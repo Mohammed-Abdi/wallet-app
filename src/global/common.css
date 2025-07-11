@@ -1,0 +1,9 @@
+h1 {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 48rem) {
+  h1 {
+    font-size: 3rem;
+  }
+}

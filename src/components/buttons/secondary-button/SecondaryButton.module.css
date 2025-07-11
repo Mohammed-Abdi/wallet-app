@@ -1,0 +1,19 @@
+.button {
+  font-size: 1rem;
+  font-weight: 500;
+  width: fit-content;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+@media (min-width: 48rem) {
+  .light:hover {
+    background-color: var(--light-hover-clr);
+  }
+
+  .dark:hover {
+    background-color: var(--dark-hover-clr);
+  }
+}

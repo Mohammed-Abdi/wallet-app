@@ -1,0 +1,21 @@
+:root {
+  --accent-clr: #00cc89;
+
+  --dark-background: #010409;
+  --light-text-clr: #fefefe;
+  --dark-wrapper-clr: #0d1117;
+  --dark-bright-clr: #151b23;
+  --dark-border-clr: #3d444d;
+  --dark-button-clr: #fefefe;
+  --dark-button-hover-clr: #212830;
+  --dark-hover-clr: #fefefe25;
+
+  --light-background: #fefefe;
+  --dark-text-clr: #010409;
+  --light-wrapper-clr: #ffffff;
+  --light-bright-clr: #ffffff;
+  --light-border-clr: #d1d9e0;
+  --light-button-clr: #010409;
+  --light-button-hover-clr: #e3e3e3;
+  --light-hover-clr: #01040910;
+}

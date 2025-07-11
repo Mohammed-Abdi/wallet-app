@@ -1,0 +1,31 @@
+.button {
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background-color: transparent;
+  width: fit-content;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.light {
+  background-color: var(--light-button-clr);
+  color: var(--light-text-clr);
+}
+
+.dark {
+  color: var(--dark-text-clr);
+  background-color: var(--dark-button-clr);
+}
+
+@media (min-width: 48rem) {
+  .light:hover {
+    background-color: var(--dark-button-hover-clr);
+  }
+
+  .dark:hover {
+    background-color: var(--light-button-hover-clr);
+  }
+}
