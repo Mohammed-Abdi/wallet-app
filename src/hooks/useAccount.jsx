@@ -4,8 +4,24 @@ import { nanoid } from "nanoid";
 
 function reducer(state, action) {
   switch (action.type) {
-    case "setContacts":
-      return { ...state, contacts: [...state.contacts, action.payload] };
+    case "login":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.account.username === action.payload) {
+            return {
+              ...account,
+              status: { ...account.status, accountStatus: "active" },
+              timestamps: {
+                ...account.timestamps,
+                lastLogin: new Date().toISOString(),
+              },
+            };
+          }
+          return account;
+        }),
+      };
+
     default:
       throw new Error("Unknown action");
   }
@@ -64,7 +80,7 @@ export function useAccount() {
 
         personalInfo: {
           name: "Guest",
-          profilePicture: "/avatars/guest.svg",
+          profilePicture: "/images/guest-user.webp",
           age: 20,
           gender: "Unknown",
         },
@@ -72,23 +88,23 @@ export function useAccount() {
         location: { city: "Addis Ababa", country: "Ethiopia" },
 
         account: {
-          username: "@guest",
+          username: "@guest_user",
           email: "guest@example.com",
           password: "unnecessary",
         },
 
         status: {
           accountStatus: "guest",
-          verification: "unverified",
-          membership: "freePlan",
+          verification: "verified",
+          membership: "basic",
         },
 
         balances: [
-          { symbol: "BTC", name: "Bitcoin", balance: 0 },
-          { symbol: "ETH", name: "Ethereum", balance: 0 },
-          { symbol: "USDT", name: "Tether", balance: 0 },
-          { symbol: "BNB", name: "Binance Coin", balance: 0 },
-          { symbol: "SOL", name: "Solana", balance: 0 },
+          { symbol: "BTC", name: "Bitcoin", balance: 0.0483673 },
+          { symbol: "ETH", name: "Ethereum", balance: 1.382 },
+          { symbol: "USDT", name: "Tether", balance: 257.31 },
+          { symbol: "BNB", name: "Binance Coin", balance: 3.27 },
+          { symbol: "SOL", name: "Solana", balance: 18.6 },
         ],
 
         transactions: [],

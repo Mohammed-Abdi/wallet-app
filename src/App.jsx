@@ -4,20 +4,25 @@ import { ThemeContext } from "./context/ThemeContext";
 import { AccountContext } from "./context/AccountContext";
 import { useTheme } from "./hooks/useTheme";
 import { useAccount } from "./hooks/useAccount";
+import { useAppStatus } from "./hooks/useAppStatus";
+import { StatusContext } from "./context/StatusContext";
 
 function App() {
   const { theme, themeDispatch } = useTheme();
-  const { currentUser, accounts, accountDispatch } = useAccount();
+  const { admins, accounts, status, message, accountDispatch } = useAccount();
+  const { loading, error, statusDispatch } = useAppStatus();
 
   return (
     <BrowserRouter>
-      <AccountContext.Provider
-        value={{ currentUser, accounts, accountDispatch }}
-      >
-        <ThemeContext.Provider value={{ theme, themeDispatch }}>
-          <Router />
-        </ThemeContext.Provider>
-      </AccountContext.Provider>
+      <StatusContext.Provider value={{ loading, error, statusDispatch }}>
+        <AccountContext.Provider
+          value={{ admins, accounts, status, message, accountDispatch }}
+        >
+          <ThemeContext.Provider value={{ theme, themeDispatch }}>
+            <Router />
+          </ThemeContext.Provider>
+        </AccountContext.Provider>
+      </StatusContext.Provider>
     </BrowserRouter>
   );
 }

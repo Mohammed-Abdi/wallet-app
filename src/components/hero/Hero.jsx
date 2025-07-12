@@ -5,9 +5,11 @@ import { ThemeContext } from "../../context/ThemeContext";
 import ActionButton from "../buttons/action-button/ActionButton";
 import SecondaryButton from "../buttons/secondary-button/SecondaryButton";
 import WalletAnimation from "../../assets/WalletAnimation";
+import { AccountContext } from "../../context/AccountContext";
 
 function Hero() {
   const { theme } = useContext(ThemeContext);
+  const { accountDispatch } = useContext(AccountContext);
 
   const textStyle = {
     color:
@@ -34,7 +36,12 @@ function Hero() {
           <ActionButton style={{ padding: "0.75rem 2rem" }}>
             <p>Get Started →</p>
           </ActionButton>
-          <SecondaryButton style={{ padding: "0.75rem 2rem" }}>
+          <SecondaryButton
+            style={{ padding: "0.75rem 2rem" }}
+            onClick={() =>
+              accountDispatch({ type: "login", payload: "@guest_user" })
+            }
+          >
             <p style={textStyle}>Demo Account</p>
           </SecondaryButton>
         </div>

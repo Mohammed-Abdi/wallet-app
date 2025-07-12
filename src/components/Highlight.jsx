@@ -11,6 +11,7 @@ function Highlight({ fontSize, children }) {
         height: "fit-content",
         padding: "0.5rem 0.75rem",
         fontSize: fontSize,
+        fontWeight: 400,
         borderRadius: `${borderRadius * 2}rem`,
         border: `2px solid ${
           theme === "dark"

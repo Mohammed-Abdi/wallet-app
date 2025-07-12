@@ -4,8 +4,8 @@ const navbarStyle = {
   paddingBlock: "1.25rem",
 };
 
-function NavBar({ children }) {
-  return <nav style={navbarStyle}>{children}</nav>;
+function NavBar({ children, style }) {
+  return <nav style={{ ...navbarStyle, ...style }}>{children}</nav>;
 }
 
 export default NavBar;

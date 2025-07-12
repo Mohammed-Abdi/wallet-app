@@ -1,13 +1,19 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
 import ThemeToggle from "../../components/buttons/ThemeToggle";
+import { ThemeContext } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar";
-import Logo from "../../components/Logo";
 import styles from "./Dashboard.module.css";
+import Profile from "../../components/Profile";
+import { AccountContext } from "../../context/AccountContext";
 
 function Dashboard() {
   const { theme } = useContext(ThemeContext);
+  const { accounts } = useContext(AccountContext);
+
+  const currentUser = accounts.find(
+    (account) => account.status.accountStatus === "active"
+  );
 
   const textStyle = {
     color:
@@ -31,15 +37,32 @@ function Dashboard() {
             : "",
       }}
     >
-      <NavBar>
-        <Logo />
+      <NavBar style={{ paddingBlock: "2rem" }}>
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <Profile
+            name={currentUser.personalInfo.name}
+            username={currentUser.account.username}
+            profilePicture={currentUser.personalInfo.profilePicture}
+            verification={currentUser.status.verification}
+            membership={currentUser.status.membership}
+          />
+        </Link>
         <div className={styles.right}>
           <ThemeToggle />
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            {/* Profile goes here */}
-          </Link>
         </div>
       </NavBar>
+      <div className={styles.balances} style={textStyle}>
+        <p style={{ paddingLeft: "0.5rem" }}>£ Bitcoin (USD)</p>
+        <h1 style={{ fontSize: "3rem" }}>
+          ${currentUser.balances.at(0).balance < 10 && 0}
+          {currentUser.balances.at(0).balance.toFixed(2)}
+        </h1>
+        <p
+          style={{ paddingLeft: "0.5rem", fontSize: "0.875rem", opacity: 0.7 }}
+        >
+          {currentUser.balances.at(0).balance} BTC
+        </p>
+      </div>
     </main>
   );
 }

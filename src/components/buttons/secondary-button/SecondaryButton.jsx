@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 import styles from "./SecondaryButton.module.css";
 
-function SecondaryButton({ children, style }) {
+function SecondaryButton({ children, style, onClick }) {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -22,6 +22,7 @@ function SecondaryButton({ children, style }) {
         transition:
           "border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}
+      onClick={onClick}
     >
       {children}
     </button>
