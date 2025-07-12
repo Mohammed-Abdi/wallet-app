@@ -19,6 +19,6 @@ export async function generateContacts(count = 1) {
     }));
   } catch (error) {
     console.error("generateContacts error:", error.message);
-    return "catch block is executed";
+    return null;
   }
 }
