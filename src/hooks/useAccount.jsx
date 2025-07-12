@@ -102,7 +102,7 @@ export function useAccount() {
 
     admins: null,
   };
-  console.log(initialAccountState);
+
   const [{ accounts, admins }, accountDispatch] = useReducer(
     reducer,
     initialAccountState
