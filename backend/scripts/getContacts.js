@@ -6,7 +6,7 @@ export async function getContacts(numberOfContacts) {
     // if (!Array.isArray(contacts) || contacts.length === 0) {
     //   throw new Error("No contacts generated");
     // }
-    return contacts;
+    return "test: contacts fetched";
   } catch (error) {
     console.error("getContacts error:", error.message);
     return "test: failed to fetch";
