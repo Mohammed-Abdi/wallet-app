@@ -1,6 +1,8 @@
 export async function getRandomUser() {
   try {
     const res = await fetch("https://randomuser.me/api/");
+    if (!res.ok) throw new Error(`Fetch failed with status ${res.status}`);
+
     const data = await res.json();
     if (!data?.results?.length) {
       throw new Error("No results found in API response");
@@ -20,7 +22,7 @@ export async function getRandomUser() {
       },
     };
   } catch (error) {
-    console.error(error.message);
+    console.error("Error in getRandomUser:", error.message);
     return null;
   }
 }
