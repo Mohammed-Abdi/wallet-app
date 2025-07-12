@@ -9,14 +9,7 @@ export async function generateContacts(count = 1) {
       })
     );
 
-    return contacts.filter(Boolean).map((user) => ({
-      name: user.name,
-      email: user.email,
-      age: user.age,
-      gender: user.gender,
-      profilePicture: user.profilePicture,
-      location: user.location,
-    }));
+    return "this is returning";
   } catch (error) {
     console.error("generateContacts error:", error.message);
     return null;
