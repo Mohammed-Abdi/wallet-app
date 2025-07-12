@@ -7,6 +7,6 @@ export async function getContacts(numberOfContacts) {
     return contacts;
   } catch (error) {
     console.error("getContacts error:", error.message);
-    return null;
+    return [];
   }
 }
