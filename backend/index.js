@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/contacts", async (req, res) => {
   try {
+    console.log("Received request at /api/contacts");
     const contacts = await getContacts(5);
     res.json(contacts);
   } catch (error) {
