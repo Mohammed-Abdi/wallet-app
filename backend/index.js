@@ -1,0 +1,25 @@
+import express from "express";
+import { getContacts } from "./scripts/getContacts.js";
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Wallet backend is running!");
+});
+
+app.get("/api/contacts", async (req, res) => {
+  try {
+    const contacts = await getContacts(5);
+    res.json(contacts);
+  } catch (error) {
+    console.error("Error fetching contacts:", error);
+    res.status(500).json({ error: "Failed to get contacts" });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
+});
