@@ -1,15 +1,12 @@
-import { Link } from "react-router-dom";
-import NavBar from "../../components/NavBar";
-import Logo from "../../components/Logo";
-import styles from "./Home.module.css";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import ThemeToggle from "../../components/buttons/ThemeToggle";
-import ActionButton from "../../components/buttons/action-button/ActionButton";
-import Hero from "../../components/hero/Hero";
-import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
+import NavBar from "../../components/NavBar";
+import Logo from "../../components/Logo";
+import styles from "./Dashboard.module.css";
 
-function Home() {
+function Dashboard() {
   const { theme } = useContext(ThemeContext);
 
   const textStyle = {
@@ -24,7 +21,7 @@ function Home() {
 
   return (
     <main
-      className={styles.homepage}
+      className={styles.dashboard}
       style={{
         backgroundColor:
           theme === "dark"
@@ -39,16 +36,12 @@ function Home() {
         <div className={styles.right}>
           <ThemeToggle />
           <Link to="/login" style={{ textDecoration: "none" }}>
-            <ActionButton>Login</ActionButton>
+            {/* Profile goes here */}
           </Link>
         </div>
       </NavBar>
-      <Hero />
-      <Footer>
-        <p style={textStyle}>&copy;2025 Mohammed Abdi. All rights reserved</p>
-      </Footer>
     </main>
   );
 }
 
-export default Home;
+export default Dashboard;
