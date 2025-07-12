@@ -8,11 +8,12 @@ import ThemeToggle from "../../components/buttons/ThemeToggle";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
 import Hero from "../../components/hero/Hero";
 import Footer from "../../components/Footer";
-import { useRandomContacts } from "../../hooks/useRandomContacts";
+import { useAccount } from "../../hooks/useAccount";
 
 function Home() {
   const { theme } = useContext(ThemeContext);
-  useRandomContacts();
+  const { contacts } = useAccount();
+  console.log(contacts);
 
   const textStyle = {
     color:

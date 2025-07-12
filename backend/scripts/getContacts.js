@@ -6,7 +6,7 @@ export async function getContacts(numberOfContacts) {
     if (!contacts.length) throw new Error("No contacts generated");
     return contacts;
   } catch (error) {
-    console.error(error.message);
-    return [];
+    console.error("getContacts error:", error.message);
+    return null;
   }
 }

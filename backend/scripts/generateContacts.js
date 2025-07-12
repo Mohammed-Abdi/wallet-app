@@ -18,7 +18,7 @@ export async function generateContacts(count = 1) {
       location: user.location,
     }));
   } catch (error) {
-    console.error(error.message);
+    console.error("generateContacts error:", error.message);
     return null;
   }
 }

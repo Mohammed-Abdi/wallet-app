@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { AccountContext } from "../context/AccountContext";
+import { useEffect, useState } from "react";
 
 export function useRandomContacts() {
-  const { accountDispatch } = useContext(AccountContext);
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,15 +8,10 @@ export function useRandomContacts() {
   useEffect(() => {
     async function fetchContacts() {
       try {
-        const res = await fetch(
-          "https://itsmamme-wallet-app-backend.onrender.com/api/contacts"
-        );
+        const res = await fetch("http://localhost:5000/api/contacts");
         if (!res.ok) throw new Error("Failed to fetch contacts");
         const data = await res.json();
         setContacts(data);
-
-        // Optionally dispatch to context
-        accountDispatch({ type: "SET_CONTACTS", payload: data });
       } catch (err) {
         setError(err.message);
       } finally {
@@ -27,7 +20,7 @@ export function useRandomContacts() {
     }
 
     fetchContacts();
-  }, [accountDispatch]);
+  }, []);
 
   return { contacts, loading, error };
 }

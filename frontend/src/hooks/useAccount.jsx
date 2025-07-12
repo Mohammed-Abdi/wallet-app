@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { useRandomContacts } from "./useRandomContacts";
 
 const initialAccountState = {
   accounts: [],
@@ -7,8 +8,8 @@ const initialAccountState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "":
-      return;
+    case "setContacts":
+      return { ...state, contacts: [...state.contacts, action.payload] };
     default:
       throw new Error("Unknown action");
   }
@@ -19,5 +20,7 @@ export function useAccount() {
     reducer,
     initialAccountState
   );
-  return { currentUser, accounts, accountDispatch };
+
+  const { contacts, loading, error } = useRandomContacts();
+  return { currentUser, accounts, contacts, loading, error, accountDispatch };
 }

@@ -1,9 +1,11 @@
 import express from "express";
+import cors from "cors"; // <-- added this
 import { getContacts } from "./scripts/getContacts.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cors()); // <-- and this
 app.use(express.json());
 
 app.get("/", (req, res) => {
