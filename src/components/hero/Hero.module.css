@@ -33,7 +33,7 @@
     text-align: center;
   }
   .right {
-    margin-left: 1.25rem;
+    display: none;
   }
 }
 
