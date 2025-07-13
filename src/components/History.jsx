@@ -54,19 +54,23 @@ function History({
   useEffect(() => {
     if (type === "deposit") {
       setMessage(
-        `You successfully deposited ${amount} ${currency} into your wallet`
+        `You successfully deposited ${amount} ${currency.toLowerCase()} into your wallet`
       );
     } else if (type === "withdraw") {
       setMessage(
-        `You successfully withdrew ${amount} ${currency} from your wallet`
+        `You successfully withdrew ${amount} ${currency.toLowerCase()} from your wallet`
       );
     } else if (type === "send") {
       setMessage(
-        `You successfully sent ${amount} ${currency} to user ID: ${id}`
+        `You successfully sent ${amount} ${currency.toLowerCase()} to user ID: ${id}`
       );
     } else if (type === "convert") {
       setMessage(
-        `You successfully converted ${from.amount} ${from.currency} to ${to.amount} ${to.currency}`
+        `You successfully converted ${
+          from.amount
+        } ${from.currency.toLowerCase()} to ${
+          to.amount
+        } ${to.currency.toLowerCase()}`
       );
     } else if (status === "success") {
       setMessage("Successful login to your account");
