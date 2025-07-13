@@ -13,6 +13,7 @@ import Deposit from "../../assets/Deposit";
 import Withdraw from "../../assets/Withdraw";
 import Send from "../../assets/Send";
 import Exchange from "../../assets/Exchange";
+import History from "../../components/History";
 
 function Dashboard() {
   const { theme } = useContext(ThemeContext);
@@ -70,6 +71,18 @@ function Dashboard() {
 
       <div className={styles.activity}>
         <p>Activities</p>
+        {currentUser.transactions.map((transaction) => (
+          <History
+            key={transaction.id}
+            type={transaction.type}
+            id={transaction.receiver}
+            data={transaction.date}
+            amount={transaction.amount}
+            currency={transaction.currency}
+            from={transaction.from}
+            to={transaction.to}
+          />
+        ))}
       </div>
     </main>
   );

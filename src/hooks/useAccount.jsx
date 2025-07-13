@@ -140,6 +140,7 @@ export function useAccount() {
           {
             id: "LzJybFzUZVqAwB_Uu-cC9",
             type: "send",
+            receiver: "LzJybFzUZVqAwB_Uu-cC9",
             amount: 50,
             currency: "USDT",
             date: "2025-07-13T11:02:14",
@@ -147,6 +148,7 @@ export function useAccount() {
           {
             id: "YgRqmPQmFz7Ht_Mp-XkX1",
             type: "send",
+            receiver: "LzJybFzUZVqAwB_Uu-cC9",
             amount: 20,
             currency: "SOL",
             date: "2025-07-10T13:22:10",
