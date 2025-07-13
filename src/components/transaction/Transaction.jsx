@@ -25,8 +25,8 @@ function Transaction({ id, type, currentBalance, setType }) {
 
   useEffect(() => {
     if (type?.toLowerCase() === "withdraw") {
-      if (!amount) setMessage("");
-      if (currentBalance < numericAmount) setMessage("GGs");
+      if (numericAmount < currentBalance) setMessage("");
+      if (currentBalance < numericAmount) setMessage("Insufficient balance");
     }
   }, [currentBalance, amount, type, numericAmount]);
 
@@ -79,10 +79,11 @@ function Transaction({ id, type, currentBalance, setType }) {
             "background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out",
         }}
       >
+        {/* for deposit and withdraw */}
         <div style={{ display: "flex", gap: "0.5rem" }}>
           <input
             type="text"
-            placeholder="Enter amount"
+            placeholder="Enter amount..."
             style={inputStyle}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -104,11 +105,13 @@ function Transaction({ id, type, currentBalance, setType }) {
             <option value="SOL">SOL</option>
           </select>
         </div>
+
+        {/* for conversion */}
         {type?.toLowerCase() === "convert" && (
           <div style={{ display: "flex", gap: "0.5rem" }}>
             <input
               type="text"
-              placeholder="Enter amount"
+              placeholder="Enter amount..."
               style={inputStyle}
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
@@ -131,16 +134,22 @@ function Transaction({ id, type, currentBalance, setType }) {
             </select>
           </div>
         )}
+
+        {/* for send */}
         {type?.toLowerCase() === "send" && (
           <input
             type="text"
-            placeholder="Enter amount"
+            placeholder="Enter receivers ID..."
             style={inputStyle}
             value={receiver}
             onChange={(e) => setReceiver(e.target.value)}
           />
         )}
-        <p>{message}</p>
+
+        <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
+          {message}
+        </p>
+
         <div className={styles.buttons}>
           <ActionButton
             style={{ width: "100%", borderRadius: "0.25rem" }}
