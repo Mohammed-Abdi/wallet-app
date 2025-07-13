@@ -28,7 +28,14 @@ function Card({ icon, text }) {
           "border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}
     >
-      <span>{icon}</span>
+      <span
+        style={{
+          color: "var(--accent-clr)",
+          transition: "transform 0.3s ease-in-out",
+        }}
+      >
+        {icon}
+      </span>
       <p>{text}</p>
     </div>
   );
