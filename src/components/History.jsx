@@ -4,6 +4,35 @@ import Loop from "../assets/Loop";
 import { formatDateTime } from "../services/formatDateTime";
 import { ThemeContext } from "../context/ThemeContext";
 
+const containerStyles = {
+  display: "flex",
+  alignItems: "center",
+  gap: "1.25rem",
+  padding: "1.25rem",
+  borderRadius: "0.5rem",
+  width: "min(36rem, 100%)",
+};
+
+const columnStyles = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+  flex: 1,
+  minWidth: 0,
+};
+
+const messageStyles = {
+  wordWrap: "break-word",
+  overflowWrap: "break-word",
+  whiteSpace: "normal",
+  width: "100%",
+};
+
+const dateStyles = {
+  fontSize: "0.875rem",
+  opacity: 0.7,
+};
+
 function History({ id, date, type, amount, currency, from, to }) {
   const [message, setMessage] = useState("");
   const { theme } = useContext(ThemeContext);
@@ -31,13 +60,8 @@ function History({ id, date, type, amount, currency, from, to }) {
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "1.25rem",
+        ...containerStyles,
         backgroundColor: `var(--${theme}-wrapper-clr)`,
-        padding: "1.25rem",
-        borderRadius: "0.25rem",
-        width: "min(36rem, 100%)",
       }}
     >
       <div>
@@ -62,26 +86,10 @@ function History({ id, date, type, amount, currency, from, to }) {
           </div>
         )}
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.5rem",
-        }}
-      >
-        <div
-          style={{
-            wordWrap: "break-word",
-            overflowWrap: "break-word",
-            whiteSpace: "normal",
-            width: "100%",
-          }}
-        >
-          {message}
-        </div>
-        <div style={{ fontSize: "0.875rem", opacity: 0.7 }}>
-          {formatDateTime(date)}
-        </div>
+
+      <div style={columnStyles}>
+        <div style={messageStyles}>{message}</div>
+        <div style={dateStyles}>{formatDateTime(date)}</div>
       </div>
     </div>
   );
