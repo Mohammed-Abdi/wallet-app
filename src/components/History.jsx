@@ -106,12 +106,12 @@ function History({
           </div>
         )}
         {type === "withdraw" && (
-          <div style={{ color: "red" }}>
+          <div style={{ color: "#a50000ff" }}>
             <ArrowUp />
           </div>
         )}
         {type === "send" && (
-          <div style={{ color: "red" }}>
+          <div style={{ color: "#a50000ff" }}>
             <ArrowUp />
           </div>
         )}
