@@ -15,6 +15,7 @@ import History from "../../components/History";
 import Transaction from "../../components/transaction/Transaction";
 import { calcTotal } from "../../services/calcTotal";
 import { formatDateTime } from "../../services/formatDateTime";
+import { useLiveDate } from "../../hooks/useLiveDate";
 
 const switchStyle = {
   width: "10rem",
@@ -32,6 +33,8 @@ function Dashboard() {
   const [type, setType] = useState(null);
   const { theme } = useContext(ThemeContext);
   const { accounts } = useContext(AccountContext);
+
+  const date = useLiveDate(60_000);
 
   const currentUser = useMemo(() => {
     return accounts.find(
@@ -106,7 +109,7 @@ function Dashboard() {
           </select>
         </div>
         <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
-          Today is {formatDateTime(new Date().toISOString())}
+          Today is {formatDateTime(date)}
         </p>
       </div>
       <div className={styles.transactions}>
