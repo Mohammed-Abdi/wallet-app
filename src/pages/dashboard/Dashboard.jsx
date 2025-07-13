@@ -8,6 +8,7 @@ import Profile from "../../components/Profile";
 import { AccountContext } from "../../context/AccountContext";
 import { getBalance } from "../../services/getBalance";
 import { convertToUSD } from "../../services/convertToUSD";
+import Card from "../../components/card";
 
 function Dashboard() {
   const { theme } = useContext(ThemeContext);
@@ -68,6 +69,9 @@ function Dashboard() {
         >
           {balance + " " + symbol}
         </p>
+      </div>
+      <div>
+        <Card>Deposit</Card>
       </div>
     </main>
   );

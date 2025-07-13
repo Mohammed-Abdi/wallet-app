@@ -5,9 +5,9 @@ const cardStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "100px",
-  height: "100px",
-  borderRadius: "0.25rem",
+  width: "6.25rem",
+  height: "6.25rem",
+  borderRadius: "0.5rem",
 };
 
 function Card({ children }) {
