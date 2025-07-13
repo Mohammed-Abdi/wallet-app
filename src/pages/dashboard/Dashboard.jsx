@@ -58,7 +58,10 @@ function Dashboard() {
         </p>
       </div>
       <div>
-        <Card>Deposit</Card>
+        <Card>
+          <span>💰</span>
+          <p>Deposit</p>
+        </Card>
       </div>
     </main>
   );
