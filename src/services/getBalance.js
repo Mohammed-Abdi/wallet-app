@@ -1,19 +1,21 @@
 import { convertToUSD } from "./convertToUSD";
 
 export function getBalance(balances) {
-  let chosenBalance = 0;
-  let chosenSymbol;
+  let highestUsdValue = 0;
+  let highestValueSymbol;
+
   balances.forEach((balance) => {
-    const usdBalance = convertToUSD(balance.balance, balance.symbol);
-    if (usdBalance > chosenBalance) {
-      chosenBalance = usdBalance;
-      chosenSymbol = balance.symbol;
+    const usdValue = convertToUSD(balance.balance, balance.symbol);
+    if (usdValue > highestUsdValue) {
+      highestUsdValue = usdValue;
+      highestValueSymbol = balance.symbol;
     }
   });
 
-  const availableBalance = balances.find(
-    (balance) => balance.symbol.toLowerCase() === chosenSymbol.toLowerCase()
+  const highestBalance = balances.find(
+    (balance) =>
+      balance.symbol.toLowerCase() === highestValueSymbol.toLowerCase()
   );
 
-  return availableBalance;
+  return highestBalance;
 }
