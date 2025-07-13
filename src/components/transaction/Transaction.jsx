@@ -11,6 +11,8 @@ function Transaction({ id, type, currentBalance, setType }) {
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
 
+  const numericAmount = Number(Number(amount).toFixed(2));
+
   const { accountDispatch } = useContext(AccountContext);
   const { theme } = useContext(ThemeContext);
 
@@ -24,22 +26,25 @@ function Transaction({ id, type, currentBalance, setType }) {
   useEffect(() => {
     if (type?.toLowerCase() === "withdraw") {
       if (!amount) setMessage("");
-      if (currentBalance < amount) setMessage("GGs");
+      if (currentBalance < numericAmount) setMessage("GGs");
     }
-  }, [currentBalance, amount, type]);
+  }, [currentBalance, amount, type, numericAmount]);
 
   function handleTransaction() {
     if (type?.toLowerCase() === "deposit") {
-      accountDispatch({ type: "deposit", payload: { id, amount, currency } });
+      accountDispatch({
+        type: "deposit",
+        payload: { id, amount: numericAmount, currency },
+      });
       setType(null);
       setAmount("");
       setCurrency("USDT");
     }
     if (type?.toLowerCase() === "withdraw") {
-      if (currentBalance > amount) {
+      if (currentBalance > numericAmount) {
         accountDispatch({
           type: "withdraw",
-          payload: { id, amount, currency },
+          payload: { id, amount: numericAmount, currency },
         });
         setType(null);
         setAmount("");
@@ -49,14 +54,17 @@ function Transaction({ id, type, currentBalance, setType }) {
     if (type?.toLowerCase() === "send") {
       accountDispatch({
         type: "send",
-        payload: { id, receiver, amount, currency },
+        payload: { id, receiver, amount: numericAmount, currency },
       });
       setType(null);
       setAmount("");
       setCurrency("USDT");
     }
     if (type?.toLowerCase() === "convert") {
-      accountDispatch({ type: "convert", payload: { id, amount } });
+      accountDispatch({
+        type: "convert",
+        payload: { id, amount: numericAmount },
+      });
       setType(null);
     }
   }
@@ -77,7 +85,7 @@ function Transaction({ id, type, currentBalance, setType }) {
             placeholder="Enter amount"
             style={inputStyle}
             value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
+            onChange={(e) => setAmount(e.target.value)}
           />
           <select
             name="currency"
@@ -103,7 +111,7 @@ function Transaction({ id, type, currentBalance, setType }) {
               placeholder="Enter amount"
               style={inputStyle}
               value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
+              onChange={(e) => setAmount(e.target.value)}
             />
             <select
               name="currency"
