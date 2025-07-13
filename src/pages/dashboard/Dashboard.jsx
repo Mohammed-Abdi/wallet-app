@@ -8,7 +8,7 @@ import Profile from "../../components/Profile";
 import { AccountContext } from "../../context/AccountContext";
 import { getBalance } from "../../services/getBalance";
 import { convertToUSD } from "../../services/convertToUSD";
-import Card from "../../components/card";
+import Card from "../../components/Card";
 import Deposit from "../../assets/Deposit";
 import Withdraw from "../../assets/Withdraw";
 import Send from "../../assets/Send";
