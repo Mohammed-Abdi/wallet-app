@@ -15,7 +15,7 @@ const cardStyle = {
   cursor: "pointer",
 };
 
-function Card({ children }) {
+function Card({ icon, text }) {
   const { theme } = useContext(ThemeContext);
   return (
     <div
@@ -28,7 +28,8 @@ function Card({ children }) {
           "border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}
     >
-      {children}
+      <span>{icon}</span>
+      <p>{text}</p>
     </div>
   );
 }
