@@ -14,6 +14,7 @@ import Withdraw from "../../assets/Withdraw";
 import Send from "../../assets/Send";
 import Exchange from "../../assets/Exchange";
 import History from "../../components/History";
+import Transaction from "../../components/transaction/Transaction";
 
 const switchStyle = {
   width: "10rem",
@@ -127,6 +128,7 @@ function Dashboard() {
               />
             ))}
       </div>
+      <Transaction type={"deposit"} currentBalance={usdBalance} />
     </main>
   );
 }
