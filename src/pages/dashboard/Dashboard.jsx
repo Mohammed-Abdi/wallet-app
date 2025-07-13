@@ -58,22 +58,10 @@ function Dashboard() {
         </p>
       </div>
       <div className={styles.transactions}>
-        <Card>
-          <span style={{ color: "var(--accent-clr)" }}>$</span>
-          <p>Deposit</p>
-        </Card>
-        <Card>
-          <span style={{ color: "var(--accent-clr)" }}>$</span>
-          <p>Withdraw</p>
-        </Card>
-        <Card>
-          <span style={{ color: "var(--accent-clr)" }}>$</span>
-          <p>Send</p>
-        </Card>
-        <Card>
-          <span style={{ color: "var(--accent-clr)" }}>$</span>
-          <p>Convert</p>
-        </Card>
+        <Card text="Deposit" icon="$" />
+        <Card text="Withdraw" icon="$" />
+        <Card text="Send" icon="$" />
+        <Card text="Convert" icon="$" />
       </div>
     </main>
   );

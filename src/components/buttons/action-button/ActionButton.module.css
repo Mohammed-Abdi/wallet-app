@@ -12,11 +12,11 @@
 
 .light {
   background-color: var(--light-button-clr);
-  color: var(--light-text-clr);
+  color: var(--dark-text-clr);
 }
 
 .dark {
-  color: var(--dark-text-clr);
+  color: var(--light-text-clr);
   background-color: var(--dark-button-clr);
 }
 
