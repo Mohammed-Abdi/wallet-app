@@ -16,19 +16,10 @@ function Card({ children }) {
     <div
       style={{
         ...cardStyle,
-        backgroundColor:
-          theme === "dark"
-            ? "var(--dark-background)"
-            : theme === "light"
-            ? "var(--light-background)"
-            : "inherit",
-        border: `1px solid ${
-          theme === "dark"
-            ? "var(--dark-border-clr)"
-            : theme === "light"
-            ? "var(--light-border-clr)"
-            : "inherit"
-        }`,
+        backgroundColor: `var(--${theme}-bright-clr)`,
+        border: `1px solid var(--${theme}-border-clr)`,
+        transition:
+          "border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}
     >
       {children}

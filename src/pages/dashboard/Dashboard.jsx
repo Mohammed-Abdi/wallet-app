@@ -18,16 +18,6 @@ function Dashboard() {
     (account) => account.status.accountStatus === "active"
   );
 
-  const textStyle = {
-    color:
-      theme === "dark"
-        ? "var(--light-background)"
-        : theme === "light"
-        ? "var(--dark-background)"
-        : "inherit",
-    transition: "color 0.3s ease-in-out",
-  };
-
   const { name, balance, symbol } = getBalance(currentUser.balances);
 
   const usdBalance = convertToUSD(balance, symbol);
@@ -36,12 +26,19 @@ function Dashboard() {
     <main
       className={styles.dashboard}
       style={{
+        color:
+          theme === "dark"
+            ? "var(--light-background)"
+            : theme === "light"
+            ? "var(--dark-background)"
+            : "inherit",
         backgroundColor:
           theme === "dark"
             ? "var(--dark-background)"
             : theme === "light"
             ? "var(--light-background)"
             : "",
+        transition: "color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}
     >
       <NavBar style={{ paddingBlock: "2rem" }}>
@@ -58,7 +55,7 @@ function Dashboard() {
           <ThemeToggle />
         </div>
       </NavBar>
-      <div className={styles.balances} style={textStyle}>
+      <div className={styles.balances}>
         <p style={{ paddingLeft: "0.5rem" }}>{name} (USD)</p>
         <h1 style={{ fontSize: "3rem" }}>
           ${usdBalance < 10 && 0}

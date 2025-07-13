@@ -2,7 +2,6 @@
   width: 100%;
   min-height: 100vh;
   padding-inline: 1.25rem;
-  transition: background-color 0.3s ease-in-out;
 }
 
 .right {
