@@ -8,7 +8,7 @@ const cardStyle = {
   fontSize: "0.875rem",
   alignItems: "center",
   justifyContent: "center",
-  width: "6.25rem",
+  width: "7rem",
   height: "6.25rem",
   borderRadius: "0.5rem",
   outline: "2px solid var(--accent-clr)",
