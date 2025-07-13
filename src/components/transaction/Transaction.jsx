@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import ActionButton from "../buttons/action-button/ActionButton";
 import SecondaryButton from "../buttons/secondary-button/SecondaryButton";
 import styles from "./Transaction.module.css";
@@ -15,8 +15,17 @@ function Transaction({ id, type, currentBalance, setType }) {
 
   const time = new Date().toISOString();
 
-  const { accountDispatch } = useContext(AccountContext);
+  const { accounts, accountDispatch } = useContext(AccountContext);
   const { theme } = useContext(ThemeContext);
+
+  let receiverFound = useMemo(() => {
+    return accounts.some((account) => account.id === receiver);
+  }, [accounts, receiver]);
+
+  const receiverName = useMemo(() => {
+    return accounts.find((account) => account.id === receiver)?.personalInfo
+      .name;
+  }, [accounts, receiver]);
 
   const inputStyle = {
     border: `2px solid var(--${theme}-border-clr)`,
@@ -26,7 +35,7 @@ function Transaction({ id, type, currentBalance, setType }) {
   };
 
   useEffect(() => {
-    if (type?.toLowerCase() === "withdraw") {
+    if (type?.toLowerCase() === "withdraw" || type?.toLowerCase() === "send") {
       if (numericAmount < currentBalance) setMessage("");
       if (currentBalance < numericAmount) setMessage("Insufficient balance");
     }
@@ -40,7 +49,7 @@ function Transaction({ id, type, currentBalance, setType }) {
         payload: { id, amount: numericAmount, currency },
       });
       accountDispatch({
-        type: "setTransactionHistory",
+        type: "logBalanceTransaction",
         payload: {
           id,
           transactionId: nanoid(),
@@ -61,7 +70,7 @@ function Transaction({ id, type, currentBalance, setType }) {
           payload: { id, amount: numericAmount, currency },
         });
         accountDispatch({
-          type: "setTransactionHistory",
+          type: "logBalanceTransaction",
           payload: {
             id,
             transactionId: nanoid(),
@@ -79,16 +88,44 @@ function Transaction({ id, type, currentBalance, setType }) {
     if (type?.toLowerCase() === "send") {
       accountDispatch({
         type: "send",
-        payload: { id, receiver, amount: numericAmount, currency },
+        payload: { id, receiver, amount: numericAmount, currency, date: time },
+      });
+      accountDispatch({
+        type: "withdraw",
+        payload: { id, amount: numericAmount, currency },
+      });
+      accountDispatch({
+        type: "logTransferTransaction",
+        payload: {
+          id,
+          transactionId: nanoid(),
+          type,
+          receiverName,
+          amount: numericAmount,
+          currency,
+          date: time,
+        },
       });
       setType(null);
       setAmount("");
+      setReceiver("");
       setCurrency("USDT");
     }
     if (type?.toLowerCase() === "convert") {
       accountDispatch({
         type: "convert",
         payload: { id, amount: numericAmount },
+      });
+      accountDispatch({
+        type: "logConversionTransaction",
+        payload: {
+          id,
+          transactionId: nanoid(),
+          type,
+          amount: numericAmount,
+          currency,
+          date: time,
+        },
       });
       setType(null);
     }
@@ -160,6 +197,10 @@ function Transaction({ id, type, currentBalance, setType }) {
           </div>
         )}
 
+        <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
+          {message}
+        </p>
+
         {/* for send */}
         {type?.toLowerCase() === "send" && (
           <input
@@ -171,9 +212,19 @@ function Transaction({ id, type, currentBalance, setType }) {
           />
         )}
 
-        <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
-          {message}
-        </p>
+        {receiver ? (
+          receiverFound ? (
+            <p
+              style={{ color: "green", fontWeight: 500 }}
+            >{`Receiver: ${receiverName}`}</p>
+          ) : (
+            <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
+              There is no account with this ID
+            </p>
+          )
+        ) : (
+          ""
+        )}
 
         <div className={styles.buttons}>
           <ActionButton
