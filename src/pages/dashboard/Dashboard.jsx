@@ -28,6 +28,7 @@ const switchStyle = {
 
 function Dashboard() {
   const [isOnActivities, setIsOnActivities] = useState(true);
+  const [type, setType] = useState(null);
   const { theme } = useContext(ThemeContext);
   const { accounts } = useContext(AccountContext);
 
@@ -75,10 +76,21 @@ function Dashboard() {
         </p>
       </div>
       <div className={styles.transactions}>
-        <Card text="Deposit" icon={<Deposit />} />
-        <Card text="Withdraw" icon={<Withdraw />} />
-        <Card text="Send" icon={<Send />} />
-        <Card text="Convert" icon={<Exchange />} />
+        <Card
+          text="Deposit"
+          icon={<Deposit />}
+          onClick={() => setType("deposit")}
+        />
+        <Card
+          text="Withdraw"
+          icon={<Withdraw />}
+          onClick={() => setType("withdraw")}
+        />
+        <Card text="Send" icon={<Send />} onClick={() => setType("send")} />
+        <Card
+          text="Convert"
+          icon={<Exchange onClick={() => setType("convert")} />}
+        />
       </div>
 
       <div className={styles.activity}>
@@ -130,7 +142,8 @@ function Dashboard() {
       </div>
       <Transaction
         id={currentUser.id}
-        type={"withdraw"}
+        type={type}
+        setType={setType}
         currentBalance={usdBalance}
       />
     </main>

@@ -15,10 +15,11 @@ const cardStyle = {
   cursor: "pointer",
 };
 
-function Card({ icon, text }) {
+function Card({ icon, text, onClick }) {
   const { theme } = useContext(ThemeContext);
   return (
     <div
+      onClick={onClick}
       className="card"
       style={{
         ...cardStyle,

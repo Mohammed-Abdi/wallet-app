@@ -5,7 +5,7 @@ import styles from "./Transaction.module.css";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AccountContext } from "../../context/AccountContext";
 
-function Transaction({ id, type, currentBalance }) {
+function Transaction({ id, type, currentBalance, setType }) {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USDT");
   const [receiver, setReceiver] = useState("");
@@ -13,37 +13,46 @@ function Transaction({ id, type, currentBalance }) {
 
   const { accountDispatch } = useContext(AccountContext);
   const { theme } = useContext(ThemeContext);
+
   const inputStyle = {
     border: `2px solid var(--${theme}-border-clr)`,
     backgroundColor: `var(--${theme}-button-hover-clr)`,
     color: `var(--${theme}-text-clr)`,
+    width: "100%",
   };
 
   useEffect(() => {
-    if (type.toLowerCase() === "withdraw") {
+    if (type?.toLowerCase() === "withdraw") {
       if (!amount) setMessage("");
       if (currentBalance < amount) setMessage("GGs");
     }
   }, [currentBalance, amount, type]);
 
   function handleTransaction() {
-    if (type.toLowerCase() === "deposit")
+    if (type?.toLowerCase() === "deposit") {
       accountDispatch({ type: "deposit", payload: { id, amount, currency } });
-    if (type.toLowerCase() === "withdraw") {
+      setType(null);
+    }
+    if (type?.toLowerCase() === "withdraw") {
       if (currentBalance > amount) {
         accountDispatch({
           type: "withdraw",
           payload: { id, amount, currency },
         });
+        setType(null);
       }
     }
-    if (type.toLowerCase() === "send")
+    if (type?.toLowerCase() === "send") {
       accountDispatch({
         type: "send",
         payload: { id, receiver, amount, currency },
       });
-    if (type.toLowerCase() === "convert")
+      setType(null);
+    }
+    if (type?.toLowerCase() === "convert") {
       accountDispatch({ type: "convert", payload: { id, amount } });
+      setType(null);
+    }
   }
 
   return type ? (
@@ -81,7 +90,34 @@ function Transaction({ id, type, currentBalance }) {
             <option value="SOL">SOL</option>
           </select>
         </div>
-        {type.toLowerCase() === "send" && (
+        {type?.toLowerCase() === "convert" && (
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <input
+              type="text"
+              placeholder="Enter amount"
+              style={inputStyle}
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
+            />
+            <select
+              name="currency"
+              id="currency"
+              style={{
+                backgroundColor: `var(--${theme}-border-clr)`,
+                color: `var(--${theme}-text-clr)`,
+              }}
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option value="USDT">USDT</option>
+              <option value="BTC">BTC</option>
+              <option value="ETH">ETH</option>
+              <option value="BNB">BNB</option>
+              <option value="SOL">SOL</option>
+            </select>
+          </div>
+        )}
+        {type?.toLowerCase() === "send" && (
           <input
             type="text"
             placeholder="Enter amount"
@@ -104,6 +140,7 @@ function Transaction({ id, type, currentBalance }) {
               width: "100%",
               borderRadius: "0.25rem",
             }}
+            onClick={() => setType(null)}
           >
             Cancel
           </SecondaryButton>
