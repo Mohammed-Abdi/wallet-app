@@ -80,13 +80,17 @@ function Dashboard() {
       </NavBar>
       <div className={styles.balances}>
         <p style={{ opacity: 0.7 }}>Est total value</p>
-        <div>
+        <div className={styles.total}>
           <h1 style={{ fontSize: "3rem" }}>
             {currency === "BTC"
               ? totalBalance?.toFixed(4)
               : totalBalance?.toFixed(2)}
           </h1>
           <select
+            style={{
+              color: `var(--dark-text-clr)`,
+              backgroundColor: `var(--dark-background)`,
+            }}
             name="currency"
             id="currency"
             value={currency}
