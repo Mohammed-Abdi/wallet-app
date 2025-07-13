@@ -45,13 +45,7 @@ function Profile({ name, username, profilePicture, verification, membership }) {
           alt={`£{name}'s profile picture`}
           style={{
             ...imageStyle,
-            border: `3px solid ${
-              theme === "dark"
-                ? "var(--dark-background)"
-                : theme === "light"
-                ? "var(--light-background)"
-                : "inherit"
-            }`,
+            border: `2px solid var(--${theme}-border-clr)`,
             transition: "border-color 0.3s ease-in-out",
           }}
         />
