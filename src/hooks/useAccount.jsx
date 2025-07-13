@@ -66,8 +66,8 @@ export function useAccount() {
       transactions: [],
 
       timestamps: {
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString(),
+        createdAt: new Date().toLocaleString(),
+        lastLogin: new Date().toLocaleString(),
       },
     };
   });
@@ -107,11 +107,80 @@ export function useAccount() {
           { symbol: "SOL", name: "Solana", balance: 18.6 },
         ],
 
-        transactions: [],
+        transactions: [
+          {
+            id: "NBmDYjz_U2waFgHgm-RjQ",
+            type: "deposit",
+            amount: 100,
+            currency: "USD",
+            date: "2025-07-13T09:00:00",
+          },
+          {
+            id: "JHwT9_KLxSmaVrcu3-fgY",
+            type: "deposit",
+            amount: 0.5,
+            currency: "ETH",
+            date: "2025-07-12T15:45:22",
+          },
+          {
+            id: "RtPwEZB7oZplA-HYjbNc3",
+            type: "withdraw",
+            amount: 10,
+            currency: "USD",
+            date: "2025-07-13T10:27:58",
+          },
+          {
+            id: "a1F_4KZlWQYc9oPLmhTjV",
+            type: "withdraw",
+            amount: 0.01,
+            currency: "BTC",
+            date: "2025-07-11T20:15:00",
+          },
+          {
+            id: "LzJybFzUZVqAwB_Uu-cC9",
+            type: "send",
+            amount: 50,
+            currency: "USDT",
+            date: "2025-07-13T11:02:14",
+          },
+          {
+            id: "YgRqmPQmFz7Ht_Mp-XkX1",
+            type: "send",
+            amount: 20,
+            currency: "SOL",
+            date: "2025-07-10T13:22:10",
+          },
+          {
+            id: "BvEW9MDHdNsqmfy6_qJz2",
+            type: "convert",
+            from: {
+              amount: 0.3,
+              currency: "ETH",
+            },
+            to: {
+              amount: 0.007,
+              currency: "BTC",
+            },
+            date: "2025-07-13T11:45:00",
+          },
+          {
+            id: "q3MzA8flD_t7wBHVX0kUe",
+            type: "convert",
+            from: {
+              amount: 100,
+              currency: "USDT",
+            },
+            to: {
+              amount: 0.145,
+              currency: "BNB",
+            },
+            date: "2025-07-09T18:30:15",
+          },
+        ],
 
         timestamps: {
-          createdAt: new Date().toISOString(),
-          lastLogin: new Date().toISOString(),
+          createdAt: new Date().toLocaleString(),
+          lastLogin: new Date().toLocaleString(),
         },
       },
     ],

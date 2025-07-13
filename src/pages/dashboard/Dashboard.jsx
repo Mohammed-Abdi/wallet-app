@@ -9,6 +9,7 @@ import { AccountContext } from "../../context/AccountContext";
 import { getBalance } from "../../services/getBalance";
 import { convertToUSD } from "../../services/convertToUSD";
 import Card from "../../components/card";
+import Deposit from "../../assets/Deposit";
 
 function Dashboard() {
   const { theme } = useContext(ThemeContext);
@@ -58,10 +59,14 @@ function Dashboard() {
         </p>
       </div>
       <div className={styles.transactions}>
-        <Card text="Deposit" icon="$" />
+        <Card text="Deposit" icon={<Deposit />} />
         <Card text="Withdraw" icon="$" />
         <Card text="Send" icon="$" />
         <Card text="Convert" icon="$" />
+      </div>
+
+      <div className={styles.activity}>
+        <p>Activities</p>
       </div>
     </main>
   );
