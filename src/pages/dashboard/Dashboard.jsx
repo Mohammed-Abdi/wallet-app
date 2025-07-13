@@ -72,7 +72,7 @@ function Dashboard() {
         </Card>
         <Card>
           <span style={{ color: "var(--accent-clr)" }}>$</span>
-          <p>Receive</p>
+          <p>Convert</p>
         </Card>
       </div>
     </main>
