@@ -6,13 +6,6 @@ h1 {
   h1 {
     font-size: 3rem;
   }
-  .card {
-    outline: 2px solid var(--accent-clr);
-  }
-  .card span {
-    color: var(--accent-clr);
-    transition: transform 0.3s ease-in-out;
-  }
   .card:hover span {
     transform: rotate(360deg) scale(1.5);
   }

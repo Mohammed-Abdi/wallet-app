@@ -57,10 +57,22 @@ function Dashboard() {
           {balance + " " + symbol}
         </p>
       </div>
-      <div>
+      <div className={styles.transactions}>
         <Card>
-          <span>$</span>
+          <span style={{ color: "var(--accent-clr)" }}>$</span>
           <p>Deposit</p>
+        </Card>
+        <Card>
+          <span style={{ color: "var(--accent-clr)" }}>$</span>
+          <p>Withdraw</p>
+        </Card>
+        <Card>
+          <span style={{ color: "var(--accent-clr)" }}>$</span>
+          <p>Send</p>
+        </Card>
+        <Card>
+          <span style={{ color: "var(--accent-clr)" }}>$</span>
+          <p>Receive</p>
         </Card>
       </div>
     </main>

@@ -16,3 +16,18 @@
   gap: 1rem;
   padding-block: 2rem;
 }
+
+.transactions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  align-items: center;
+  width: fit-content;
+}
+
+@media (max-width: 31.25rem) {
+  .transactions {
+    grid-template-columns: repeat(2, 1fr);
+    margin-inline: auto;
+  }
+}

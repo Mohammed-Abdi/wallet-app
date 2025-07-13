@@ -11,6 +11,7 @@ const cardStyle = {
   width: "6.25rem",
   height: "6.25rem",
   borderRadius: "0.5rem",
+  outline: "2px solid var(--accent-clr)",
   cursor: "pointer",
 };
 
