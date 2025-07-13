@@ -3,8 +3,7 @@
 
   --dark-background: #010409;
   --dark-text-clr: #fefefe;
-  --dark-wrapper-clr: #0d1117;
-  --dark-bright-clr: #151b23;
+  --dark-wrapper-clr: #151b23;
   --dark-border-clr: #3d444d;
   --dark-button-clr: #fefefe;
   --dark-button-hover-clr: #212830;
@@ -12,8 +11,7 @@
 
   --light-background: #fefefe;
   --light-text-clr: #010409;
-  --light-wrapper-clr: #ffffff;
-  --light-bright-clr: #ffffff;
+  --light-wrapper-clr: #f5f5f5;
   --light-border-clr: #d1d9e0;
   --light-button-clr: #010409;
   --light-button-hover-clr: #e3e3e3;
