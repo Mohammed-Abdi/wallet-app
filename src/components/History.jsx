@@ -108,12 +108,12 @@ function History({
           </div>
         )}
         {status === "success" && (
-          <div style={{ color: "green" }}>
+          <div style={{ color: "#5eff00ff" }}>
             <SuccessfulLogin />
           </div>
         )}
         {status === "failed" && (
-          <div style={{ color: "red" }}>
+          <div style={{ color: "#ff0000ff" }}>
             <FailedLogin />
           </div>
         )}
