@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ArrowUp from "../assets/ArrowUp";
 import Loop from "../assets/Loop";
+import { formatDateTime } from "../services/formatDateTime";
+import { ThemeContext } from "../context/ThemeContext";
 
 function History({ id, date, type, amount, currency, from, to }) {
   const [message, setMessage] = useState("");
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (type === "deposit")
@@ -26,7 +29,18 @@ function History({ id, date, type, amount, currency, from, to }) {
   }, [type, amount, currency, id, from, to]);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "1.25rem",
+        backgroundColor: `var(--${theme}-wrapper-clr)`,
+        padding: "1.25rem",
+        borderRadius: "0.25rem",
+        width: "min(36rem, 100%)",
+        marginInline: "0.625rem",
+      }}
+    >
       <div>
         {type === "deposit" && (
           <div style={{ transform: "rotate(180deg)", color: "green" }}>
@@ -49,9 +63,17 @@ function History({ id, date, type, amount, currency, from, to }) {
           </div>
         )}
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.5rem",
+        }}
+      >
         <div>{message}</div>
-        <div>{date}</div>
+        <div style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+          {formatDateTime(date)}
+        </div>
       </div>
     </div>
   );

@@ -76,7 +76,7 @@ function Dashboard() {
             key={transaction.id}
             type={transaction.type}
             id={transaction.receiver}
-            data={transaction.date}
+            date={transaction.date}
             amount={transaction.amount}
             currency={transaction.currency}
             from={transaction.from}
