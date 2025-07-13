@@ -39,7 +39,7 @@ function Hero() {
           <SecondaryButton
             style={{ padding: "0.75rem 2rem" }}
             onClick={() =>
-              accountDispatch({ type: "login", payload: "@guest_user" })
+              accountDispatch({ type: "login", payload: "guest_user" })
             }
           >
             <p style={textStyle}>Demo Account</p>
