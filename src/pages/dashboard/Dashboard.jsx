@@ -7,6 +7,7 @@ import styles from "./Dashboard.module.css";
 import Profile from "../../components/Profile";
 import { AccountContext } from "../../context/AccountContext";
 import { getBalance } from "../../services/getBalance";
+import { convertToUSD } from "../../services/convertToUSD";
 
 function Dashboard() {
   const { theme } = useContext(ThemeContext);
@@ -29,6 +30,8 @@ function Dashboard() {
   const { chosenName, chosenBalance, chosenSymbol } = getBalance(
     currentUser.balances
   );
+
+  const usdBalance = convertToUSD(chosenBalance, chosenSymbol);
 
   return (
     <main
@@ -60,7 +63,7 @@ function Dashboard() {
         <p style={{ paddingLeft: "0.5rem" }}>{chosenName} (USD)</p>
         <h1 style={{ fontSize: "3rem" }}>
           ${chosenBalance < 10 && 0}
-          {chosenBalance.toFixed(2)}
+          {usdBalance.toFixed(2)}
         </h1>
         <p
           style={{ paddingLeft: "0.5rem", fontSize: "0.875rem", opacity: 0.7 }}
