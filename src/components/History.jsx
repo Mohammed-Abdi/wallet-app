@@ -34,29 +34,47 @@ const dateStyles = {
   opacity: 0.7,
 };
 
-function History({ id, date, type, amount, currency, from, to }) {
+function History({
+  id,
+  date,
+  type,
+  amount,
+  currency,
+  from,
+  to,
+  status,
+  location,
+}) {
   const [message, setMessage] = useState("");
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
-    if (type === "deposit")
+    if (type === "deposit") {
       setMessage(
         `You successfully deposited ${amount} ${currency} into your wallet`
       );
-    else if (type === "withdraw")
+    } else if (type === "withdraw") {
       setMessage(
         `You successfully withdrew ${amount} ${currency} from your wallet`
       );
-    else if (type === "send")
+    } else if (type === "send") {
       setMessage(
         `You successfully sent ${amount} ${currency} to user ID: ${id}`
       );
-    else if (type === "convert")
+    } else if (type === "convert") {
       setMessage(
         `You successfully converted ${from.amount} ${from.currency} to ${to.amount} ${to.currency}`
       );
-    else setMessage("");
-  }, [type, amount, currency, id, from, to]);
+    } else if (status === "success") {
+      setMessage("Successful login to your account");
+    } else if (status === "failed") {
+      setMessage("Failed login attempt detected");
+    } else if (status === "blocked") {
+      setMessage("Your login was blocked due to suspicious activity");
+    } else {
+      setMessage("");
+    }
+  }, [type, amount, currency, id, from, to, status]);
 
   return (
     <div
@@ -90,6 +108,11 @@ function History({ id, date, type, amount, currency, from, to }) {
 
       <div style={columnStyles}>
         <div style={messageStyles}>{message}</div>
+        {location && (
+          <div style={{ ...dateStyles, color: "#4682A9", opacity: 1 }}>
+            {location.city + ", " + location.country}
+          </div>
+        )}
         <div style={dateStyles}>{formatDateTime(date)}</div>
       </div>
     </div>

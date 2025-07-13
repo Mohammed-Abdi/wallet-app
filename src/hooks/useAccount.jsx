@@ -64,6 +64,7 @@ export function useAccount() {
       ],
 
       transactions: [],
+      logins: [],
 
       timestamps: {
         createdAt: new Date().toISOString(),
@@ -177,6 +178,44 @@ export function useAccount() {
               currency: "SOL",
             },
             date: "2025-07-13T10:00:00",
+          },
+        ],
+
+        logins: [
+          {
+            status: "success",
+            location: { city: "Addis Ababa", country: "Ethiopia" },
+            date: "2025-07-13T08:20:00",
+          },
+          {
+            status: "failed",
+            location: { city: "Nairobi", country: "Kenya" },
+            date: "2025-07-12T22:45:10",
+          },
+          {
+            status: "blocked",
+            location: { city: "Istanbul", country: "Türkiye" },
+            date: "2025-07-12T20:18:45",
+          },
+          {
+            status: "success",
+            location: { city: "Frankfurt", country: "Germany" },
+            date: "2025-07-11T06:15:30",
+          },
+          {
+            status: "failed",
+            location: { city: "Dubai", country: "UAE" },
+            date: "2025-07-10T19:02:00",
+          },
+          {
+            status: "success",
+            location: { city: "New York", country: "USA" },
+            date: "2025-07-10T07:30:00",
+          },
+          {
+            status: "blocked",
+            location: { city: "Lagos", country: "Nigeria" },
+            date: "2025-07-09T23:10:45",
           },
         ],
 
