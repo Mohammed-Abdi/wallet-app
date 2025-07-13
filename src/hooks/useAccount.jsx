@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { useRandomContacts } from "./useRandomContacts";
 import { nanoid } from "nanoid";
+import { getFormattedDate } from "../services/getFormattedDate";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -66,8 +67,8 @@ export function useAccount() {
       transactions: [],
 
       timestamps: {
-        createdAt: new Date().toLocaleString(),
-        lastLogin: new Date().toLocaleString(),
+        createdAt: getFormattedDate(),
+        lastLogin: getFormattedDate(),
       },
     };
   });
@@ -179,8 +180,8 @@ export function useAccount() {
         ],
 
         timestamps: {
-          createdAt: new Date().toLocaleString(),
-          lastLogin: new Date().toLocaleString(),
+          createdAt: getFormattedDate(),
+          lastLogin: getFormattedDate(),
         },
       },
     ],
