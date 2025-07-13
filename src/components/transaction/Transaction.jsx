@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 
 function Transaction({ id, type, currentBalance, setType }) {
   const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState("USDT");
+  const [currency, setCurrency] = useState("USD");
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
   const numericAmount = Number(Number(amount).toFixed(2));
