@@ -26,18 +26,8 @@ function Dashboard() {
     <main
       className={styles.dashboard}
       style={{
-        color:
-          theme === "dark"
-            ? "var(--light-background)"
-            : theme === "light"
-            ? "var(--dark-background)"
-            : "inherit",
-        backgroundColor:
-          theme === "dark"
-            ? "var(--dark-background)"
-            : theme === "light"
-            ? "var(--light-background)"
-            : "",
+        color: `var(--${theme}-text-clr)`,
+        backgroundColor: `var(--${theme}-background)`,
         transition: "color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}
     >

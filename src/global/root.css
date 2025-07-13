@@ -2,7 +2,7 @@
   --accent-clr: #00cc89;
 
   --dark-background: #010409;
-  --light-text-clr: #fefefe;
+  --dark-text-clr: #fefefe;
   --dark-wrapper-clr: #0d1117;
   --dark-bright-clr: #151b23;
   --dark-border-clr: #3d444d;
@@ -11,7 +11,7 @@
   --dark-hover-clr: #fefefe25;
 
   --light-background: #fefefe;
-  --dark-text-clr: #010409;
+  --light-text-clr: #010409;
   --light-wrapper-clr: #ffffff;
   --light-bright-clr: #ffffff;
   --light-border-clr: #d1d9e0;
