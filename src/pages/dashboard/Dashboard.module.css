@@ -51,4 +51,7 @@
     grid-template-columns: repeat(2, 1fr);
     margin-inline: auto;
   }
+  .activity {
+    align-items: center;
+  }
 }

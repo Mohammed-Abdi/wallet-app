@@ -69,7 +69,16 @@ function History({ id, date, type, amount, currency, from, to }) {
           gap: "0.5rem",
         }}
       >
-        <div>{message}</div>
+        <div
+          style={{
+            wordWrap: "break-word",
+            overflowWrap: "break-word",
+            whiteSpace: "normal",
+            width: "100%",
+          }}
+        >
+          {message}
+        </div>
         <div style={{ fontSize: "0.875rem", opacity: 0.7 }}>
           {formatDateTime(date)}
         </div>
