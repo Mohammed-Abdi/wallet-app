@@ -31,7 +31,6 @@ function Card({ icon, text }) {
       <span
         style={{
           color: "var(--accent-clr)",
-          transition: "transform 0.3s ease-in-out",
           marginTop: "-1rem",
         }}
       >
