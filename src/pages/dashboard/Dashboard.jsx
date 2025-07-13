@@ -34,7 +34,7 @@ function Dashboard() {
   const { theme } = useContext(ThemeContext);
   const { accounts } = useContext(AccountContext);
 
-  const date = useLiveDate(60_000);
+  const date = useLiveDate(100);
 
   const currentUser = useMemo(() => {
     return accounts.find(
