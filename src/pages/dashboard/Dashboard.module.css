@@ -27,6 +27,9 @@
 }
 
 @media (max-width: 31.25rem) {
+  .balances {
+    align-items: center;
+  }
   .transactions {
     grid-template-columns: repeat(2, 1fr);
     margin-inline: auto;
