@@ -194,12 +194,12 @@ export function useAccount() {
           },
           {
             status: "blocked",
-            location: { city: "Istanbul", country: "Türkiye" },
+            location: { city: "Addis Ababa", country: "Ethiopia" },
             date: "2025-07-12T20:18:45",
           },
           {
             status: "success",
-            location: { city: "Frankfurt", country: "Germany" },
+            location: { city: "Addis Ababa", country: "Ethiopia" },
             date: "2025-07-11T06:15:30",
           },
           {
@@ -209,16 +209,10 @@ export function useAccount() {
           },
           {
             status: "success",
-            location: { city: "New York", country: "USA" },
+            location: { city: "Addis Ababa", country: "Ethiopia" },
             date: "2025-07-10T07:30:00",
           },
-          {
-            status: "blocked",
-            location: { city: "Lagos", country: "Nigeria" },
-            date: "2025-07-09T23:10:45",
-          },
         ],
-
         timestamps: {
           createdAt: new Date().toISOString(),
           lastLogin: new Date().toISOString(),

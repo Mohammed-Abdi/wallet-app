@@ -118,7 +118,14 @@ function Dashboard() {
                 to={transaction.to}
               />
             ))
-          : "No Login Histories"}
+          : currentUser.logins.map((login) => (
+              <History
+                key={login.date}
+                status={login.status}
+                date={login.date}
+                location={login.location}
+              />
+            ))}
       </div>
     </main>
   );

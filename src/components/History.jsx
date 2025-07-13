@@ -3,6 +3,9 @@ import ArrowUp from "../assets/ArrowUp";
 import Loop from "../assets/Loop";
 import { formatDateTime } from "../services/formatDateTime";
 import { ThemeContext } from "../context/ThemeContext";
+import SuccessfulLogin from "../assets/SuccessfulLogin";
+import FailedLogin from "../assets/FailedLogin";
+import BlockedLogin from "../assets/BlockedLogin";
 
 const containerStyles = {
   display: "flex",
@@ -70,7 +73,7 @@ function History({
     } else if (status === "failed") {
       setMessage("Failed login attempt detected");
     } else if (status === "blocked") {
-      setMessage("Your login was blocked due to suspicious activity");
+      setMessage("Login was blocked due to suspicious activity");
     } else {
       setMessage("");
     }
@@ -102,6 +105,21 @@ function History({
         {type === "convert" && (
           <div style={{ color: "#9929EA" }}>
             <Loop />
+          </div>
+        )}
+        {status === "success" && (
+          <div style={{ color: "green" }}>
+            <SuccessfulLogin />
+          </div>
+        )}
+        {status === "failed" && (
+          <div style={{ color: "red" }}>
+            <FailedLogin />
+          </div>
+        )}
+        {status === "blocked" && (
+          <div>
+            <BlockedLogin />
           </div>
         )}
       </div>
