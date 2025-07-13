@@ -38,7 +38,6 @@ function History({ id, date, type, amount, currency, from, to }) {
         padding: "1.25rem",
         borderRadius: "0.25rem",
         width: "min(36rem, 100%)",
-        marginInline: "0.625rem",
       }}
     >
       <div>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ThemeToggle from "../../components/buttons/ThemeToggle";
 import { ThemeContext } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
@@ -15,7 +15,18 @@ import Send from "../../assets/Send";
 import Exchange from "../../assets/Exchange";
 import History from "../../components/History";
 
+const switchStyle = {
+  width: "10rem",
+  paddingBlock: "0.5rem",
+  border: "none",
+  background: "none",
+  color: "inherit",
+  fontSize: "inherit",
+  cursor: "pointer",
+};
+
 function Dashboard() {
+  const [isOnActivities, setIsOnActivities] = useState(true);
   const { theme } = useContext(ThemeContext);
   const { accounts } = useContext(AccountContext);
 
@@ -70,19 +81,44 @@ function Dashboard() {
       </div>
 
       <div className={styles.activity}>
-        <p>Activities</p>
-        {currentUser.transactions.map((transaction) => (
-          <History
-            key={transaction.id}
-            type={transaction.type}
-            id={transaction.receiver}
-            date={transaction.date}
-            amount={transaction.amount}
-            currency={transaction.currency}
-            from={transaction.from}
-            to={transaction.to}
-          />
-        ))}
+        <div>
+          <button
+            style={{
+              ...switchStyle,
+              borderBottom: isOnActivities
+                ? "2px solid var(--accent-clr)"
+                : "none",
+            }}
+            onClick={() => setIsOnActivities(true)}
+          >
+            Activities
+          </button>
+          <button
+            style={{
+              ...switchStyle,
+              borderBottom: !isOnActivities
+                ? "2px solid var(--accent-clr)"
+                : "none",
+            }}
+            onClick={() => setIsOnActivities(false)}
+          >
+            Logins
+          </button>
+        </div>
+        {isOnActivities
+          ? currentUser.transactions.map((transaction) => (
+              <History
+                key={transaction.id}
+                type={transaction.type}
+                id={transaction.receiver}
+                date={transaction.date}
+                amount={transaction.amount}
+                currency={transaction.currency}
+                from={transaction.from}
+                to={transaction.to}
+              />
+            ))
+          : "No Login Histories"}
       </div>
     </main>
   );
