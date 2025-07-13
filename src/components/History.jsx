@@ -103,7 +103,7 @@ function History({
           </div>
         )}
         {type === "convert" && (
-          <div style={{ color: "#9929EA" }}>
+          <div style={{ color: "#4682A9" }}>
             <Loop />
           </div>
         )}
