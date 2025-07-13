@@ -5,7 +5,6 @@ const cardStyle = {
   display: "flex",
   flexDirection: "column",
   gap: "0.75rem",
-  fontSize: "0.875rem",
   alignItems: "center",
   justifyContent: "center",
   width: "7rem",
@@ -36,7 +35,7 @@ function Card({ icon, text }) {
       >
         {icon}
       </span>
-      <p>{text}</p>
+      <p style={{ fontSize: "0.875rem", fontWeight: 500 }}>{text}</p>
     </div>
   );
 }
