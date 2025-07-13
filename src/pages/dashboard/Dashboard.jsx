@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import ThemeToggle from "../../components/buttons/ThemeToggle";
 import { ThemeContext } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
@@ -32,13 +32,27 @@ function Dashboard() {
   const { theme } = useContext(ThemeContext);
   const { accounts } = useContext(AccountContext);
 
-  const currentUser = accounts.find(
-    (account) => account.status.accountStatus === "active"
-  );
+  const currentUser = useMemo(() => {
+    return accounts.find(
+      (account) => account.status.accountStatus === "active"
+    );
+  }, [accounts]);
 
   const { name, balance, symbol } = getBalance(currentUser.balances);
 
   const usdBalance = convertToUSD(balance, symbol);
+
+  const sortedTransactions = useMemo(() => {
+    return [...currentUser.transactions].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+  }, [currentUser.transactions]);
+
+  const sortedLogins = useMemo(() => {
+    return [...currentUser.logins].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+  }, [currentUser.logins]);
 
   return (
     <main
@@ -119,7 +133,7 @@ function Dashboard() {
           </button>
         </div>
         {isOnActivities
-          ? currentUser.transactions.map((transaction) => (
+          ? sortedTransactions.map((transaction) => (
               <History
                 key={transaction.id}
                 type={transaction.type}
@@ -131,7 +145,7 @@ function Dashboard() {
                 to={transaction.to}
               />
             ))
-          : currentUser.logins.map((login) => (
+          : sortedLogins.map((login) => (
               <History
                 key={login.date}
                 status={login.status}

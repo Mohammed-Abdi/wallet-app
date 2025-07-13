@@ -4,14 +4,16 @@ import SecondaryButton from "../buttons/secondary-button/SecondaryButton";
 import styles from "./Transaction.module.css";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AccountContext } from "../../context/AccountContext";
+import { nanoid } from "nanoid";
 
 function Transaction({ id, type, currentBalance, setType }) {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USDT");
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
-
   const numericAmount = Number(Number(amount).toFixed(2));
+
+  const time = new Date().toISOString();
 
   const { accountDispatch } = useContext(AccountContext);
   const { theme } = useContext(ThemeContext);
@@ -31,10 +33,22 @@ function Transaction({ id, type, currentBalance, setType }) {
   }, [currentBalance, amount, type, numericAmount]);
 
   function handleTransaction() {
+    const numericAmount = Number(Number(amount).toFixed(2));
     if (type?.toLowerCase() === "deposit") {
       accountDispatch({
         type: "deposit",
         payload: { id, amount: numericAmount, currency },
+      });
+      accountDispatch({
+        type: "setTransactionHistory",
+        payload: {
+          id,
+          transactionId: nanoid(),
+          type,
+          amount: numericAmount,
+          currency,
+          date: time,
+        },
       });
       setType(null);
       setAmount("");
@@ -45,6 +59,17 @@ function Transaction({ id, type, currentBalance, setType }) {
         accountDispatch({
           type: "withdraw",
           payload: { id, amount: numericAmount, currency },
+        });
+        accountDispatch({
+          type: "setTransactionHistory",
+          payload: {
+            id,
+            transactionId: nanoid(),
+            type,
+            amount: numericAmount,
+            currency,
+            date: time,
+          },
         });
         setType(null);
         setAmount("");

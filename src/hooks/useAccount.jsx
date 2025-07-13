@@ -70,6 +70,30 @@ function reducer(state, action) {
         }),
       };
 
+    case "setTransactionHistory":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.id === action.payload.id) {
+            return {
+              ...account,
+              transactions: [
+                ...account.transactions,
+                {
+                  id: action.payload.transactionId,
+                  type: action.payload.type,
+                  amount: action.payload.amount,
+                  currency: action.payload.currency,
+                  date: action.payload.date,
+                },
+              ],
+            };
+          } else {
+            return account;
+          }
+        }),
+      };
+
     default:
       throw new Error("Unknown action");
   }
