@@ -10,7 +10,7 @@ const containerStyles = {
   gap: "1.25rem",
   padding: "1.25rem",
   borderRadius: "0.5rem",
-  width: "min(36rem, 100%)",
+  width: "min(32rem, 100%)",
 };
 
 const columnStyles = {
@@ -25,11 +25,12 @@ const messageStyles = {
   wordWrap: "break-word",
   overflowWrap: "break-word",
   whiteSpace: "normal",
+  fontSize: "0.875rem",
   width: "100%",
 };
 
 const dateStyles = {
-  fontSize: "0.875rem",
+  fontSize: "0.75rem",
   opacity: 0.7,
 };
 
