@@ -97,6 +97,7 @@ function History({
       style={{
         ...containerStyles,
         backgroundColor: `var(--${theme}-wrapper-clr)`,
+        transition: "background-color 0.3s ease-in-out",
       }}
     >
       <div>
