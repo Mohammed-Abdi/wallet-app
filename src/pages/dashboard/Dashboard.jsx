@@ -59,7 +59,7 @@ function Dashboard() {
       </div>
       <div>
         <Card>
-          <span>💰</span>
+          <span>$</span>
           <p>Deposit</p>
         </Card>
       </div>
