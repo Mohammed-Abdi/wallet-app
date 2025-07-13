@@ -101,10 +101,10 @@ export function useAccount() {
 
         balances: [
           { symbol: "BTC", name: "Bitcoin", balance: 0.00054 },
-          { symbol: "ETH", name: "Ethereum", balance: 1.382 },
-          { symbol: "USDT", name: "Tether", balance: 257.31 },
-          { symbol: "BNB", name: "Binance Coin", balance: 3.27 },
-          { symbol: "SOL", name: "Solana", balance: 18.6 },
+          { symbol: "ETH", name: "Ethereum", balance: 0.0082 },
+          { symbol: "USDT", name: "Tether", balance: 40.31 },
+          { symbol: "BNB", name: "Binance Coin", balance: 0.027 },
+          { symbol: "SOL", name: "Solana", balance: 0.06 },
         ],
 
         transactions: [
