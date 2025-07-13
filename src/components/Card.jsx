@@ -4,7 +4,7 @@ import { ThemeContext } from "../context/ThemeContext";
 const cardStyle = {
   display: "flex",
   flexDirection: "column",
-  gap: "0.75rem",
+  gap: "0.25rem",
   alignItems: "center",
   justifyContent: "center",
   width: "7rem",
