@@ -88,8 +88,10 @@ function Dashboard() {
           </h1>
           <select
             style={{
-              color: `var(--dark-text-clr)`,
-              backgroundColor: `var(--dark-background)`,
+              color: `var(--${theme}-text-clr)`,
+              backgroundColor: `var(--${theme}-background)`,
+              transition:
+                "background-color 0.3s ease-in-out, color 0.3s ease-in-out",
             }}
             name="currency"
             id="currency"
