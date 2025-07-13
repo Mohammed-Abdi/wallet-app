@@ -52,6 +52,7 @@ function Profile({ name, username, profilePicture, verification, membership }) {
                 ? "var(--light-background)"
                 : "inherit"
             }`,
+            transition: "border-color 0.3s ease-in-out",
           }}
         />
       </div>
