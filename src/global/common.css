@@ -7,6 +7,6 @@ h1 {
     font-size: 3rem;
   }
   .card:hover span {
-    transform: rotate(360deg);
+    transform: rotateY(360deg);
   }
 }
