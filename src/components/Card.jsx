@@ -4,6 +4,7 @@ import { ThemeContext } from "../context/ThemeContext";
 const cardStyle = {
   display: "flex",
   flexDirection: "column",
+  position: "relative",
   gap: "0.25rem",
   alignItems: "center",
   justifyContent: "center",
@@ -31,11 +32,23 @@ function Card({ icon, text }) {
         style={{
           color: "var(--accent-clr)",
           transition: "transform 0.3s ease-in-out",
+          marginTop: "-1rem",
         }}
       >
         {icon}
       </span>
-      <p style={{ fontSize: "0.875rem", fontWeight: 500 }}>{text}</p>
+      <p
+        style={{
+          fontSize: "0.875rem",
+          fontWeight: 500,
+          position: "absolute",
+          bottom: "0.75rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        {text}
+      </p>
     </div>
   );
 }

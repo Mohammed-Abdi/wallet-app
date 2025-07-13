@@ -10,6 +10,9 @@ import { getBalance } from "../../services/getBalance";
 import { convertToUSD } from "../../services/convertToUSD";
 import Card from "../../components/card";
 import Deposit from "../../assets/Deposit";
+import Withdraw from "../../assets/Withdraw";
+import Send from "../../assets/Send";
+import Exchange from "../../assets/Exchange";
 
 function Dashboard() {
   const { theme } = useContext(ThemeContext);
@@ -60,9 +63,9 @@ function Dashboard() {
       </div>
       <div className={styles.transactions}>
         <Card text="Deposit" icon={<Deposit />} />
-        <Card text="Withdraw" icon="$" />
-        <Card text="Send" icon="$" />
-        <Card text="Convert" icon="$" />
+        <Card text="Withdraw" icon={<Withdraw />} />
+        <Card text="Send" icon={<Send />} />
+        <Card text="Convert" icon={<Exchange />} />
       </div>
 
       <div className={styles.activity}>
