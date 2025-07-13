@@ -57,7 +57,7 @@ function History({
       setMessage(
         `You successfully deposited ${amount} ${currency} ${
           currency !== "USD"
-            ? `(~ $${convertToUSD(amount, currency).toFixed(2)})`
+            ? `($${convertToUSD(amount, currency).toFixed(2)})`
             : ""
         } into your wallet`
       );
@@ -65,7 +65,7 @@ function History({
       setMessage(
         `You successfully withdrew ${amount} ${currency} ${
           currency !== "USD"
-            ? `(~ $${convertToUSD(amount, currency).toFixed(2)})`
+            ? `($${convertToUSD(amount, currency).toFixed(2)})`
             : ""
         } from your wallet`
       );
@@ -73,7 +73,7 @@ function History({
       setMessage(
         `You successfully sent ${amount} ${currency} ${
           currency !== "USD"
-            ? `(~ $${convertToUSD(amount, currency).toFixed(2)})`
+            ? `($${convertToUSD(amount, currency).toFixed(2)})`
             : ""
         } to user ID: ${id}`
       );
