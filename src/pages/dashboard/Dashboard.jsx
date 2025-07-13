@@ -27,11 +27,9 @@ function Dashboard() {
     transition: "color 0.3s ease-in-out",
   };
 
-  const { chosenName, chosenBalance, chosenSymbol } = getBalance(
-    currentUser.balances
-  );
+  const { name, balance, symbol } = getBalance(currentUser.balances);
 
-  const usdBalance = convertToUSD(chosenBalance, chosenSymbol);
+  const usdBalance = convertToUSD(balance, symbol);
 
   return (
     <main
@@ -60,15 +58,15 @@ function Dashboard() {
         </div>
       </NavBar>
       <div className={styles.balances} style={textStyle}>
-        <p style={{ paddingLeft: "0.5rem" }}>{chosenName} (USD)</p>
+        <p style={{ paddingLeft: "0.5rem" }}>{name} (USD)</p>
         <h1 style={{ fontSize: "3rem" }}>
-          ${chosenBalance < 10 && 0}
+          ${usdBalance < 10 && 0}
           {usdBalance.toFixed(2)}
         </h1>
         <p
           style={{ paddingLeft: "0.5rem", fontSize: "0.875rem", opacity: 0.7 }}
         >
-          {chosenBalance + " " + chosenSymbol}
+          {balance + " " + symbol}
         </p>
       </div>
     </main>
