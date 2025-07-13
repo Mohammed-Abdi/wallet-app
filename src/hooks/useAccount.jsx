@@ -44,7 +44,7 @@ export function useAccount() {
       location: individual.location,
 
       account: {
-        username: `@${individual.name.split(" ").join("_")}`,
+        username: individual.name.split(" ").join("_"),
         email: individual.email,
         password: "unnecessary",
       },
@@ -88,7 +88,7 @@ export function useAccount() {
         location: { city: "Addis Ababa", country: "Ethiopia" },
 
         account: {
-          username: "@guest_user",
+          username: "guest_user",
           email: "guest@example.com",
           password: "unnecessary",
         },
