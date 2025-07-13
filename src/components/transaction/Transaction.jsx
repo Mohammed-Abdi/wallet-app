@@ -32,6 +32,8 @@ function Transaction({ id, type, currentBalance, setType }) {
     if (type?.toLowerCase() === "deposit") {
       accountDispatch({ type: "deposit", payload: { id, amount, currency } });
       setType(null);
+      setAmount("");
+      setCurrency("USDT");
     }
     if (type?.toLowerCase() === "withdraw") {
       if (currentBalance > amount) {
@@ -40,6 +42,8 @@ function Transaction({ id, type, currentBalance, setType }) {
           payload: { id, amount, currency },
         });
         setType(null);
+        setAmount("");
+        setCurrency("USDT");
       }
     }
     if (type?.toLowerCase() === "send") {
@@ -48,6 +52,8 @@ function Transaction({ id, type, currentBalance, setType }) {
         payload: { id, receiver, amount, currency },
       });
       setType(null);
+      setAmount("");
+      setCurrency("USDT");
     }
     if (type?.toLowerCase() === "convert") {
       accountDispatch({ type: "convert", payload: { id, amount } });
