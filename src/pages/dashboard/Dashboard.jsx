@@ -6,8 +6,6 @@ import NavBar from "../../components/NavBar";
 import styles from "./Dashboard.module.css";
 import Profile from "../../components/Profile";
 import { AccountContext } from "../../context/AccountContext";
-import { getBalance } from "../../services/getBalance";
-import { convertToUSD } from "../../services/convertToUSD";
 import Card from "../../components/Card";
 import Deposit from "../../assets/Deposit";
 import Withdraw from "../../assets/Withdraw";
@@ -15,6 +13,8 @@ import Send from "../../assets/Send";
 import Exchange from "../../assets/Exchange";
 import History from "../../components/History";
 import Transaction from "../../components/transaction/Transaction";
+import { calcTotal } from "../../services/calcTotal";
+import { formatDateTime } from "../../services/formatDateTime";
 
 const switchStyle = {
   width: "10rem",
@@ -28,6 +28,7 @@ const switchStyle = {
 
 function Dashboard() {
   const [isOnActivities, setIsOnActivities] = useState(true);
+  const [currency, setCurrency] = useState("USD");
   const [type, setType] = useState(null);
   const { theme } = useContext(ThemeContext);
   const { accounts } = useContext(AccountContext);
@@ -38,9 +39,9 @@ function Dashboard() {
     );
   }, [accounts]);
 
-  const { name, balance, symbol } = getBalance(currentUser.balances);
-
-  const usdBalance = convertToUSD(balance, symbol);
+  const totalBalance = useMemo(() => {
+    return calcTotal(currentUser?.balances, currency);
+  }, [currency, currentUser?.balances]);
 
   const sortedTransactions = useMemo(() => {
     return [...currentUser.transactions].sort(
@@ -78,15 +79,28 @@ function Dashboard() {
         </div>
       </NavBar>
       <div className={styles.balances}>
-        <p style={{ paddingLeft: "0.5rem" }}>{name} (USD)</p>
-        <h1 style={{ fontSize: "3rem" }}>
-          ${usdBalance < 10 && 0}
-          {usdBalance.toFixed(2)}
-        </h1>
-        <p
-          style={{ paddingLeft: "0.5rem", fontSize: "0.875rem", opacity: 0.7 }}
-        >
-          {balance + " " + symbol}
+        <p style={{ opacity: 0.7 }}>Est total value</p>
+        <div>
+          <h1 style={{ fontSize: "3rem" }}>
+            {currency === "BTC"
+              ? totalBalance?.toFixed(4)
+              : totalBalance?.toFixed(2)}
+          </h1>
+          <select
+            name="currency"
+            id="currency"
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            <option value="USD">USD</option>
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="BNB">BNB</option>
+            <option value="SOL">SOL</option>
+          </select>
+        </div>
+        <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+          Today is {formatDateTime(new Date().toISOString())}
         </p>
       </div>
       <div className={styles.transactions}>
@@ -158,7 +172,7 @@ function Dashboard() {
         id={currentUser.id}
         type={type}
         setType={setType}
-        currentBalance={usdBalance}
+        currentBalance={totalBalance}
       />
     </main>
   );

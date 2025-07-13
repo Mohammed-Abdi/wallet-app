@@ -29,7 +29,7 @@ const guestAccount = {
   balances: [
     { symbol: "BTC", name: "Bitcoin", balance: 0.00054 },
     { symbol: "ETH", name: "Ethereum", balance: 0.0082 },
-    { symbol: "USDT", name: "Tether", balance: 40.31 },
+    { symbol: "USD", name: "Dollar", balance: 40.31 },
     { symbol: "BNB", name: "Binance Coin", balance: 0.027 },
     { symbol: "SOL", name: "Solana", balance: 0.06 },
   ],
@@ -332,7 +332,7 @@ export function useAccount() {
           balances: [
             { symbol: "BTC", name: "Bitcoin", balance: 0 },
             { symbol: "ETH", name: "Ethereum", balance: 0 },
-            { symbol: "USDT", name: "Tether", balance: 0 },
+            { symbol: "USD", name: "Dollar", balance: 0 },
             { symbol: "BNB", name: "Binance Coin", balance: 0 },
             { symbol: "SOL", name: "Solana", balance: 0 },
           ],

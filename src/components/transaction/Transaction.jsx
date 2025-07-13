@@ -160,7 +160,7 @@ function Transaction({ id, type, currentBalance, setType }) {
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
           >
-            <option value="USDT">USDT</option>
+            <option value="USD">USD</option>
             <option value="BTC">BTC</option>
             <option value="ETH">ETH</option>
             <option value="BNB">BNB</option>
