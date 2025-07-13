@@ -56,7 +56,7 @@ function History({
     if (type === "deposit") {
       setMessage(
         `You successfully deposited ${amount} ${currency} ${
-          currency !== "USD"
+          currency !== "USD" && currency !== "USDT"
             ? `($${convertToUSD(amount, currency).toFixed(2)})`
             : ""
         } into your wallet`
@@ -64,7 +64,7 @@ function History({
     } else if (type === "withdraw") {
       setMessage(
         `You successfully withdrew ${amount} ${currency} ${
-          currency !== "USD"
+          currency !== "USD" && currency !== "USDT"
             ? `($${convertToUSD(amount, currency).toFixed(2)})`
             : ""
         } from your wallet`
@@ -72,7 +72,7 @@ function History({
     } else if (type === "send") {
       setMessage(
         `You successfully sent ${amount} ${currency} ${
-          currency !== "USD"
+          currency !== "USD" && currency !== "USDT"
             ? `($${convertToUSD(amount, currency).toFixed(2)})`
             : ""
         } to user ID: ${id}`
