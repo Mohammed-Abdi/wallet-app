@@ -62,7 +62,7 @@ function Profile({ name, username, profilePicture, verification, membership }) {
           </span>
         </h2>
         <p style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <span style={{ opacity: 0.7 }}>{username}</span>
+          <span style={{ opacity: 0.7 }}>@{username}</span>
           <span style={{ color: "var(--accent-clr)" }}>
             {membership?.split("").at(0).toUpperCase() + membership?.slice(1)}
           </span>
