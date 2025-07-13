@@ -57,7 +57,7 @@ function History({ id, date, type, amount, currency, from, to }) {
           </div>
         )}
         {type === "convert" && (
-          <div style={{ color: "green" }}>
+          <div style={{ color: "#9929EA" }}>
             <Loop />
           </div>
         )}
