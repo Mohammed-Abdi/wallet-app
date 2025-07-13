@@ -22,6 +22,54 @@ function reducer(state, action) {
         }),
       };
 
+    case "deposit":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.id === action.payload.id) {
+            return {
+              ...account,
+              balances: account.balances.map((balance) => {
+                if (balance.symbol === action.payload.currency) {
+                  return {
+                    ...balance,
+                    balance: balance.balance + action.payload.amount,
+                  };
+                } else {
+                  return balance;
+                }
+              }),
+            };
+          } else {
+            return account;
+          }
+        }),
+      };
+
+    case "withdraw":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.id === action.payload.id) {
+            return {
+              ...account,
+              balances: account.balances.map((balance) => {
+                if (balance.symbol === action.payload.currency) {
+                  return {
+                    ...balance,
+                    balance: balance.balance - action.payload.amount,
+                  };
+                } else {
+                  return balance;
+                }
+              }),
+            };
+          } else {
+            return account;
+          }
+        }),
+      };
+
     default:
       throw new Error("Unknown action");
   }

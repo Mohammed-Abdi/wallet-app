@@ -24,6 +24,18 @@
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 0.25rem;
+  width: 75%;
+}
+
+.wrapper select {
+  border-radius: 0.25rem;
+  width: 25%;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+.wrapper select:focus {
+  outline: none;
 }
 
 .wrapper input:focus {

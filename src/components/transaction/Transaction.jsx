@@ -1,17 +1,50 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ActionButton from "../buttons/action-button/ActionButton";
 import SecondaryButton from "../buttons/secondary-button/SecondaryButton";
 import styles from "./Transaction.module.css";
 import { ThemeContext } from "../../context/ThemeContext";
+import { AccountContext } from "../../context/AccountContext";
 
-function Transaction({ type, currentBalance }) {
+function Transaction({ id, type, currentBalance }) {
   const [amount, setAmount] = useState("");
+  const [currency, setCurrency] = useState("USDT");
+  const [receiver, setReceiver] = useState("");
+  const [message, setMessage] = useState("");
+
+  const { accountDispatch } = useContext(AccountContext);
   const { theme } = useContext(ThemeContext);
   const inputStyle = {
     border: `2px solid var(--${theme}-border-clr)`,
     backgroundColor: `var(--${theme}-button-hover-clr)`,
     color: `var(--${theme}-text-clr)`,
   };
+
+  useEffect(() => {
+    if (type.toLowerCase() === "withdraw") {
+      if (!amount) setMessage("");
+      if (currentBalance < amount) setMessage("GGs");
+    }
+  }, [currentBalance, amount, type]);
+
+  function handleTransaction() {
+    if (type.toLowerCase() === "deposit")
+      accountDispatch({ type: "deposit", payload: { id, amount, currency } });
+    if (type.toLowerCase() === "withdraw") {
+      if (currentBalance > amount) {
+        accountDispatch({
+          type: "withdraw",
+          payload: { id, amount, currency },
+        });
+      }
+    }
+    if (type.toLowerCase() === "send")
+      accountDispatch({
+        type: "send",
+        payload: { id, receiver, amount, currency },
+      });
+    if (type.toLowerCase() === "convert")
+      accountDispatch({ type: "convert", payload: { id, amount } });
+  }
 
   return type ? (
     <main className={styles.main}>
@@ -23,15 +56,46 @@ function Transaction({ type, currentBalance }) {
             "background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out",
         }}
       >
-        <input
-          type="text"
-          placeholder="Enter amount"
-          style={inputStyle}
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <input
+            type="text"
+            placeholder="Enter amount"
+            style={inputStyle}
+            value={amount}
+            onChange={(e) => setAmount(Number(e.target.value))}
+          />
+          <select
+            name="currency"
+            id="currency"
+            style={{
+              backgroundColor: `var(--${theme}-border-clr)`,
+              color: `var(--${theme}-text-clr)`,
+            }}
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+          >
+            <option value="USDT">USDT</option>
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="BNB">BNB</option>
+            <option value="SOL">SOL</option>
+          </select>
+        </div>
+        {type.toLowerCase() === "send" && (
+          <input
+            type="text"
+            placeholder="Enter amount"
+            style={inputStyle}
+            value={receiver}
+            onChange={(e) => setReceiver(e.target.value)}
+          />
+        )}
+        <p>{message}</p>
         <div className={styles.buttons}>
-          <ActionButton style={{ width: "100%", borderRadius: "0.25rem" }}>
+          <ActionButton
+            style={{ width: "100%", borderRadius: "0.25rem" }}
+            onClick={handleTransaction}
+          >
             {type?.split("").at(0).toUpperCase() + type?.slice(1)}
           </ActionButton>
           <SecondaryButton

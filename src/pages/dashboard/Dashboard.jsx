@@ -128,7 +128,11 @@ function Dashboard() {
               />
             ))}
       </div>
-      <Transaction type={"deposit"} currentBalance={usdBalance} />
+      <Transaction
+        id={currentUser.id}
+        type={"withdraw"}
+        currentBalance={usdBalance}
+      />
     </main>
   );
 }
