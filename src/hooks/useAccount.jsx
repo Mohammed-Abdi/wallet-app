@@ -326,7 +326,7 @@ export function useAccount() {
           status: {
             accountStatus: "inactive",
             verification: "verified",
-            membership: i % 2 !== 0 ? "pro" : "freePlan",
+            membership: i % 2 !== 0 ? "pro" : "basic",
           },
 
           balances: [
