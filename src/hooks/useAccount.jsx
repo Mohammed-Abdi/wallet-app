@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import { useRandomContacts } from "./useRandomContacts";
 import { nanoid } from "nanoid";
 
@@ -296,6 +296,7 @@ function reducer(state, action) {
 }
 
 export function useAccount() {
+  const isInitialized = useRef(false);
   const { contacts, status, message } = useRandomContacts(3);
   const [{ accounts, admins }, accountDispatch] = useReducer(
     reducer,
@@ -303,7 +304,7 @@ export function useAccount() {
   );
 
   useEffect(() => {
-    if (contacts.length > 0) {
+    if (!isInitialized.current && contacts.length > 0) {
       const contactArray = contacts.map((individual, i) => {
         return {
           id: nanoid(),
@@ -348,6 +349,7 @@ export function useAccount() {
       });
 
       accountDispatch({ type: "initialize", payload: contactArray });
+      isInitialized.current = true;
     }
   }, [contacts]);
 

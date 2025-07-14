@@ -245,18 +245,22 @@ function Transaction({ id, type, currentBalance, setType }) {
             Cancel
           </SecondaryButton>
         </div>
-        {accounts
-          .filter((account) => account.account.username !== "guest_user")
-          .map((account) => (
-            <Contacts
-              key={account.id}
-              name={account.personalInfo.name}
-              username={account.account.username}
-              profilePicture={account.personalInfo.profilePicture}
-              verification={account.status.verification}
-              membership={account.status.membership}
-            />
-          ))}
+
+        <div>
+          <p>Your Contacts</p>
+          {accounts
+            .filter((account) => account.account.username !== "guest_user")
+            .map((account) => (
+              <Contacts
+                key={account.id}
+                name={account.personalInfo.name}
+                username={account.account.username}
+                profilePicture={account.personalInfo.profilePicture}
+                verification={account.status.verification}
+                membership={account.status.membership}
+              />
+            ))}
+        </div>
       </div>
     </main>
   ) : (
