@@ -42,7 +42,7 @@ function Profile({ name, username, profilePicture, verification, membership }) {
       <div style={imageWrapperStyle}>
         <img
           src={profilePicture}
-          alt={`£{name}'s profile picture`}
+          alt={`${name}'s profile picture`}
           style={{
             ...imageStyle,
             border: `2px solid var(--${theme}-border-clr)`,
