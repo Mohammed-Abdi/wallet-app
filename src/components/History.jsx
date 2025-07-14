@@ -75,7 +75,7 @@ function History({
           currency !== "USD" && currency !== "USDT"
             ? `($${convertToUSD(amount, currency).toFixed(2)})`
             : ""
-        } to user ID: ${id}`
+        } to ${id}`
       );
     } else if (type === "convert") {
       setMessage(
