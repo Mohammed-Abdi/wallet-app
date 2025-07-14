@@ -259,6 +259,7 @@ function Transaction({ id, type, currentBalance, setType }) {
                   profilePicture={account.personalInfo.profilePicture}
                   verification={account.status.verification}
                   membership={account.status.membership}
+                  onClick={() => setReceiver(account.id)}
                 />
               ))}
           </div>
