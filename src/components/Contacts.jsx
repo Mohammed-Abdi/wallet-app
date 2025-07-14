@@ -59,9 +59,9 @@ function Contacts({
       <div>
         <h4 style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           {name?.split(" ").at(0)}{" "}
-          <span style={{ transform: "translateY(0.25rem)" }}>
+          <span style={{ transform: "translateY(0.125rem)" }}>
             {verification === "verified" ? (
-              <Verified />
+              <Verified size={16} />
             ) : (
               <Highlight fontSize="0.75rem">unverified</Highlight>
             )}
