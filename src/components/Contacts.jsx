@@ -7,6 +7,10 @@ const wrapperStyle = {
   display: "flex",
   alignItems: "center",
   gap: "1.25rem",
+  marginBlock: "1.25rem",
+  padding: "0.625rem",
+  borderRadius: "0.5rem",
+  cursor: "pointer",
 };
 
 const imageWrapperStyle = {
@@ -30,21 +34,22 @@ function Contacts({
   profilePicture,
   verification,
   membership,
+  onClick,
 }) {
   const { theme } = useContext(ThemeContext);
 
-  const textStyle = {
-    color:
-      theme === "dark"
-        ? "var(--light-background)"
-        : theme === "light"
-        ? "var(--dark-background)"
-        : "inherit",
-    transition: "color 0.3s ease-in-out",
-  };
-
   return (
-    <div style={{ ...textStyle, ...wrapperStyle }}>
+    <div
+      className="contacts"
+      onClick={onClick}
+      style={{
+        ...wrapperStyle,
+        color: `var(--${theme}-text-clr)`,
+        border: `1px solid var(--${theme}-border-clr)`,
+        backgroundColor: `var(--${theme}-wrapper-clr)`,
+        transition: "color 0.3s ease-in-out",
+      }}
+    >
       <div style={imageWrapperStyle}>
         <img
           src={profilePicture}
