@@ -240,7 +240,9 @@ function Transaction({ id, type, balances, setType }) {
               onChange={(e) => setToCurrency(e.target.value)}
             >
               {filteredCurrencyArray?.map((cur) => (
-                <option value={cur}>{cur}</option>
+                <option key={cur} value={cur}>
+                  {cur}
+                </option>
               ))}
             </select>
           </div>
