@@ -5,29 +5,29 @@ export function convertTo(balance, fromCurrency, toCurrency) {
 
   if (fromCurrency === "USD") {
     if (toCurrency === "BTC") value = balance / 117923;
-    else if (toCurrency === "SOL") value = balance / 21;
-    else if (toCurrency === "ETH") value = balance / 1850;
-    else if (toCurrency === "BNB") value = balance / 314;
+    else if (toCurrency === "ETH") value = balance / 2960.44;
+    else if (toCurrency === "BNB") value = balance / 687.65;
+    else if (toCurrency === "SOL") value = balance / 161.83;
   } else if (fromCurrency === "BTC") {
     if (toCurrency === "USD") value = balance * 117923;
-    else if (toCurrency === "SOL") value = (balance * 117923) / 21;
-    else if (toCurrency === "ETH") value = (balance * 117923) / 1850;
-    else if (toCurrency === "BNB") value = (balance * 117923) / 314;
-  } else if (fromCurrency === "SOL") {
-    if (toCurrency === "USD") value = balance * 21;
-    else if (toCurrency === "BTC") value = (balance * 21) / 117923;
-    else if (toCurrency === "ETH") value = (balance * 21) / 1850;
-    else if (toCurrency === "BNB") value = (balance * 21) / 314;
+    else if (toCurrency === "ETH") value = (balance * 117923) / 2960.44;
+    else if (toCurrency === "BNB") value = (balance * 117923) / 687.65;
+    else if (toCurrency === "SOL") value = (balance * 117923) / 161.83;
   } else if (fromCurrency === "ETH") {
-    if (toCurrency === "USD") value = balance * 1850;
-    else if (toCurrency === "BTC") value = (balance * 1850) / 117923;
-    else if (toCurrency === "SOL") value = (balance * 1850) / 21;
-    else if (toCurrency === "BNB") value = (balance * 1850) / 314;
+    if (toCurrency === "USD") value = balance * 2960.44;
+    else if (toCurrency === "BTC") value = (balance * 2960.44) / 117923;
+    else if (toCurrency === "BNB") value = (balance * 2960.44) / 687.65;
+    else if (toCurrency === "SOL") value = (balance * 2960.44) / 161.83;
   } else if (fromCurrency === "BNB") {
-    if (toCurrency === "USD") value = balance * 314;
-    else if (toCurrency === "BTC") value = (balance * 314) / 117923;
-    else if (toCurrency === "SOL") value = (balance * 314) / 21;
-    else if (toCurrency === "ETH") value = (balance * 314) / 1850;
+    if (toCurrency === "USD") value = balance * 687.65;
+    else if (toCurrency === "BTC") value = (balance * 687.65) / 117923;
+    else if (toCurrency === "ETH") value = (balance * 687.65) / 2960.44;
+    else if (toCurrency === "SOL") value = (balance * 687.65) / 161.83;
+  } else if (fromCurrency === "SOL") {
+    if (toCurrency === "USD") value = balance * 161.83;
+    else if (toCurrency === "BTC") value = (balance * 161.83) / 117923;
+    else if (toCurrency === "ETH") value = (balance * 161.83) / 2960.44;
+    else if (toCurrency === "BNB") value = (balance * 161.83) / 687.65;
   } else {
     throw new Error("Unsupported currency conversion");
   }
@@ -36,6 +36,7 @@ export function convertTo(balance, fromCurrency, toCurrency) {
 }
 
 function formatResult(value, currency) {
-  if (currency === "USD") return Number(value).toFixed(2);
-  else return Number(value).toFixed(5);
+  return currency === "USD"
+    ? Number(value).toFixed(2)
+    : Number(value).toFixed(5);
 }
