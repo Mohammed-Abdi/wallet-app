@@ -241,6 +241,33 @@ function reducer(state, action) {
         }),
       };
 
+    case "convert":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.id === action.payload.id) {
+            return {
+              ...account,
+              balances: account.balances.map((balance) => {
+                if (balance.symbol === action.payload.currency.from) {
+                  return {
+                    ...balance,
+                    balance: balance.balance - action.payload.amount.from,
+                  };
+                } else if (balance.symbol === action.payload.currency.to) {
+                  return {
+                    ...balance,
+                    balance: balance.balance + action.payload.amount.to,
+                  };
+                }
+                return balance;
+              }),
+            };
+          }
+          return account;
+        }),
+      };
+
     case "logBalanceTransaction":
       return {
         ...state,
@@ -287,6 +314,29 @@ function reducer(state, action) {
           } else {
             return account;
           }
+        }),
+      };
+
+    case "logConversionTransaction":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.id === action.payload.id) {
+            return {
+              ...account,
+              transactions: [
+                ...account.transactions,
+                {
+                  id: action.payload.transactionId,
+                  type: action.payload.type,
+                  from: action.payload.from,
+                  to: action.payload.to,
+                  date: action.payload.date,
+                },
+              ],
+            };
+          }
+          return account;
         }),
       };
 

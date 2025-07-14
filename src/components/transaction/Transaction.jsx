@@ -126,22 +126,39 @@ function Transaction({ id, type, balances, setType }) {
       setCurrency("USD");
     }
     if (type?.toLowerCase() === "convert") {
+      const convertedAmount = Number(convertTo(amount, currency, toCurrency));
+
       accountDispatch({
         type: "convert",
-        payload: { id, amount: numericAmount },
+        payload: {
+          id,
+          amount: { from: numericAmount, to: convertedAmount },
+          currency: { from: currency, to: toCurrency },
+        },
       });
+
       accountDispatch({
         type: "logConversionTransaction",
         payload: {
           id,
           transactionId: nanoid(),
-          type,
-          amount: numericAmount,
-          currency,
+          type: "convert",
+          from: {
+            amount: numericAmount,
+            currency,
+          },
+          to: {
+            amount: convertedAmount,
+            currency: toCurrency,
+          },
           date: time,
         },
       });
+
       setType(null);
+      setAmount("");
+      setCurrency("USD");
+      setToCurrency("BTC");
     }
   }
 
