@@ -7,12 +7,16 @@ import { AccountContext } from "../../context/AccountContext";
 import { nanoid } from "nanoid";
 import Contacts from "../Contacts";
 
-function Transaction({ id, type, currentBalance, setType }) {
+function Transaction({ id, type, balances, setType }) {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USD");
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
   const numericAmount = Number(Number(amount).toFixed(2));
+
+  const currentBalance = useMemo(() => {
+    return balances?.find((blc) => blc.symbol === currency)?.balance;
+  }, [balances, currency]);
 
   const time = new Date().toISOString();
 

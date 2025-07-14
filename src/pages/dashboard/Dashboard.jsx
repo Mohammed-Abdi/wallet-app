@@ -181,7 +181,7 @@ function Dashboard() {
         id={currentUser.id}
         type={type}
         setType={setType}
-        currentBalance={totalBalance}
+        balances={currentUser.balances}
       />
     </main>
   );
