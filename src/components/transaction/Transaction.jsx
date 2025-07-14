@@ -205,7 +205,10 @@ function Transaction({ id, type, balances, setType }) {
               color: `var(--${theme}-text-clr)`,
             }}
             value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
+            onChange={(e) => {
+              setCurrency(e.target.value);
+              setAmount("");
+            }}
           >
             <option value="USD">USD</option>
             <option value="BTC">BTC</option>
@@ -226,7 +229,11 @@ function Transaction({ id, type, balances, setType }) {
               type="text"
               placeholder="Enter amount..."
               style={{ ...inputStyle, background: "none", border: "none" }}
-              value={`${convertTo(amount, currency, toCurrency)} ${toCurrency}`}
+              value={
+                amount
+                  ? `${convertTo(amount, currency, toCurrency)} ${toCurrency}`
+                  : "Let see what you got"
+              }
               onChange={(e) => setToCurrency(e.target.value)}
             />
             <select
