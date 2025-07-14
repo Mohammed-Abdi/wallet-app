@@ -6,6 +6,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { AccountContext } from "../../context/AccountContext";
 import { nanoid } from "nanoid";
 import Contacts from "../Contacts";
+import { convertToUSD } from "../../services/convertToUSD";
 
 function Transaction({ id, type, balances, setType }) {
   const [amount, setAmount] = useState("");
@@ -146,6 +147,16 @@ function Transaction({ id, type, balances, setType }) {
             "background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out",
         }}
       >
+        <p>
+          Balance:{" "}
+          {currency === "USD"
+            ? `$${currentBalance.toFixed(2)}`
+            : `${currentBalance} ${currency} ($${convertToUSD(
+                currentBalance,
+                currency
+              ).toFixed(2)})`}
+        </p>
+
         {/* for deposit and withdraw */}
         <div style={{ display: "flex", gap: "0.5rem" }}>
           <input
