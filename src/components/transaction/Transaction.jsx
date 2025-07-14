@@ -49,7 +49,11 @@ function Transaction({ id, type, balances, setType }) {
   };
 
   useEffect(() => {
-    if (type?.toLowerCase() === "withdraw" || type?.toLowerCase() === "send") {
+    if (
+      type?.toLowerCase() === "withdraw" ||
+      type?.toLowerCase() === "send" ||
+      type?.toLowerCase() === "convert"
+    ) {
       if (numericAmount < currentBalance) setMessage("");
       if (currentBalance < numericAmount) setMessage("Insufficient balance");
     }
@@ -128,37 +132,39 @@ function Transaction({ id, type, balances, setType }) {
     if (type?.toLowerCase() === "convert") {
       const convertedAmount = Number(convertTo(amount, currency, toCurrency));
 
-      accountDispatch({
-        type: "convert",
-        payload: {
-          id,
-          amount: { from: numericAmount, to: convertedAmount },
-          currency: { from: currency, to: toCurrency },
-        },
-      });
-
-      accountDispatch({
-        type: "logConversionTransaction",
-        payload: {
-          id,
-          transactionId: nanoid(),
+      if (currentBalance > numericAmount) {
+        accountDispatch({
           type: "convert",
-          from: {
-            amount: numericAmount,
-            currency,
+          payload: {
+            id,
+            amount: { from: numericAmount, to: convertedAmount },
+            currency: { from: currency, to: toCurrency },
           },
-          to: {
-            amount: convertedAmount,
-            currency: toCurrency,
-          },
-          date: time,
-        },
-      });
+        });
 
-      setType(null);
-      setAmount("");
-      setCurrency("USD");
-      setToCurrency("BTC");
+        accountDispatch({
+          type: "logConversionTransaction",
+          payload: {
+            id,
+            transactionId: nanoid(),
+            type: "convert",
+            from: {
+              amount: numericAmount,
+              currency,
+            },
+            to: {
+              amount: convertedAmount,
+              currency: toCurrency,
+            },
+            date: time,
+          },
+        });
+
+        setType(null);
+        setAmount("");
+        setCurrency("USD");
+        setToCurrency("BTC");
+      }
     }
   }
 
@@ -209,6 +215,10 @@ function Transaction({ id, type, balances, setType }) {
           </select>
         </div>
 
+        <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
+          {message}
+        </p>
+
         {/* for conversion */}
         {type?.toLowerCase() === "convert" && (
           <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -235,10 +245,6 @@ function Transaction({ id, type, balances, setType }) {
             </select>
           </div>
         )}
-
-        <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
-          {message}
-        </p>
 
         {/* for send */}
         {type?.toLowerCase() === "send" && (
