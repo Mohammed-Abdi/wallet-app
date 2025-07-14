@@ -8,12 +8,19 @@ import { nanoid } from "nanoid";
 import Contacts from "../Contacts";
 import { convertToUSD } from "../../services/convertToUSD";
 
+const currencyArray = ["USD", "BTC", "SOL", "ETH", "BNB"];
+
 function Transaction({ id, type, balances, setType }) {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USD");
+  const [toCurrency, setToCurrency] = useState("BTC");
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
   const numericAmount = Number(Number(amount).toFixed(2));
+
+  const filteredCurrencyArray = useMemo(() => {
+    return currencyArray.filter((cur) => cur !== currency);
+  }, [currency]);
 
   const currentBalance = useMemo(() => {
     return balances?.find((blc) => blc.symbol === currency)?.balance;
@@ -190,9 +197,9 @@ function Transaction({ id, type, balances, setType }) {
             <input
               type="text"
               placeholder="Enter amount..."
-              style={inputStyle}
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              style={{ ...inputStyle, background: "none", border: "none" }}
+              value={`You will get ${currentBalance} ${toCurrency}`}
+              onChange={(e) => setToCurrency(e.target.value)}
             />
             <select
               name="currency"
@@ -201,14 +208,12 @@ function Transaction({ id, type, balances, setType }) {
                 backgroundColor: `var(--${theme}-border-clr)`,
                 color: `var(--${theme}-text-clr)`,
               }}
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
+              value={toCurrency}
+              onChange={(e) => setToCurrency(e.target.value)}
             >
-              <option value="USDT">USDT</option>
-              <option value="BTC">BTC</option>
-              <option value="ETH">ETH</option>
-              <option value="BNB">BNB</option>
-              <option value="SOL">SOL</option>
+              {filteredCurrencyArray?.map((cur) => (
+                <option value={cur}>{cur}</option>
+              ))}
             </select>
           </div>
         )}
