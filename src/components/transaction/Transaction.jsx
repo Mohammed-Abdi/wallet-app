@@ -61,7 +61,7 @@ function Transaction({ id, type, currentBalance, setType }) {
       });
       setType(null);
       setAmount("");
-      setCurrency("USDT");
+      setCurrency("USD");
     }
     if (type?.toLowerCase() === "withdraw") {
       if (currentBalance > numericAmount) {
@@ -82,7 +82,7 @@ function Transaction({ id, type, currentBalance, setType }) {
         });
         setType(null);
         setAmount("");
-        setCurrency("USDT");
+        setCurrency("USD");
       }
     }
     if (type?.toLowerCase() === "send") {
@@ -109,7 +109,7 @@ function Transaction({ id, type, currentBalance, setType }) {
       setType(null);
       setAmount("");
       setReceiver("");
-      setCurrency("USDT");
+      setCurrency("USD");
     }
     if (type?.toLowerCase() === "convert") {
       accountDispatch({
