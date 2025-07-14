@@ -5,6 +5,7 @@ import styles from "./Transaction.module.css";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AccountContext } from "../../context/AccountContext";
 import { nanoid } from "nanoid";
+import Contacts from "../Contacts";
 
 function Transaction({ id, type, currentBalance, setType }) {
   const [amount, setAmount] = useState("");
@@ -244,6 +245,18 @@ function Transaction({ id, type, currentBalance, setType }) {
             Cancel
           </SecondaryButton>
         </div>
+        {accounts
+          .filter((account) => account.account.username !== "guest_user")
+          .map((account) => (
+            <Contacts
+              key={account.id}
+              name={account.personalInfo.name}
+              username={account.account.username}
+              profilePicture={account.personalInfo.profilePicture}
+              verification={account.status.verification}
+              membership={account.status.membership}
+            />
+          ))}
       </div>
     </main>
   ) : (
