@@ -126,7 +126,8 @@ function Dashboard() {
         <Card text="Send" icon={<Send />} onClick={() => setType("send")} />
         <Card
           text="Convert"
-          icon={<Exchange onClick={() => setType("convert")} />}
+          icon={<Exchange />}
+          onClick={() => setType("convert")}
         />
       </div>
 
