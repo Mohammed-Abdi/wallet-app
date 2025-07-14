@@ -7,6 +7,7 @@ import { AccountContext } from "../../context/AccountContext";
 import { nanoid } from "nanoid";
 import Contacts from "../Contacts";
 import { convertToUSD } from "../../services/convertToUSD";
+import { convertTo } from "../../services/convertTo";
 
 const currencyArray = ["USD", "BTC", "SOL", "ETH", "BNB"];
 
@@ -198,7 +199,7 @@ function Transaction({ id, type, balances, setType }) {
               type="text"
               placeholder="Enter amount..."
               style={{ ...inputStyle, background: "none", border: "none" }}
-              value={`You will get ${currentBalance} ${toCurrency}`}
+              value={`${convertTo(amount, currency, toCurrency)} ${toCurrency}`}
               onChange={(e) => setToCurrency(e.target.value)}
             />
             <select
