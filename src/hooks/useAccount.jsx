@@ -7,21 +7,21 @@ const guestAccount = {
 
   personalInfo: {
     name: "Guest",
-    profilePicture: "/images/guest-user.webp",
-    age: 20,
-    gender: "Unknown",
+    profilePicture: null,
+    age: Math.floor(Math.random() * 10) + 20,
+    gender: "Not specified",
   },
 
   location: { city: "Addis Ababa", country: "Ethiopia" },
 
   account: {
     username: "guest_user",
-    email: "guest@example.com",
+    email: "guest.user@gmail.com",
     password: "unnecessary",
   },
 
   status: {
-    accountStatus: "guest",
+    accountStatus: "inactive",
     verification: "verified",
     membership: "basic",
   },
@@ -351,9 +351,13 @@ function reducer(state, action) {
 export function useAccount() {
   const isInitialized = useRef(false);
   const { contacts, status, message } = useRandomContacts(3);
-  const [{ accounts, admins }, accountDispatch] = useReducer(
+  const [state, accountDispatch] = useReducer(
     reducer,
-    initialAccountState
+    initialAccountState,
+    () => {
+      const storedState = localStorage.getItem("accountData");
+      return storedState ? JSON.parse(storedState) : initialAccountState;
+    }
   );
 
   useEffect(() => {
@@ -372,7 +376,7 @@ export function useAccount() {
           location: individual.location,
 
           account: {
-            username: individual.name.split(" ").join("_"),
+            username: individual.name.split(" ").join("_").toLowerCase(),
             email: individual.email,
             password: "unnecessary",
           },
@@ -406,5 +410,15 @@ export function useAccount() {
     }
   }, [contacts]);
 
-  return { admins, accounts, status, message, accountDispatch };
+  useEffect(() => {
+    localStorage.setItem("accountData", JSON.stringify(state));
+  }, [state]);
+
+  return {
+    admins: state.admins,
+    accounts: state.accounts,
+    status,
+    message,
+    accountDispatch,
+  };
 }
