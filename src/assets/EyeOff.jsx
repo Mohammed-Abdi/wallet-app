@@ -1,11 +1,10 @@
-export default function EyeOff(props) {
+export default function EyeOff({ size = 16 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={16}
-      height={16}
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
-      {...props}
     >
       <g fill="currentColor">
         <path
