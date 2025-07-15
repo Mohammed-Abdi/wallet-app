@@ -11,26 +11,14 @@ import Footer from "../../components/Footer";
 
 function Home() {
   const { theme } = useContext(ThemeContext);
-  const textStyle = {
-    color:
-      theme === "dark"
-        ? "var(--light-background)"
-        : theme === "light"
-        ? "var(--dark-background)"
-        : "inherit",
-    transition: "color 0.3s ease-in-out",
-  };
 
   return (
     <main
       className={styles.homepage}
       style={{
-        backgroundColor:
-          theme === "dark"
-            ? "var(--dark-background)"
-            : theme === "light"
-            ? "var(--light-background)"
-            : "",
+        color: `var(--${theme}-text-clr)`,
+        backgroundColor: `var(--${theme}-background)`,
+        transition: "color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}
     >
       <NavBar>
@@ -44,7 +32,7 @@ function Home() {
       </NavBar>
       <Hero />
       <Footer>
-        <p style={textStyle}>&copy;2025 Mohammed Abdi. All rights reserved</p>
+        <p>&copy;2025 Mohammed Abdi. All rights reserved</p>
       </Footer>
     </main>
   );
