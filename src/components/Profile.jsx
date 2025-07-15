@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import Verified from "../assets/Verified";
 import Highlight from "./Highlight";
@@ -27,17 +27,15 @@ const imageStyle = {
 function Profile({ name, username, profilePicture, verification, membership }) {
   const { theme } = useContext(ThemeContext);
 
-  const randomNumber = Math.floor(Math.random() * 8) + 1;
+  const amongUsPfp = useRef(
+    `profile-picture/among-us-${Math.floor(Math.random() * 8) + 1}.webp`
+  );
 
   return (
     <div style={{ ...wrapperStyle }}>
       <div style={imageWrapperStyle}>
         <img
-          src={
-            profilePicture
-              ? profilePicture
-              : `profile-picture/among-us-${randomNumber}.webp`
-          }
+          src={profilePicture ? profilePicture : amongUsPfp.current}
           alt={`${name}'s profile picture`}
           style={{
             ...imageStyle,
