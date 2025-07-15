@@ -1,7 +1,7 @@
 import styles from "./Login.module.css";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import Logo from "../../components/Logo";
 import Input from "../../components/Input";
@@ -15,6 +15,8 @@ function Login() {
 
   const { theme } = useContext(ThemeContext);
   const { accounts, accountDispatch } = useContext(AccountContext);
+
+  const navigate = useNavigate();
 
   function handleLogin(e) {
     e.preventDefault();
@@ -37,6 +39,7 @@ function Login() {
     setMessage("");
     setEmail("");
     setPassword("");
+    navigate("/");
   }
 
   useEffect(() => {

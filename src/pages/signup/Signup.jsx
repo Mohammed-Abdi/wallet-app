@@ -1,7 +1,7 @@
 import styles from "./Signup.module.css";
 import { useContext, useMemo, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import Logo from "../../components/Logo";
 import Input from "../../components/Input";
@@ -31,6 +31,7 @@ function Signup() {
 
   const { theme } = useContext(ThemeContext);
   const { accounts, accountDispatch } = useContext(AccountContext);
+  const navigate = useNavigate();
 
   const userNameMatch = useMemo(() => {
     return accounts.some(
@@ -107,6 +108,7 @@ function Signup() {
     setEmail("");
     setNewPassword("");
     setConfirmPassword("");
+    navigate("/");
   }
 
   return (
