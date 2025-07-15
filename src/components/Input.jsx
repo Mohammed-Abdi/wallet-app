@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
-function Input({ type, isPassword, placeholder }) {
+function Input({ type = "text", isPassword, placeholder }) {
   const { theme } = useContext(ThemeContext);
   return (
     <input
