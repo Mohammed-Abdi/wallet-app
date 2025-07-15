@@ -9,6 +9,15 @@ import ActionButton from "../../components/buttons/action-button/ActionButton";
 import { getAge } from "../../services/getAge";
 import { AccountContext } from "../../context/AccountContext";
 import { nanoid } from "nanoid";
+import Checked from "../../assets/Checked";
+
+const miniMessageStyle = {
+  position: "absolute",
+  right: "0.75rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  fontWeight: 500,
+};
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -21,7 +30,14 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const { theme } = useContext(ThemeContext);
-  const { accountDispatch } = useContext(AccountContext);
+  const { accounts, accountDispatch } = useContext(AccountContext);
+
+  const userNameMatch = useMemo(() => {
+    return accounts.some(
+      (account) =>
+        account?.account?.username?.toLowerCase() === username?.toLowerCase()
+    );
+  }, [username, accounts]);
 
   const userInfo = useMemo(() => {
     return {
@@ -94,14 +110,7 @@ function Signup() {
   }
 
   return (
-    <main
-      className={styles.signup}
-      style={{
-        color: `var(--${theme}-text-clr)`,
-        backgroundColor: `var(--${theme}-background)`,
-        transition: "color 0.3s ease-in-out, background-color 0.3s ease-in-out",
-      }}
-    >
+    <main className={styles.signup}>
       <NavBar>
         <Logo />
 
@@ -186,25 +195,72 @@ function Signup() {
                 getValue={setBirthdate}
               />
             </article>
-            <Input type="text" placeholder="Username" getValue={setUsername} />
+            <article style={{ position: "relative" }}>
+              <Input
+                type="text"
+                placeholder="Username"
+                getValue={setUsername}
+              />
+              {username.length >= 3 && (
+                <div style={miniMessageStyle}>
+                  {userNameMatch ? (
+                    <p style={{ color: "red" }}>Username already taken</p>
+                  ) : (
+                    <Checked />
+                  )}
+                </div>
+              )}
+            </article>
 
             <Input
               type="email"
               placeholder="Email address"
               getValue={setEmail}
             />
-            <Input
-              type="password"
-              isPassword={true}
-              placeholder="New Password"
-              getValue={setNewPassword}
-            />
-            <Input
-              type="password"
-              isPassword={true}
-              placeholder="Confirm Password"
-              getValue={setConfirmPassword}
-            />
+            <article style={{ position: "relative" }}>
+              <Input
+                type="password"
+                isPassword={true}
+                placeholder="New Password"
+                getValue={setNewPassword}
+              />
+              {confirmPassword && (
+                <div
+                  style={{
+                    ...miniMessageStyle,
+                    right: "2.5rem",
+                  }}
+                >
+                  {newPassword === confirmPassword ? <Checked /> : ""}
+                </div>
+              )}
+            </article>
+            <article style={{ position: "relative" }}>
+              <Input
+                type="password"
+                isPassword={true}
+                placeholder="Confirm Password"
+                getValue={setConfirmPassword}
+              />
+
+              {confirmPassword && (
+                <div
+                  style={{
+                    ...miniMessageStyle,
+                    right: "2.5rem",
+                    transform: "translateY(-65%)",
+                  }}
+                >
+                  {newPassword === confirmPassword ? (
+                    <div style={{ transform: "translateY(15%)" }}>
+                      <Checked />
+                    </div>
+                  ) : (
+                    <p style={{ color: "red" }}>Passwords don't Match</p>
+                  )}
+                </div>
+              )}
+            </article>
             <ActionButton
               onClick={handleSubmit}
               style={{ width: "100%", paddingBlock: "0.75rem" }}
