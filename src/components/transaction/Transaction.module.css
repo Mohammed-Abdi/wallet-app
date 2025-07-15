@@ -50,6 +50,6 @@
 
 @media (max-width: 30rem) {
   .wrapper {
-    transform: translateY(-5rem);
+    transform: translateY(-3rem);
   }
 }
