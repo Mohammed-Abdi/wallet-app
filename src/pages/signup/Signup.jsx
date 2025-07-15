@@ -186,12 +186,13 @@ function Signup() {
                 getValue={setBirthdate}
               />
             </article>
+            <Input type="text" placeholder="Username" getValue={setUsername} />
+
             <Input
               type="email"
               placeholder="Email address"
               getValue={setEmail}
             />
-            <Input type="text" placeholder="Username" getValue={setUsername} />
             <Input
               type="password"
               isPassword={true}
