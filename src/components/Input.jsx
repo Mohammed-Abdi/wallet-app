@@ -1,14 +1,20 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import EyeOff from "../assets/EyeOff";
 import EyeOn from "../assets/EyeOn";
 
-function Input({ type = "text", isPassword, placeholder, style }) {
+function Input({ type = "text", isPassword, placeholder, style, getValue }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [value, setValue] = useState("");
   const { theme } = useContext(ThemeContext);
+  useEffect(() => {
+    getValue(value);
+  }, [value, getValue]);
   return (
     <div style={{ position: "relative" }}>
       <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         style={{
           ...style,
           border: `2px solid var(--${theme}-border-clr)`,
