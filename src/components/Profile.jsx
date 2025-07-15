@@ -27,11 +27,17 @@ const imageStyle = {
 function Profile({ name, username, profilePicture, verification, membership }) {
   const { theme } = useContext(ThemeContext);
 
+  const randomNumber = Math.floor(Math.random() * 8) + 1;
+
   return (
     <div style={{ ...wrapperStyle }}>
       <div style={imageWrapperStyle}>
         <img
-          src={profilePicture}
+          src={
+            profilePicture
+              ? profilePicture
+              : `profile-picture/among-us-${randomNumber}.webp`
+          }
           alt={`${name}'s profile picture`}
           style={{
             ...imageStyle,
