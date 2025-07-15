@@ -90,8 +90,16 @@ function Signup() {
               <Input type="date" placeholder="Email address" />
             </article>
             <Input type="email" placeholder="Email address" />
-            <Input type="email" placeholder="New Password" />
-            <Input type="email" placeholder="Confirm Password" />
+            <Input
+              type="password"
+              isPassword={true}
+              placeholder="New Password"
+            />
+            <Input
+              type="password"
+              isPassword={true}
+              placeholder="Confirm Password"
+            />
             <ActionButton style={{ width: "100%", paddingBlock: "0.75rem" }}>
               Sign Up
             </ActionButton>
