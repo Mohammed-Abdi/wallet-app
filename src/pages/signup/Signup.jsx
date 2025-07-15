@@ -8,6 +8,7 @@ import Input from "../../components/Input";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
 import { getAge } from "../../services/getAge";
 import { AccountContext } from "../../context/AccountContext";
+import { nanoid } from "nanoid";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -15,29 +16,72 @@ function Signup() {
   const [gender, setGender] = useState("Not specified");
   const [birthdate, setBirthdate] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const randomNumber = Math.floor(Math.random() * 8) + 1;
 
   const { theme } = useContext(ThemeContext);
   const { accountDispatch } = useContext(AccountContext);
 
   const userInfo = useMemo(() => {
     return {
-      name: `${firstName} ${lastName}`,
-      gender,
-      age: getAge(birthdate),
-      birthdate,
-      email,
-      password: newPassword === confirmPassword ? newPassword : "error",
+      id: nanoid(),
+
+      personalInfo: {
+        name: `${
+          firstName?.split("").at(0)?.toUpperCase() +
+          firstName?.toLowerCase().slice(1)
+        } ${
+          lastName?.split("").at(0)?.toUpperCase() +
+          lastName?.toLowerCase().slice(1)
+        }`,
+        profilePicture: `profile-picture/among-us-${randomNumber}`,
+        age: getAge(birthdate),
+        gender: gender,
+      },
+
+      location: { city: "Addis Ababa", country: "Ethiopia" },
+
+      account: {
+        username: username?.toLowerCase(),
+        email: email?.toLowerCase(),
+        password: newPassword === confirmPassword ? newPassword : "error",
+      },
+
+      status: {
+        accountStatus: "inactive",
+        verification: "unverified",
+        membership: "basic",
+      },
+
+      balances: [
+        { symbol: "BTC", name: "Bitcoin", balance: 0 },
+        { symbol: "ETH", name: "Ethereum", balance: 0 },
+        { symbol: "USD", name: "Dollar", balance: 0 },
+        { symbol: "BNB", name: "Binance Coin", balance: 0 },
+        { symbol: "SOL", name: "Solana", balance: 0 },
+      ],
+
+      transactions: [],
+      logins: [],
+
+      timestamps: {
+        createdAt: new Date().toISOString(),
+        lastLogin: new Date().toISOString(),
+      },
     };
   }, [
     firstName,
     lastName,
     gender,
     birthdate,
+    username,
     email,
     newPassword,
     confirmPassword,
+    randomNumber,
   ]);
 
   function handleSubmit(e) {
@@ -150,6 +194,7 @@ function Signup() {
               placeholder="Email address"
               getValue={setEmail}
             />
+            <Input type="text" placeholder="Username" getValue={setUsername} />
             <Input
               type="password"
               isPassword={true}
