@@ -3,6 +3,11 @@ import { ThemeContext } from "../context/ThemeContext";
 import EyeOff from "../assets/EyeOff";
 import EyeOn from "../assets/EyeOn";
 
+const today = new Date();
+const formatted = `${today.getFullYear()}-${String(
+  today.getMonth() + 1
+).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
 function Input({
   type = "text",
   isPassword,
@@ -21,7 +26,7 @@ function Input({
   return (
     <div style={{ position: "relative" }}>
       <input
-        value={value}
+        value={type === "date" && !value ? formatted : value}
         onChange={(e) => setValue(e.target.value)}
         style={{
           ...style,
