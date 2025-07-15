@@ -171,6 +171,9 @@ function reducer(state, action) {
         }),
       };
 
+    case "addNewUser":
+      return { ...state, accounts: [...state.accounts, action.payload] };
+
     case "deposit":
       return {
         ...state,
