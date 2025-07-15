@@ -75,7 +75,7 @@ function Signup() {
                 name="gender"
                 id="gender"
                 style={{
-                  padding: "0.625rem",
+                  padding: "0.75rem",
                   backgroundColor: `var(--dark-wrapper-clr)`,
                   color: `var(--dark-text-clr)`,
                   width: "100%",
