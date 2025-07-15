@@ -44,10 +44,8 @@ function Contacts({
       onClick={onClick}
       style={{
         ...wrapperStyle,
-        color: `var(--${theme}-text-clr)`,
         border: `1px solid var(--${theme}-border-clr)`,
-        backgroundColor: `var(--${theme}-wrapper-clr)`,
-        transition: "color 0.3s ease-in-out",
+        transition: "border-color 0.3s ease-in-out",
       }}
     >
       <div style={imageWrapperStyle}>
@@ -56,7 +54,7 @@ function Contacts({
           alt={`${name}'s profile picture`}
           style={{
             ...imageStyle,
-            border: `2px solid var(--${theme}-border-clr)`,
+            border: `2px solid var(--${theme}-background)`,
             transition: "border-color 0.3s ease-in-out",
           }}
         />

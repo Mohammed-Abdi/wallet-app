@@ -12,13 +12,7 @@ function SecondaryButton({ children, style, onClick }) {
       }`}
       style={{
         ...style,
-        border: `2px solid ${
-          theme === "dark"
-            ? "var(--dark-border-clr)"
-            : theme === "light"
-            ? "var(--light-border-clr)"
-            : ""
-        }`,
+        border: `2px solid var(--${theme}-border-clr)`,
         transition:
           "border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
       }}

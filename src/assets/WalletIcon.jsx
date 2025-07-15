@@ -1,10 +1,11 @@
-export default function WalletIcon({ size }) {
+export default function WalletIcon({ size, color = "currentColor" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
       viewBox="0 0 24 24"
+      style={{ color }}
     >
       <path
         fill="currentColor"

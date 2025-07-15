@@ -15,13 +15,6 @@ function ThemeToggle() {
           ? () => themeDispatch({ type: "toggleMode", payload: "dark" })
           : null
       }
-      color={
-        theme === "dark"
-          ? "var(--light-background)"
-          : theme === "light"
-          ? "var(--dark-background)"
-          : ""
-      }
     >
       {theme === "dark" && <DarkModeIcon />}
       {theme === "light" && <LightModeIcon />}

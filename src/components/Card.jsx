@@ -23,10 +23,8 @@ function Card({ icon, text, onClick }) {
       className="card"
       style={{
         ...cardStyle,
-        backgroundColor: `var(--${theme}-wrapper-clr)`,
         border: `1px solid var(--${theme}-border-clr)`,
-        transition:
-          "border-color 0.3s ease-in-out, background-color 0.3s ease-in-out",
+        transition: "border-color 0.3s ease-in-out",
       }}
     >
       <span

@@ -8,6 +8,8 @@ import { nanoid } from "nanoid";
 import Contacts from "../Contacts";
 import { convertToUSD } from "../../services/convertToUSD";
 import { convertTo } from "../../services/convertTo";
+import Highlight from "../Highlight";
+import Bank from "../../assets/Bank";
 
 const currencyArray = ["USD", "BTC", "SOL", "ETH", "BNB"];
 
@@ -43,8 +45,8 @@ function Transaction({ id, type, balances, setType }) {
 
   const inputStyle = {
     border: `2px solid var(--${theme}-border-clr)`,
-    backgroundColor: `var(--${theme}-button-hover-clr)`,
-    color: `var(--${theme}-text-clr)`,
+    backgroundColor: `var(--${theme}-wrapper-clr)`,
+    color: "inherit",
     width: "100%",
   };
 
@@ -166,6 +168,8 @@ function Transaction({ id, type, balances, setType }) {
         setToCurrency("BTC");
       }
     }
+    setReceiver("");
+    setMessage("");
   }
 
   return type ? (
@@ -178,15 +182,35 @@ function Transaction({ id, type, balances, setType }) {
             "background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out",
         }}
       >
-        <p>
-          Balance:{" "}
-          {currency === "USD"
-            ? `$${currentBalance.toFixed(2)}`
-            : `${currentBalance} ${currency} ($${convertToUSD(
-                currentBalance,
-                currency
-              ).toFixed(2)})`}
-        </p>
+        <Highlight>
+          <p
+            style={{
+              display: "flex",
+              gap: "0.5rem",
+              alignItems: "center",
+            }}
+          >
+            <Bank /> Balance:{" "}
+            <p
+              style={{
+                fontWeight: currency === "USD" ? 500 : 400,
+                color:
+                  currency === "USD"
+                    ? currentBalance < 1
+                      ? "red"
+                      : "var(--accent-clr)"
+                    : "",
+              }}
+            >
+              {currency === "USD"
+                ? `$${currentBalance.toFixed(2)}`
+                : `${currentBalance} ${currency} ($${convertToUSD(
+                    currentBalance,
+                    currency
+                  ).toFixed(2)})`}
+            </p>
+          </p>
+        </Highlight>
 
         {/* for deposit and withdraw */}
         <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -218,9 +242,11 @@ function Transaction({ id, type, balances, setType }) {
           </select>
         </div>
 
-        <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
-          {message}
-        </p>
+        {message && (
+          <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
+            {message}
+          </p>
+        )}
 
         {/* for conversion */}
         {type?.toLowerCase() === "convert" && (
@@ -282,7 +308,11 @@ function Transaction({ id, type, balances, setType }) {
 
         <div className={styles.buttons}>
           <ActionButton
-            style={{ width: "100%", borderRadius: "0.25rem" }}
+            style={{
+              width: "100%",
+              borderRadius: "0.25rem",
+              paddingBlock: "0.75rem",
+            }}
             onClick={handleTransaction}
           >
             {type?.split("").at(0).toUpperCase() + type?.slice(1)}
@@ -292,8 +322,13 @@ function Transaction({ id, type, balances, setType }) {
               color: `var(--${theme}-text-clr)`,
               width: "100%",
               borderRadius: "0.25rem",
+              paddingBlock: "0.75rem",
             }}
-            onClick={() => setType(null)}
+            onClick={() => {
+              setType(null);
+              setMessage("");
+              setReceiver("");
+            }}
           >
             Cancel
           </SecondaryButton>

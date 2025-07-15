@@ -59,16 +59,9 @@ function Dashboard() {
   }, [currentUser.logins]);
 
   return (
-    <main
-      className={styles.dashboard}
-      style={{
-        color: `var(--${theme}-text-clr)`,
-        backgroundColor: `var(--${theme}-background)`,
-        transition: "color 0.3s ease-in-out, background-color 0.3s ease-in-out",
-      }}
-    >
+    <main className={styles.dashboard}>
       <NavBar style={{ paddingBlock: "2rem" }}>
-        <Link to="/login" style={{ textDecoration: "none" }}>
+        <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
           <Profile
             name={currentUser.personalInfo.name}
             username={currentUser.account.username}

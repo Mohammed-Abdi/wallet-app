@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../../context/ThemeContext";
 import styles from "./ToggleButton.module.css";
+import { ThemeContext } from "../../../context/ThemeContext";
 
 function ToggleButton({ color, children, onClick }) {
   const { theme } = useContext(ThemeContext);
+
   return (
     <button
       onClick={onClick ? onClick : null}

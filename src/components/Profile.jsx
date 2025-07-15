@@ -27,18 +27,8 @@ const imageStyle = {
 function Profile({ name, username, profilePicture, verification, membership }) {
   const { theme } = useContext(ThemeContext);
 
-  const textStyle = {
-    color:
-      theme === "dark"
-        ? "var(--light-background)"
-        : theme === "light"
-        ? "var(--dark-background)"
-        : "inherit",
-    transition: "color 0.3s ease-in-out",
-  };
-
   return (
-    <div style={{ ...textStyle, ...wrapperStyle }}>
+    <div style={{ ...wrapperStyle }}>
       <div style={imageWrapperStyle}>
         <img
           src={profilePicture}
