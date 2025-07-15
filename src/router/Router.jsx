@@ -3,6 +3,7 @@ import Home from "../pages/home/Home";
 import Dashboard from "../pages/dashboard/Dashboard";
 import { useContext } from "react";
 import { AccountContext } from "../context/AccountContext";
+import Signup from "../pages/signup/Signup";
 
 function Router() {
   const { accounts } = useContext(AccountContext);
@@ -14,7 +15,7 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={currentUser ? <Dashboard /> : <Home />} />
-      {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 }

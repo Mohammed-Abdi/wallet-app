@@ -1,0 +1,57 @@
+.signup {
+  width: 100%;
+  min-height: 100vh;
+  padding-inline: 1.25rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.goto {
+  font-weight: 500;
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.signup h1 {
+  font-size: 1.25rem;
+}
+
+.mainText {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.subText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  opacity: 0.7;
+}
+
+@media (min-width: 48rem) {
+  .signup h1 {
+    font-size: 4.25rem;
+  }
+  .leftSide {
+    max-width: 50vw;
+  }
+  .mainText {
+    flex-direction: column;
+    gap: 0;
+  }
+}
