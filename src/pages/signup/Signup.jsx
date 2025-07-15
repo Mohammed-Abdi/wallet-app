@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import Logo from "../../components/Logo";
 import Hero from "../../components/hero/Hero";
+import Input from "../../components/Input";
 
 function Signup() {
   const { theme } = useContext(ThemeContext);
@@ -20,20 +21,23 @@ function Signup() {
     >
       <NavBar>
         <Logo />
-        <div className={styles.right}>
-          <p style={{ opacity: 0.8 }}>Already have an account?</p>
+
+        <p className={styles.option}>
+          <span style={{ opacity: 0.7 }}>Already have an account?</span>
           <Link to="/login" style={{ textDecoration: "none" }}>
-            <p
+            <span
               className={styles.goto}
               style={{
                 color: `var(--${theme}-text-clr)`,
                 transition: "color 0.3s ease-in-out",
+                opacity: 1,
+                marginLeft: "0.5rem",
               }}
             >
               Login
-            </p>
+            </span>
           </Link>
-        </div>
+        </p>
       </NavBar>
       <div className={styles.body}>
         <div className={styles.leftSide}>
@@ -55,7 +59,40 @@ function Signup() {
             </p>
           </section>
         </div>
-        <div className={styles.rightSide}></div>
+        <div className={styles.rightSide}>
+          <form className={styles.form}>
+            <article
+              style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}
+            >
+              <Input type="text" placeholder="First name" />
+              <Input type="text" placeholder="Surname" />
+            </article>
+            <article
+              style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}
+            >
+              <select
+                name="gender"
+                id="gender"
+                style={{
+                  padding: "0.625rem",
+                  backgroundColor: `var(--dark-wrapper-clr)`,
+                  color: `var(--dark-text-clr)`,
+                  width: "100%",
+                  borderRadius: "0.5rem",
+                  border: `2px solid var(--dark-border-clr)`,
+                  fontSize: "1rem",
+                }}
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              <Input type="date" placeholder="Email address" />
+            </article>
+            <Input type="email" placeholder="Email address" />
+            <Input type="email" placeholder="New Password" />
+            <Input type="email" placeholder="Confirm Password" />
+          </form>
+        </div>
       </div>
     </main>
   );

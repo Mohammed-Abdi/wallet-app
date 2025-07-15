@@ -1,6 +1,7 @@
 const navbarStyle = {
   display: "flex",
   justifyContent: "space-between",
+  alignItems: "center",
   paddingBlock: "1.25rem",
 };
 
