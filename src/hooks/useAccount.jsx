@@ -412,7 +412,7 @@ export function useAccount() {
       accountDispatch({ type: "initialize", payload: contactArray });
       isInitialized.current = true;
     }
-  }, [contacts]);
+  }, [contacts, state.accounts]);
 
   useEffect(() => {
     localStorage.setItem("accountData", JSON.stringify(state));
