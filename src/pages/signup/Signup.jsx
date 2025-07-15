@@ -7,6 +7,7 @@ import Logo from "../../components/Logo";
 import Input from "../../components/Input";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
 import { getAge } from "../../services/getAge";
+import { AccountContext } from "../../context/AccountContext";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
@@ -18,6 +19,7 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const { theme } = useContext(ThemeContext);
+  const { accountDispatch } = useContext(AccountContext);
 
   const userInfo = useMemo(() => {
     return {
@@ -37,6 +39,18 @@ function Signup() {
     newPassword,
     confirmPassword,
   ]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    accountDispatch({ type: "addNewUser", payload: userInfo });
+    setFirstName("");
+    setLastName("");
+    setGender("Not specified");
+    setBirthdate("");
+    setEmail("");
+    setNewPassword("");
+    setConfirmPassword("");
+  }
 
   return (
     <main
@@ -148,7 +162,10 @@ function Signup() {
               placeholder="Confirm Password"
               getValue={setConfirmPassword}
             />
-            <ActionButton style={{ width: "100%", paddingBlock: "0.75rem" }}>
+            <ActionButton
+              onClick={handleSubmit}
+              style={{ width: "100%", paddingBlock: "0.75rem" }}
+            >
               Sign Up
             </ActionButton>
           </form>
