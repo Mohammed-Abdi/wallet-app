@@ -72,6 +72,7 @@ function Signup() {
               style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}
             >
               <select
+                required
                 name="gender"
                 id="gender"
                 style={{
@@ -84,8 +85,12 @@ function Signup() {
                   fontSize: "1rem",
                 }}
               >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="Not specified" disabled>
+                  Choose your gender
+                </option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Prefer not to say">Prefer not to say</option>
               </select>
               <Input type="date" placeholder="Email address" />
             </article>
