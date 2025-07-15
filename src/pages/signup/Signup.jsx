@@ -92,7 +92,7 @@ function Signup() {
                 <option value="Female">Female</option>
                 <option value="Prefer not to say">Prefer not to say</option>
               </select>
-              <Input type="date" placeholder="Email address" />
+              <Input type="date" placeholder="Birthdate" />
             </article>
             <Input type="email" placeholder="Email address" />
             <Input
