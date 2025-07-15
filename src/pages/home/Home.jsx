@@ -8,11 +8,9 @@ import ThemeToggle from "../../components/buttons/ThemeToggle";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
 import Hero from "../../components/hero/Hero";
 import Footer from "../../components/Footer";
-import { calcTotal } from "../../services/calcTotal";
 
 function Home() {
   const { theme } = useContext(ThemeContext);
-  calcTotal();
   const textStyle = {
     color:
       theme === "dark"
