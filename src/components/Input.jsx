@@ -3,13 +3,14 @@ import { ThemeContext } from "../context/ThemeContext";
 import EyeOff from "../assets/EyeOff";
 import EyeOn from "../assets/EyeOn";
 
-function Input({ type = "text", isPassword, placeholder }) {
+function Input({ type = "text", isPassword, placeholder, style }) {
   const [isVisible, setIsVisible] = useState(false);
   const { theme } = useContext(ThemeContext);
   return (
     <div style={{ position: "relative" }}>
       <input
         style={{
+          ...style,
           border: `2px solid var(--${theme}-border-clr)`,
           backgroundColor: `var(--${theme}-wrapper-clr)`,
           color: `var(--${theme}-text-clr)`,
