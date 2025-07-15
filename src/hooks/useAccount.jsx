@@ -404,7 +404,7 @@ export function useAccount() {
           },
 
           status: {
-            accountStatus: "inactive",
+            accountStatus: "contacts",
             verification: "verified",
             membership: i % 2 === 0 ? "pro" : "basic",
           },

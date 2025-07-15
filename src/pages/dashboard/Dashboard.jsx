@@ -185,6 +185,7 @@ function Dashboard() {
             ))}
       </div>
       <Transaction
+        user={currentUser}
         id={currentUser.id}
         type={type}
         setType={setType}

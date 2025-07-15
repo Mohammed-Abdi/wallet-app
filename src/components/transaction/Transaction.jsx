@@ -13,7 +13,7 @@ import Bank from "../../assets/Bank";
 
 const currencyArray = ["USD", "BTC", "SOL", "ETH", "BNB"];
 
-function Transaction({ id, type, balances, setType }) {
+function Transaction({ user, id, type, balances, setType }) {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("BTC");
@@ -334,24 +334,27 @@ function Transaction({ id, type, balances, setType }) {
           </SecondaryButton>
         </div>
 
-        {type?.toLowerCase() === "send" && (
-          <div>
-            <p>Select a contact to paste their ID</p>
-            {accounts
-              .filter((account) => account.account.username !== "guest_user")
-              .map((account) => (
-                <Contacts
-                  key={account.id}
-                  name={account.personalInfo.name}
-                  username={account.account.username}
-                  profilePicture={account.personalInfo.profilePicture}
-                  verification={account.status.verification}
-                  membership={account.status.membership}
-                  onClick={() => setReceiver(account.id)}
-                />
-              ))}
-          </div>
-        )}
+        {type?.toLowerCase() === "send" &&
+          user.account.username === "guest_user" && (
+            <div>
+              <p>Select a contact to paste their ID</p>
+              {accounts
+                .filter(
+                  (account) => account.status.accountStatus === "contacts"
+                )
+                .map((account) => (
+                  <Contacts
+                    key={account.id}
+                    name={account.personalInfo.name}
+                    username={account.account.username}
+                    profilePicture={account.personalInfo.profilePicture}
+                    verification={account.status.verification}
+                    membership={account.status.membership}
+                    onClick={() => setReceiver(account.id)}
+                  />
+                ))}
+            </div>
+          )}
       </div>
     </main>
   ) : (
