@@ -7,9 +7,11 @@ function Input({ type = "text", isPassword, placeholder, style, getValue }) {
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState("");
   const { theme } = useContext(ThemeContext);
+
   useEffect(() => {
     getValue(value);
   }, [value, getValue]);
+
   return (
     <div style={{ position: "relative" }}>
       <input
