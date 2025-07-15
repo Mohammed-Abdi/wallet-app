@@ -16,6 +16,7 @@ function Input({ type, isPassword, placeholder }) {
       }}
       type={isPassword ? "" : type}
       placeholder={placeholder}
+      required
     />
   );
 }
