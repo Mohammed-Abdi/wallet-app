@@ -5,6 +5,7 @@ import Highlight from "../Highlight";
 import ActionButton from "../buttons/action-button/ActionButton";
 import SecondaryButton from "../buttons/secondary-button/SecondaryButton";
 import WalletAnimation from "../../assets/WalletAnimation";
+import { Link } from "react-router-dom";
 
 function Hero() {
   const { accountDispatch } = useContext(AccountContext);
@@ -20,9 +21,11 @@ function Hero() {
           digital wallet experience.
         </h1>
         <div className={styles.buttons}>
-          <ActionButton style={{ padding: "0.75rem 2rem" }}>
-            <p>Get Started →</p>
-          </ActionButton>
+          <Link to="/signup">
+            <ActionButton style={{ padding: "0.75rem 2rem" }}>
+              <p>Get Started →</p>
+            </ActionButton>
+          </Link>
           <SecondaryButton
             style={{ padding: "0.75rem 2rem" }}
             onClick={() =>
