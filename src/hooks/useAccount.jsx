@@ -361,7 +361,11 @@ export function useAccount() {
   );
 
   useEffect(() => {
-    if (!isInitialized.current && contacts.length > 0) {
+    if (
+      !isInitialized.current &&
+      contacts.length > 0 &&
+      state.accounts.length === 1
+    ) {
       const contactArray = contacts.map((individual, i) => {
         return {
           id: nanoid(),
