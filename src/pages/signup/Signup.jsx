@@ -6,6 +6,7 @@ import NavBar from "../../components/NavBar";
 import Logo from "../../components/Logo";
 import Hero from "../../components/hero/Hero";
 import Input from "../../components/Input";
+import ActionButton from "../../components/buttons/action-button/ActionButton";
 
 function Signup() {
   const { theme } = useContext(ThemeContext);
@@ -91,7 +92,14 @@ function Signup() {
             <Input type="email" placeholder="Email address" />
             <Input type="email" placeholder="New Password" />
             <Input type="email" placeholder="Confirm Password" />
+            <ActionButton style={{ width: "100%", paddingBlock: "0.75rem" }}>
+              Sign Up
+            </ActionButton>
           </form>
+          <p className={styles.notice}>
+            This project is for portfolio and development purposes only. No real
+            user data is stored or used.
+          </p>
         </div>
       </div>
     </main>
