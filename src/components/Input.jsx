@@ -3,7 +3,13 @@ import { ThemeContext } from "../context/ThemeContext";
 import EyeOff from "../assets/EyeOff";
 import EyeOn from "../assets/EyeOn";
 
-function Input({ type = "text", isPassword, placeholder, style, getValue }) {
+function Input({
+  type = "text",
+  isPassword,
+  placeholder,
+  style,
+  getValue = () => {},
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const [value, setValue] = useState("");
   const { theme } = useContext(ThemeContext);
