@@ -191,7 +191,7 @@ function Transaction({ id, type, balances, setType }) {
             }}
           >
             <Bank /> Balance:{" "}
-            <p
+            <span
               style={{
                 fontWeight: currency === "USD" ? 500 : 400,
                 color:
@@ -208,7 +208,7 @@ function Transaction({ id, type, balances, setType }) {
                     currentBalance,
                     currency
                   ).toFixed(2)})`}
-            </p>
+            </span>
           </p>
         </Highlight>
 
@@ -223,7 +223,7 @@ function Transaction({ id, type, balances, setType }) {
           />
           <select
             name="currency"
-            id="currency"
+            id="currencyDropDown"
             style={{
               backgroundColor: `var(--${theme}-border-clr)`,
               color: `var(--${theme}-text-clr)`,
