@@ -5,10 +5,11 @@ import Highlight from "../Highlight";
 import ActionButton from "../buttons/action-button/ActionButton";
 import SecondaryButton from "../buttons/secondary-button/SecondaryButton";
 import WalletAnimation from "../../assets/WalletAnimation";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Hero() {
   const { accountDispatch } = useContext(AccountContext);
+  const navigate = useNavigate();
 
   return (
     <section className={styles.hero}>
@@ -28,9 +29,10 @@ function Hero() {
           </Link>
           <SecondaryButton
             style={{ padding: "0.75rem 2rem" }}
-            onClick={() =>
-              accountDispatch({ type: "login", payload: "guest_user" })
-            }
+            onClick={() => {
+              accountDispatch({ type: "login", payload: "guest_user" });
+              navigate("/dashboard");
+            }}
           >
             <p>Demo Account</p>
           </SecondaryButton>

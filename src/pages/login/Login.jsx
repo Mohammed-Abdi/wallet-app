@@ -39,7 +39,7 @@ function Login() {
     setMessage("");
     setEmail("");
     setPassword("");
-    navigate("/");
+    navigate("/dashboard");
   }
 
   useEffect(() => {

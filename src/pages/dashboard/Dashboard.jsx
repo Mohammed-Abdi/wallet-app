@@ -16,6 +16,7 @@ import Transaction from "../../components/transaction/Transaction";
 import { calcTotal } from "../../services/calcTotal";
 import { formatDateTime } from "../../services/formatDateTime";
 import { useLiveDate } from "../../hooks/useLiveDate";
+import ActionButton from "../../components/buttons/action-button/ActionButton";
 
 const switchStyle = {
   width: "10rem",
@@ -32,7 +33,7 @@ function Dashboard() {
   const [currency, setCurrency] = useState("USD");
   const [type, setType] = useState(null);
   const { theme } = useContext(ThemeContext);
-  const { accounts } = useContext(AccountContext);
+  const { accounts, accountDispatch } = useContext(AccountContext);
 
   const date = useLiveDate(60_000);
 
@@ -72,6 +73,18 @@ function Dashboard() {
         </Link>
         <div className={styles.right}>
           <ThemeToggle />
+          <Link to="/">
+            <ActionButton
+              onClick={() => {
+                accountDispatch({
+                  type: "logout",
+                  payload: currentUser?.account?.username?.toLowerCase(),
+                });
+              }}
+            >
+              Logout
+            </ActionButton>
+          </Link>
         </div>
       </NavBar>
       <div className={styles.balances}>

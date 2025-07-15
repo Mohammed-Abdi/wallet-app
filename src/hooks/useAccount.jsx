@@ -171,6 +171,24 @@ function reducer(state, action) {
         }),
       };
 
+    case "logout":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.account.username === action.payload) {
+            return {
+              ...account,
+              status: { ...account.status, accountStatus: "inactive" },
+              timestamps: {
+                ...account.timestamps,
+                lastLogin: new Date().toISOString(),
+              },
+            };
+          }
+          return account;
+        }),
+      };
+
     case "addNewUser":
       return { ...state, accounts: [...state.accounts, action.payload] };
 

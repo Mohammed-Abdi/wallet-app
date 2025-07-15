@@ -101,6 +101,7 @@ function Signup() {
   function handleSubmit(e) {
     e.preventDefault();
     accountDispatch({ type: "addNewUser", payload: userInfo });
+    accountDispatch({ type: "login", payload: username.toLowerCase() });
     setFirstName("");
     setLastName("");
     setGender("Not specified");
@@ -108,7 +109,7 @@ function Signup() {
     setEmail("");
     setNewPassword("");
     setConfirmPassword("");
-    navigate("/");
+    navigate("/dashboard");
   }
 
   return (
