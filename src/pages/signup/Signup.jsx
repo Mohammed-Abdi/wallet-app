@@ -20,8 +20,6 @@ function Signup() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const randomNumber = Math.floor(Math.random() * 8) + 1;
-
   const { theme } = useContext(ThemeContext);
   const { accountDispatch } = useContext(AccountContext);
 
@@ -37,7 +35,7 @@ function Signup() {
           lastName?.split("").at(0)?.toUpperCase() +
           lastName?.toLowerCase().slice(1)
         }`,
-        profilePicture: `profile-picture/among-us-${randomNumber}`,
+        profilePicture: null,
         age: getAge(birthdate),
         gender: gender,
       },
@@ -81,7 +79,6 @@ function Signup() {
     email,
     newPassword,
     confirmPassword,
-    randomNumber,
   ]);
 
   function handleSubmit(e) {
