@@ -361,6 +361,134 @@ function reducer(state, action) {
         }),
       };
 
+    case "changeUsername":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                account: {
+                  ...account.account,
+                  username: action.payload.username,
+                },
+              }
+            : account
+        ),
+      };
+
+    case "changeEmail":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                account: {
+                  ...account.account,
+                  email: action.payload.email,
+                },
+              }
+            : account
+        ),
+      };
+
+    case "changePassword":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                account: {
+                  ...account.account,
+                  password: action.payload.password,
+                },
+              }
+            : account
+        ),
+      };
+
+    case "changeAge":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                personalInfo: {
+                  ...account.personalInfo,
+                  age: action.payload.age,
+                },
+              }
+            : account
+        ),
+      };
+
+    case "changeGender":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                personalInfo: {
+                  ...account.personalInfo,
+                  gender: action.payload.gender,
+                },
+              }
+            : account
+        ),
+      };
+
+    case "changeFullName":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                personalInfo: {
+                  ...account.personalInfo,
+                  name: action.payload.name,
+                },
+              }
+            : account
+        ),
+      };
+
+    case "changeCity":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                location: {
+                  ...account.location,
+                  city: action.payload.city,
+                },
+              }
+            : account
+        ),
+      };
+
+    case "changeCountry":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) =>
+          account.id === action.payload.id
+            ? {
+                ...account,
+                location: {
+                  ...account.location,
+                  country: action.payload.country,
+                },
+              }
+            : account
+        ),
+      };
+
     default:
       throw new Error("Unknown action");
   }
