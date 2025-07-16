@@ -34,7 +34,7 @@ function Input({
           backgroundColor: `var(--${theme}-wrapper-clr)`,
           color: `var(--${theme}-text-clr)`,
           padding: "0.75rem",
-          borderRadius: "0.5rem",
+          borderRadius: "0.25rem",
           fontSize: "1rem",
           width: "100%",
         }}
