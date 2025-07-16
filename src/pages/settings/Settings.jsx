@@ -32,7 +32,7 @@ function Settings() {
   }, [accounts]);
 
   const amongUsPfp = useRef(
-    `profile-picture/among-us-${Math.floor(Math.random() * 8) + 1}.webp`
+    `/profile-picture/among-us-${Math.floor(Math.random() * 8) + 1}.webp`
   );
 
   const profilePicture = user?.personalInfo.profilePicture;
