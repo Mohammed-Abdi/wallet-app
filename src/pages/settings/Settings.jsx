@@ -5,7 +5,7 @@ import SettingInput from "../../components/SettingInput";
 import { formatDateTime } from "../../services/formatDateTime";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
 import Loader from "../../components/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const imageWrapperStyle = {
   display: "flex",
@@ -24,6 +24,7 @@ const imageStyle = {
 };
 
 function Settings() {
+  const navigate = useNavigate();
   const { accounts, accountDispatch } = useContext(AccountContext);
 
   const user = useMemo(() => {
@@ -172,6 +173,7 @@ function Settings() {
         payload: { id: user?.id, country },
       });
     }
+    navigate("/dashboard");
   }
 
   if (!user) return <Loader />;
