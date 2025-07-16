@@ -6,13 +6,14 @@ import Login from "../pages/login/Login";
 import NotFound from "../pages/not-found/NotFound";
 import { useContext, useMemo } from "react";
 import { AccountContext } from "../context/AccountContext";
+import Settings from "../pages/settings/Settings";
 
 function Router() {
   const { accounts } = useContext(AccountContext);
 
   const activeUser = useMemo(() => {
     return accounts.find(
-      (account) => account.status.accountStatus === "active"
+      (account) => account?.status?.accountStatus === "active"
     );
   }, [accounts]);
 
@@ -22,9 +23,16 @@ function Router() {
       <Route path="/signup" element={<Signup />} />
       <Route
         path="/dashboard"
-        element={activeUser ? <Dashboard key={activeUser.id} /> : <NotFound />}
+        element={activeUser ? <Dashboard key={activeUser?.id} /> : <NotFound />}
       />
       <Route path="/login" element={<Login />} />
+      <Route
+        path={`${activeUser?.personalInfo.name
+          .split(" ")
+          .join("-")
+          .toLowerCase()}`}
+        element={<Settings key={activeUser?.id} />}
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
