@@ -47,15 +47,15 @@ function Settings() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [accountStatus] = useState("");
-  const [verification] = useState("");
-  const [membership] = useState("");
+  const [accountStatus, setAccountStatus] = useState("");
+  const [verification, setVerification] = useState("");
+  const [membership, setMembership] = useState("");
 
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
 
-  const [createdAt] = useState("");
-  const [lastLogin] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
+  const [lastLogin, setLastLogin] = useState("");
 
   useEffect(() => {
     if (!user) return;
@@ -70,6 +70,11 @@ function Settings() {
     setPassword(user.account.password || "");
     setCity(user.location.city || "");
     setCountry(user.location.country || "");
+    setAccountStatus(user.status.accountStatus || "");
+    setVerification(user.status.verification || "");
+    setMembership(user.status.membership || "");
+    setCreatedAt(user.timestamps.createdAt || "");
+    setLastLogin(user.timestamps.lastLogin || "");
   }, [user]);
 
   const hasChanges = useMemo(() => {
