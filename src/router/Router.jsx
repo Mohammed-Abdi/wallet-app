@@ -27,7 +27,7 @@ function Router() {
       />
       <Route path="/login" element={<Login />} />
       <Route
-        path={`${activeUser?.personalInfo.name
+        path={`/dashboard/${activeUser?.personalInfo.name
           .split(" ")
           .join("-")
           .toLowerCase()}`}

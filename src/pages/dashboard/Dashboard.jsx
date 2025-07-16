@@ -63,7 +63,7 @@ function Dashboard() {
     <main className={styles.dashboard}>
       <NavBar style={{ paddingBlock: "2rem" }}>
         <Link
-          to={`${currentUser.personalInfo.name
+          to={`/dashboard/${currentUser.personalInfo.name
             .split(" ")
             .join("-")
             .toLowerCase()}`}
