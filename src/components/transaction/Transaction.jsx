@@ -295,7 +295,7 @@ function Transaction({ user, id, type, balances, setType }) {
         {receiver ? (
           receiverFound ? (
             <p
-              style={{ color: "green", fontWeight: 500 }}
+              style={{ color: "var(--accent-clr)", fontWeight: 500 }}
             >{`Receiver: ${receiverName}`}</p>
           ) : (
             <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
