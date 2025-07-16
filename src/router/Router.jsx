@@ -3,6 +3,7 @@ import Home from "../pages/home/Home";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Signup from "../pages/signup/Signup";
 import Login from "../pages/login/Login";
+import NotFound from "../pages/not-found/NotFound";
 
 function Router() {
   return (
@@ -11,6 +12,7 @@ function Router() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/login" element={<Login />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
