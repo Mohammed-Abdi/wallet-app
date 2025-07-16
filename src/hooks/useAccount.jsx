@@ -6,13 +6,13 @@ const guestAccount = {
   id: nanoid(),
 
   personalInfo: {
-    name: "Guest",
+    name: "Guest User",
     profilePicture: null,
     age: Math.floor(Math.random() * 10) + 20,
-    gender: "Not specified",
+    gender: "None",
   },
 
-  location: { city: "Addis Ababa", country: "Ethiopia" },
+  location: { city: "Dire Dawa", country: "Ethiopia" },
 
   account: {
     username: "guest_user",
