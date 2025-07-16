@@ -1,9 +1,10 @@
-import { useContext, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Settings.module.css";
 import { AccountContext } from "../../context/AccountContext";
 import SettingInput from "../../components/SettingInput";
 import { formatDateTime } from "../../services/formatDateTime";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
+import Loader from "../../components/Loader";
 
 const imageWrapperStyle = {
   display: "flex",
@@ -36,39 +37,74 @@ function Settings() {
 
   const profilePicture = user?.personalInfo.profilePicture;
 
-  const [firstName, setFirstName] = useState(
-    user?.personalInfo.name.split(" ").at(0) || ""
-  );
-  const [lastName, setLastName] = useState(
-    user?.personalInfo.name.split(" ").at(1) || ""
-  );
-  const [age, setAge] = useState(user?.personalInfo.age || "");
-  const [gender, setGender] = useState(user?.personalInfo.gender || "");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
 
-  const [username, setUsername] = useState(user?.account.username || "");
-  const [email, setEmail] = useState(user?.account.email || "");
-  const [password, setPassword] = useState(user?.account.password || "");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [accountStatus] = useState(user?.status.accountStatus || "");
-  const [verification] = useState(user?.status.verification || "");
-  const [membership] = useState(user?.status.membership || "");
+  const [accountStatus] = useState("");
+  const [verification] = useState("");
+  const [membership] = useState("");
 
-  const [city, setCity] = useState(user?.location.city || "");
-  const [country, setCountry] = useState(user?.location.country || "");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
 
-  const [createdAt] = useState(user?.timestamps.createdAt || "");
-  const [lastLogin] = useState(user?.timestamps.lastLogin || "");
+  const [createdAt] = useState("");
+  const [lastLogin] = useState("");
 
-  const hasChanges =
-    username !== user?.account.username ||
-    email !== user?.account.email ||
-    password !== user?.account.password ||
-    age !== user?.personalInfo.age ||
-    gender !== user?.personalInfo.gender ||
-    firstName !== user?.personalInfo.name?.split(" ").at(0) ||
-    lastName !== user?.personalInfo.name?.split(" ").at(1) ||
-    city !== user?.location.city ||
-    country !== user?.location.country;
+  useEffect(() => {
+    if (!user) return;
+
+    const nameParts = user.personalInfo.name.split(" ");
+    setFirstName(nameParts[0] || "");
+    setLastName(nameParts.slice(1).join(" ") || "");
+    setAge(user.personalInfo.age || "");
+    setGender(user.personalInfo.gender || "");
+    setUsername(user.account.username || "");
+    setEmail(user.account.email || "");
+    setPassword(user.account.password || "");
+    setCity(user.location.city || "");
+    setCountry(user.location.country || "");
+  }, [user]);
+
+  const hasChanges = useMemo(() => {
+    if (!user) return false;
+
+    if (username !== "" && username !== user.account.username) return true;
+    else if (email !== "" && email !== user.account.email) return true;
+    else if (password !== "" && password !== user.account.password) return true;
+    else if (age !== "" && age !== user.personalInfo.age) return true;
+    else if (gender !== "" && gender !== user.personalInfo.gender) return true;
+
+    const originalFirstName = user.personalInfo.name.split(" ").at(0);
+    if (firstName !== "" && firstName !== originalFirstName) return true;
+
+    const originalLastName = user.personalInfo.name
+      .split(" ")
+      .slice(1)
+      .join(" ");
+    if (lastName !== "" && lastName !== originalLastName) return true;
+
+    if (city !== "" && city !== user.location.city) return true;
+    if (country !== "" && country !== user.location.country) return true;
+
+    return false;
+  }, [
+    user,
+    username,
+    email,
+    password,
+    age,
+    gender,
+    firstName,
+    lastName,
+    city,
+    country,
+  ]);
 
   function handleChanges() {
     if (username !== user?.account.username) {
@@ -131,6 +167,8 @@ function Settings() {
       });
     }
   }
+
+  if (!user) return <Loader />;
 
   return (
     <main className={styles.settings}>
