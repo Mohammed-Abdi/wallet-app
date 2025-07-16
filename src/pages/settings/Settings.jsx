@@ -5,6 +5,7 @@ import SettingInput from "../../components/SettingInput";
 import { formatDateTime } from "../../services/formatDateTime";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
 import Loader from "../../components/Loader";
+import { Link } from "react-router-dom";
 
 const imageWrapperStyle = {
   display: "flex",
@@ -378,6 +379,18 @@ function Settings() {
       {hasChanges && (
         <ActionButton onClick={handleChanges}>Apply changes</ActionButton>
       )}
+      <Link to="/">
+        <ActionButton
+          onClick={() =>
+            accountDispatch({
+              type: "logout",
+              payload: user.account.username,
+            })
+          }
+        >
+          Logout
+        </ActionButton>
+      </Link>
     </main>
   );
 }
