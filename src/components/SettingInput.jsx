@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Edit from "../assets/Edit";
+import { ThemeContext } from "../context/ThemeContext";
 
 const inputWrapperStyle = {
   position: "relative",
@@ -23,6 +24,7 @@ const editorIconStyle = {
 };
 
 function SettingInput({ canChange, type = "text", value, setValue, style }) {
+  const { theme } = useContext(ThemeContext);
   const [isEditing, setIsEditing] = useState(false);
   const input = useRef(null);
   return (
@@ -32,7 +34,7 @@ function SettingInput({ canChange, type = "text", value, setValue, style }) {
         style={{
           ...inputStyle,
           ...style,
-          backgroundColor: `var(--dark-${
+          backgroundColor: `var(--${theme}-${
             isEditing ? "wrapper-clr" : "background"
           })`,
         }}
