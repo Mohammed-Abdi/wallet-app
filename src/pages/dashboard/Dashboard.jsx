@@ -17,7 +17,6 @@ import { calcTotal } from "../../services/calcTotal";
 import { formatDateTime } from "../../services/formatDateTime";
 import { useLiveDate } from "../../hooks/useLiveDate";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
-import Settings from "../settings/Settings";
 
 const switchStyle = {
   width: "10rem",
@@ -62,7 +61,6 @@ function Dashboard() {
 
   return (
     <main className={styles.dashboard}>
-      <Settings />
       <NavBar style={{ paddingBlock: "2rem" }}>
         <Link
           to={`${currentUser.personalInfo.name
