@@ -10,8 +10,8 @@ import { AccountContext } from "../context/AccountContext";
 function Router() {
   const { accounts } = useContext(AccountContext);
 
-  const userIsActive = useMemo(() => {
-    return accounts.some(
+  const activeUser = useMemo(() => {
+    return accounts.find(
       (account) => account.status.accountStatus === "active"
     );
   }, [accounts]);
@@ -22,7 +22,7 @@ function Router() {
       <Route path="/signup" element={<Signup />} />
       <Route
         path="/dashboard"
-        element={userIsActive ? <Dashboard /> : <NotFound />}
+        element={activeUser ? <Dashboard key={activeUser.id} /> : <NotFound />}
       />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<NotFound />} />
