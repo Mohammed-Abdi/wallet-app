@@ -5,7 +5,7 @@ function Disclaimer() {
         width: "min(34rem, 100%)",
         marginInline: "auto",
         textAlign: "center",
-        opacity: 0.7,
+        opacity: 0.5,
       }}
     >
       This application is a portfolio project intended for demonstration and
