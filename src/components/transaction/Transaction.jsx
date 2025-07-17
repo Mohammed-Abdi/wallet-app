@@ -30,7 +30,7 @@ function Transaction({ user, id, type, balances, setType }) {
 
   useEffect(() => {
     if (isSuccessful) {
-      okBtn.current.focus();
+      okBtn?.current?.focus();
     }
   }, [isSuccessful]);
 
