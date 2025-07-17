@@ -96,7 +96,7 @@ function Dashboard() {
               color: `var(--${theme}-text-clr)`,
               backgroundColor: `var(--${theme}-background)`,
               transition:
-                "background-color 0.3s ease-in-out, color 0.3s ease-in-out",
+                "background-color 0.3s ease-in-out, color 0.1s ease-in-out",
             }}
             name="currency"
             id="currency"
