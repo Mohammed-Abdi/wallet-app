@@ -14,9 +14,8 @@ import Exchange from "../../assets/Exchange";
 import History from "../../components/History";
 import Transaction from "../../components/transaction/Transaction";
 import { calcTotal } from "../../services/calcTotal";
-import { formatDateTime } from "../../services/formatDateTime";
-import { useLiveDate } from "../../hooks/useLiveDate";
 import SecondaryButton from "../../components/buttons/secondary-button/SecondaryButton";
+import CopyButton from "../../assets/CopyButton";
 
 const switchStyle = {
   width: "10rem",
@@ -36,8 +35,6 @@ function Dashboard() {
   const { accounts } = useContext(AccountContext);
   const [transactionShown, setTransactionShown] = useState(3);
   const [loginShown, setLoginShown] = useState(3);
-
-  const date = useLiveDate(60_000);
 
   const currentUser = useMemo(() => {
     return accounts.find(
@@ -110,9 +107,27 @@ function Dashboard() {
             <option value="SOL">SOL</option>
           </select>
         </div>
-        <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
-          Today is {formatDateTime(date)}
-        </p>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "0.5rem",
+            fontSize: "0.875rem",
+          }}
+        >
+          Wallet Address:{" "}
+          <div
+            style={{
+              opacity: 0.7,
+            }}
+          >
+            {currentUser.id}
+          </div>
+          <div style={{ cursor: "pointer" }}>
+            <CopyButton />
+          </div>
+        </div>
       </div>
       <div className={styles.transactions}>
         <Card
