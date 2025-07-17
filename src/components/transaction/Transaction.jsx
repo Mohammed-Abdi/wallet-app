@@ -11,6 +11,7 @@ import { convertTo } from "../../services/convertTo";
 import Highlight from "../Highlight";
 import Bank from "../../assets/Bank";
 import Checked from "../../assets/Checked";
+import PasteButton from "../../assets/PasteButton";
 
 const currencyArray = ["USD", "BTC", "SOL", "ETH", "BNB"];
 
@@ -368,13 +369,36 @@ function Transaction({ user, id, type, balances, setType }) {
 
           {/* for send */}
           {type?.toLowerCase() === "send" && (
-            <input
-              type="text"
-              placeholder="Enter receivers ID..."
-              style={inputStyle}
-              value={receiver}
-              onChange={(e) => setReceiver(e.target.value)}
-            />
+            <div style={{ position: "relative" }}>
+              <input
+                type="text"
+                placeholder="Enter receivers ID..."
+                style={inputStyle}
+                value={receiver}
+                onChange={(e) => setReceiver(e.target.value)}
+              />
+              {!receiver && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "0.5rem",
+                    transform: "translateY(-30%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={async () => {
+                    try {
+                      const paste = await navigator.clipboard.readText();
+                      setReceiver(paste);
+                    } catch (error) {
+                      console.error("Clipboard read failed:", error.message);
+                    }
+                  }}
+                >
+                  <PasteButton style={{ opacity: 0.7 }} />
+                </div>
+              )}
+            </div>
           )}
 
           {receiver ? (
@@ -383,11 +407,7 @@ function Transaction({ user, id, type, balances, setType }) {
                 style={{ color: "var(--accent-clr)", fontWeight: 500 }}
               >{`Receiver: ${receiverName}`}</p>
             ) : (
-              <p
-                style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}
-              >
-                There is no account with this ID
-              </p>
+              <p style={{ color: "red", fontWeight: 500 }}>Invalid address</p>
             )
           ) : (
             ""
