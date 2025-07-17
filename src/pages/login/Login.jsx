@@ -32,6 +32,7 @@ function Login() {
 
     if (user.account.password !== password) {
       setMessage("Incorrect password");
+      accountDispatch({ type: "failedLogin", payload: user.account.username });
       return;
     }
 

@@ -115,6 +115,23 @@ function reducer(state, action) {
         }),
       };
 
+    case "failedLogin":
+      return {
+        ...state,
+        accounts: state.accounts.map((account) => {
+          if (account.account.username === action.payload) {
+            return {
+              ...account,
+              logins: [
+                { status: "failed", date: new Date().toISOString() },
+                ...account.logins,
+              ],
+            };
+          }
+          return account;
+        }),
+      };
+
     case "logout":
       return {
         ...state,
