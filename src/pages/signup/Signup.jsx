@@ -69,8 +69,8 @@ function Signup() {
 
       status: {
         accountStatus: "inactive",
-        verification: "unverified",
-        membership: "basic",
+        verification: "verified",
+        membership: "pro",
       },
 
       balances: [
