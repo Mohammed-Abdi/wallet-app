@@ -27,24 +27,31 @@ const guestAccount = {
   },
 
   balances: [
-    { symbol: "BTC", name: "Bitcoin", balance: 0.00054 },
-    { symbol: "ETH", name: "Ethereum", balance: 0.0082 },
-    { symbol: "USD", name: "Dollar", balance: 40.31 },
-    { symbol: "BNB", name: "Binance Coin", balance: 0.027 },
-    { symbol: "SOL", name: "Solana", balance: 0.06 },
+    { symbol: "BTC", name: "Bitcoin", balance: 0.00017 },
+    { symbol: "ETH", name: "Ethereum", balance: 0 },
+    { symbol: "USD", name: "Dollar", balance: 24 },
+    { symbol: "BNB", name: "Binance Coin", balance: 0 },
+    { symbol: "SOL", name: "Solana", balance: 0 },
   ],
 
   transactions: [
     {
+      id: "fWpkGV7sciRqM9LhJXDoE",
+      type: "deposit",
+      amount: 67,
+      currency: "USD",
+      date: "2025-07-13T08:45:00",
+    },
+    {
       id: "KM9Lt0RXNpO3dYqhscJ1e",
       type: "convert",
       from: {
-        amount: 0.04,
-        currency: "BNB",
+        amount: 20,
+        currency: "USD",
       },
       to: {
-        amount: 0.06,
-        currency: "SOL",
+        amount: 0.00017,
+        currency: "BTC",
       },
       date: "2025-07-13T10:00:00",
     },
@@ -52,16 +59,9 @@ const guestAccount = {
       id: "ZuEVR5a13CNtWyPQFmOjz",
       type: "send",
       receiver: "tx07-receiver",
-      amount: 0.04,
-      currency: "BNB",
+      amount: 23,
+      currency: "USD",
       date: "2025-07-13T09:00:00",
-    },
-    {
-      id: "fWpkGV7sciRqM9LhJXDoE",
-      type: "deposit",
-      amount: 0.067,
-      currency: "BNB",
-      date: "2025-07-13T08:45:00",
     },
   ],
   logins: [
