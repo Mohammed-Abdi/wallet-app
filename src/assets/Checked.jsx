@@ -1,9 +1,14 @@
-export default function Checked({ color = "#14cb00ff" }) {
+export default function Checked({
+  color = "#14cb00ff",
+  width = 24,
+  height = 24,
+  strokeWidth = 2,
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
+      width={width}
+      height={height}
       viewBox="0 0 24 24"
       style={{ color }}
     >
@@ -12,7 +17,7 @@ export default function Checked({ color = "#14cb00ff" }) {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={2}
+        strokeWidth={strokeWidth}
       >
         <path
           strokeDasharray={64}

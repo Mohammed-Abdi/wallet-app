@@ -10,6 +10,7 @@ import { convertToUSD } from "../../services/convertToUSD";
 import { convertTo } from "../../services/convertTo";
 import Highlight from "../Highlight";
 import Bank from "../../assets/Bank";
+import Checked from "../../assets/Checked";
 
 const currencyArray = ["USD", "BTC", "SOL", "ETH", "BNB"];
 
@@ -19,6 +20,8 @@ function Transaction({ user, id, type, balances, setType }) {
   const [toCurrency, setToCurrency] = useState("BTC");
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isSuccessful, setIsSuccessful] = useState(false);
   const numericAmount = Number(Number(amount).toFixed(2));
 
   const filteredCurrencyArray = useMemo(() => {
@@ -51,6 +54,44 @@ function Transaction({ user, id, type, balances, setType }) {
   };
 
   useEffect(() => {
+    if (type === "deposit") {
+      setSuccessMessage(
+        `You successfully deposited ${amount} ${currency} ${
+          currency !== "USD" && currency !== "USDT"
+            ? `($${convertToUSD(amount, currency).toFixed(2)})`
+            : ""
+        } into your wallet`
+      );
+    } else if (type === "withdraw") {
+      setSuccessMessage(
+        `You successfully withdrew ${amount} ${currency} ${
+          currency !== "USD" && currency !== "USDT"
+            ? `($${convertToUSD(amount, currency).toFixed(2)})`
+            : ""
+        } from your wallet`
+      );
+    } else if (type === "send") {
+      setSuccessMessage(
+        `You successfully sent ${amount} ${currency} ${
+          currency !== "USD" && currency !== "USDT"
+            ? `($${convertToUSD(amount, currency).toFixed(2)})`
+            : ""
+        } to ${receiverName}`
+      );
+    } else if (type === "convert") {
+      setSuccessMessage(
+        `You successfully converted ${amount} ${currency} to ${convertTo(
+          amount,
+          currency,
+          toCurrency
+        )} ${toCurrency}`
+      );
+    } else {
+      setSuccessMessage("");
+    }
+  }, [type, amount, currency, id, toCurrency, setSuccessMessage]);
+
+  useEffect(() => {
     if (
       type?.toLowerCase() === "withdraw" ||
       type?.toLowerCase() === "send" ||
@@ -79,8 +120,7 @@ function Transaction({ user, id, type, balances, setType }) {
           date: time,
         },
       });
-      setType(null);
-      setAmount("");
+      setIsSuccessful(true);
       setCurrency("USD");
     }
     if (type?.toLowerCase() === "withdraw") {
@@ -100,9 +140,7 @@ function Transaction({ user, id, type, balances, setType }) {
             date: time,
           },
         });
-        setType(null);
-        setAmount("");
-        setCurrency("USD");
+        setIsSuccessful(true);
       }
     }
     if (type?.toLowerCase() === "send") {
@@ -126,10 +164,8 @@ function Transaction({ user, id, type, balances, setType }) {
           date: time,
         },
       });
-      setType(null);
-      setAmount("");
+      setIsSuccessful(true);
       setReceiver("");
-      setCurrency("USD");
     }
     if (type?.toLowerCase() === "convert") {
       const convertedAmount = Number(convertTo(amount, currency, toCurrency));
@@ -161,201 +197,229 @@ function Transaction({ user, id, type, balances, setType }) {
             date: time,
           },
         });
-
-        setType(null);
-        setAmount("");
-        setCurrency("USD");
-        setToCurrency("BTC");
+        setIsSuccessful(true);
       }
     }
-    setReceiver("");
     setMessage("");
   }
 
   return type ? (
     <main className={styles.main}>
-      <div
-        className={styles.wrapper}
-        style={{
-          color: `var(--${theme}-text-clr)`,
-          transition:
-            "background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out",
-        }}
-      >
-        <Highlight>
-          <p
+      {isSuccessful ? (
+        <div
+          className={styles.successNotification}
+          style={{ backgroundColor: `var(--dark-wrapper-clr)` }}
+        >
+          <Checked
+            width={100}
+            height={100}
+            strokeWidth={1}
+            color="var(--accent-clr)"
+          />
+          <p>{successMessage}</p>
+          <ActionButton
             style={{
-              display: "flex",
-              gap: "0.5rem",
-              alignItems: "center",
+              width: "100%",
+              backgroundColor: "var(--accent-clr)",
+              color: "var(--light-text-clr)",
+            }}
+            onClick={() => {
+              setType(null);
+              setIsSuccessful(false);
+              setAmount("");
+              setCurrency("USD");
+              setToCurrency("BTC");
             }}
           >
-            <Bank /> Balance:{" "}
-            <span
+            OK
+          </ActionButton>
+        </div>
+      ) : (
+        <div
+          className={styles.wrapper}
+          style={{
+            color: `var(--${theme}-text-clr)`,
+            transition:
+              "background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out",
+          }}
+        >
+          <Highlight>
+            <p
               style={{
-                fontWeight: currency === "USD" ? 500 : 400,
-                color:
-                  currency === "USD"
-                    ? currentBalance < 1
-                      ? "red"
-                      : "var(--accent-clr)"
-                    : "",
+                display: "flex",
+                gap: "0.5rem",
+                alignItems: "center",
               }}
             >
-              {currency === "USD"
-                ? `$${currentBalance.toFixed(2)}`
-                : `${currentBalance} ${currency} ($${convertToUSD(
-                    currentBalance,
-                    currency
-                  ).toFixed(2)})`}
-            </span>
-          </p>
-        </Highlight>
+              <Bank /> Balance:{" "}
+              <span
+                style={{
+                  fontWeight: currency === "USD" ? 500 : 400,
+                  color:
+                    currency === "USD"
+                      ? currentBalance < 1
+                        ? "red"
+                        : "var(--accent-clr)"
+                      : "",
+                }}
+              >
+                {currency === "USD"
+                  ? `$${currentBalance.toFixed(2)}`
+                  : `${currentBalance} ${currency} ($${convertToUSD(
+                      currentBalance,
+                      currency
+                    ).toFixed(2)})`}
+              </span>
+            </p>
+          </Highlight>
 
-        {/* for deposit and withdraw */}
-        <div style={{ display: "flex", gap: "0.5rem" }}>
-          <input
-            type="text"
-            placeholder="Enter amount..."
-            style={inputStyle}
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <select
-            name="currency"
-            id="currencyDropDown"
-            style={{
-              backgroundColor: `var(--${theme}-border-clr)`,
-              color: `var(--${theme}-text-clr)`,
-            }}
-            value={currency}
-            onChange={(e) => {
-              setCurrency(e.target.value);
-              setAmount("");
-            }}
-          >
-            <option value="USD">USD</option>
-            <option value="BTC">BTC</option>
-            <option value="ETH">ETH</option>
-            <option value="BNB">BNB</option>
-            <option value="SOL">SOL</option>
-          </select>
-        </div>
-
-        {message && (
-          <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
-            {message}
-          </p>
-        )}
-
-        {/* for conversion */}
-        {type?.toLowerCase() === "convert" && (
+          {/* for deposit and withdraw */}
           <div style={{ display: "flex", gap: "0.5rem" }}>
             <input
               type="text"
               placeholder="Enter amount..."
-              style={{ ...inputStyle, background: "none", border: "none" }}
-              value={
-                amount
-                  ? `${convertTo(amount, currency, toCurrency)} ${toCurrency}`
-                  : "Let see what you got"
-              }
-              onChange={(e) => setToCurrency(e.target.value)}
+              style={inputStyle}
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
             />
             <select
               name="currency"
-              id="currency"
+              id="currencyDropDown"
               style={{
                 backgroundColor: `var(--${theme}-border-clr)`,
                 color: `var(--${theme}-text-clr)`,
               }}
-              value={toCurrency}
-              onChange={(e) => setToCurrency(e.target.value)}
+              value={currency}
+              onChange={(e) => {
+                setCurrency(e.target.value);
+                setAmount("");
+              }}
             >
-              {filteredCurrencyArray?.map((cur) => (
-                <option key={cur} value={cur}>
-                  {cur}
-                </option>
-              ))}
+              <option value="USD">USD</option>
+              <option value="BTC">BTC</option>
+              <option value="ETH">ETH</option>
+              <option value="BNB">BNB</option>
+              <option value="SOL">SOL</option>
             </select>
           </div>
-        )}
 
-        {/* for send */}
-        {type?.toLowerCase() === "send" && (
-          <input
-            type="text"
-            placeholder="Enter receivers ID..."
-            style={inputStyle}
-            value={receiver}
-            onChange={(e) => setReceiver(e.target.value)}
-          />
-        )}
-
-        {receiver ? (
-          receiverFound ? (
-            <p
-              style={{ color: "var(--accent-clr)", fontWeight: 500 }}
-            >{`Receiver: ${receiverName}`}</p>
-          ) : (
+          {message && (
             <p style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}>
-              There is no account with this ID
+              {message}
             </p>
-          )
-        ) : (
-          ""
-        )}
+          )}
 
-        <div className={styles.buttons}>
-          <ActionButton
-            style={{
-              width: "100%",
-              borderRadius: "0.25rem",
-              paddingBlock: "0.75rem",
-            }}
-            onClick={handleTransaction}
-          >
-            {type?.split("").at(0).toUpperCase() + type?.slice(1)}
-          </ActionButton>
-          <SecondaryButton
-            style={{
-              color: `var(--${theme}-text-clr)`,
-              width: "100%",
-              borderRadius: "0.25rem",
-              paddingBlock: "0.75rem",
-            }}
-            onClick={() => {
-              setType(null);
-              setMessage("");
-              setReceiver("");
-            }}
-          >
-            Cancel
-          </SecondaryButton>
-        </div>
-
-        {type?.toLowerCase() === "send" &&
-          user.account.username === "guest_user" && (
-            <div>
-              <p>Select a contact to paste their ID</p>
-              {accounts
-                .filter(
-                  (account) => account.status.accountStatus === "contacts"
-                )
-                .map((account) => (
-                  <Contacts
-                    key={account.id}
-                    name={account.personalInfo.name}
-                    username={account.account.username}
-                    profilePicture={account.personalInfo.profilePicture}
-                    verification={account.status.verification}
-                    membership={account.status.membership}
-                    onClick={() => setReceiver(account.id)}
-                  />
+          {/* for conversion */}
+          {type?.toLowerCase() === "convert" && (
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              <input
+                type="text"
+                placeholder="Enter amount..."
+                style={{ ...inputStyle, background: "none", border: "none" }}
+                value={
+                  amount
+                    ? `${convertTo(amount, currency, toCurrency)} ${toCurrency}`
+                    : "Let see what you got"
+                }
+                onChange={(e) => setToCurrency(e.target.value)}
+              />
+              <select
+                name="currency"
+                id="currency"
+                style={{
+                  backgroundColor: `var(--${theme}-border-clr)`,
+                  color: `var(--${theme}-text-clr)`,
+                }}
+                value={toCurrency}
+                onChange={(e) => setToCurrency(e.target.value)}
+              >
+                {filteredCurrencyArray?.map((cur) => (
+                  <option key={cur} value={cur}>
+                    {cur}
+                  </option>
                 ))}
+              </select>
             </div>
           )}
-      </div>
+
+          {/* for send */}
+          {type?.toLowerCase() === "send" && (
+            <input
+              type="text"
+              placeholder="Enter receivers ID..."
+              style={inputStyle}
+              value={receiver}
+              onChange={(e) => setReceiver(e.target.value)}
+            />
+          )}
+
+          {receiver ? (
+            receiverFound ? (
+              <p
+                style={{ color: "var(--accent-clr)", fontWeight: 500 }}
+              >{`Receiver: ${receiverName}`}</p>
+            ) : (
+              <p
+                style={{ fontSize: "0.875rem", color: "red", fontWeight: 500 }}
+              >
+                There is no account with this ID
+              </p>
+            )
+          ) : (
+            ""
+          )}
+
+          <div className={styles.buttons}>
+            <ActionButton
+              style={{
+                width: "100%",
+                borderRadius: "0.25rem",
+                paddingBlock: "0.75rem",
+              }}
+              onClick={handleTransaction}
+            >
+              {type?.split("").at(0).toUpperCase() + type?.slice(1)}
+            </ActionButton>
+            <SecondaryButton
+              style={{
+                color: `var(--${theme}-text-clr)`,
+                width: "100%",
+                borderRadius: "0.25rem",
+                paddingBlock: "0.75rem",
+              }}
+              onClick={() => {
+                setType(null);
+                setMessage("");
+                setReceiver("");
+              }}
+            >
+              Cancel
+            </SecondaryButton>
+          </div>
+
+          {type?.toLowerCase() === "send" &&
+            user.account.username === "guest_user" && (
+              <div>
+                <p>Select a contact to paste their ID</p>
+                {accounts
+                  .filter(
+                    (account) => account.status.accountStatus === "contacts"
+                  )
+                  .map((account) => (
+                    <Contacts
+                      key={account.id}
+                      name={account.personalInfo.name}
+                      username={account.account.username}
+                      profilePicture={account.personalInfo.profilePicture}
+                      verification={account.status.verification}
+                      membership={account.status.membership}
+                      onClick={() => setReceiver(account.id)}
+                    />
+                  ))}
+              </div>
+            )}
+        </div>
+      )}
     </main>
   ) : (
     ""

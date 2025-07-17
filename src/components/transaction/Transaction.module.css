@@ -48,6 +48,21 @@
   gap: 0.625rem;
 }
 
+.successNotification {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  align-items: center;
+  width: min(270px, 100% - 40px);
+  margin-inline: auto;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
+.successNotification p {
+  text-align: center;
+}
+
 @media (max-width: 30rem) {
   .wrapper {
     transform: translateY(-3rem);
