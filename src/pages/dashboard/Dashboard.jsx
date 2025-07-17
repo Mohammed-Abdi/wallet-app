@@ -17,6 +17,7 @@ import { calcTotal } from "../../services/calcTotal";
 import SecondaryButton from "../../components/buttons/secondary-button/SecondaryButton";
 import CopyButton from "../../assets/CopyButton";
 import Copied from "../../assets/Copied";
+import EmptyFiles from "../../assets/EmptyFiles";
 
 const switchStyle = {
   width: "10rem",
@@ -192,8 +193,9 @@ function Dashboard() {
             Logins
           </button>
         </div>
-        {isOnActivities
-          ? sortedTransactions
+        {isOnActivities ? (
+          sortedTransactions?.length ? (
+            sortedTransactions
               .map((transaction) => (
                 <History
                   key={transaction.id}
@@ -207,35 +209,86 @@ function Dashboard() {
                 />
               ))
               .slice(0, transactionShown)
-          : sortedLogins
-              .map((login) => (
-                <History
-                  key={login.date}
-                  status={login.status}
-                  date={login.date}
-                />
-              ))
-              .slice(0, loginShown)}
-        {isOnActivities ? (
-          transactionShown <= sortedTransactions.length ? (
-            <SecondaryButton
-              onClick={() => setTransactionShown((cur) => cur + 3)}
-            >
-              Show more activities
-            </SecondaryButton>
           ) : (
-            <SecondaryButton onClick={() => setTransactionShown(3)}>
+            <p
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.625rem",
+                alignItems: "center",
+                marginInline: "auto",
+                marginTop: "2rem",
+              }}
+            >
+              <EmptyFiles width={50} height={50} style={{ opacity: 0.7 }} />
+              No Transaction activities
+            </p>
+          )
+        ) : sortedLogins?.length ? (
+          sortedLogins
+            .map((login) => (
+              <History
+                key={login.date}
+                status={login.status}
+                date={login.date}
+              />
+            ))
+            .slice(0, loginShown)
+        ) : (
+          <p
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.625rem",
+              alignItems: "center",
+              marginInline: "auto",
+              marginTop: "2rem",
+            }}
+          >
+            <EmptyFiles width={50} height={50} style={{ opacity: 0.7 }} />
+            No Login activities
+          </p>
+        )}
+        {isOnActivities ? (
+          sortedTransactions?.length ? (
+            transactionShown <= sortedTransactions.length ? (
+              sortedTransactions.length > 3 ? (
+                <SecondaryButton
+                  onClick={() => setTransactionShown((cur) => cur + 3)}
+                >
+                  Show more activities
+                </SecondaryButton>
+              ) : (
+                ""
+              )
+            ) : sortedTransactions.length > 3 ? (
+              <SecondaryButton onClick={() => setTransactionShown(3)}>
+                Show less activities
+              </SecondaryButton>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )
+        ) : sortedLogins?.length ? (
+          loginShown <= sortedLogins.length ? (
+            sortedLogins.length > 3 ? (
+              <SecondaryButton onClick={() => setLoginShown((cur) => cur + 3)}>
+                Show more activities
+              </SecondaryButton>
+            ) : (
+              ""
+            )
+          ) : sortedLogins.length > 3 ? (
+            <SecondaryButton onClick={() => setLoginShown(3)}>
               Show less activities
             </SecondaryButton>
+          ) : (
+            ""
           )
-        ) : loginShown <= sortedLogins.length ? (
-          <SecondaryButton onClick={() => setLoginShown((cur) => cur + 3)}>
-            Show more activities
-          </SecondaryButton>
         ) : (
-          <SecondaryButton onClick={() => setLoginShown(3)}>
-            Show less activities
-          </SecondaryButton>
+          ""
         )}
       </div>
       <Transaction
