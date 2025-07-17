@@ -16,7 +16,7 @@ import Transaction from "../../components/transaction/Transaction";
 import { calcTotal } from "../../services/calcTotal";
 import { formatDateTime } from "../../services/formatDateTime";
 import { useLiveDate } from "../../hooks/useLiveDate";
-import ActionButton from "../../components/buttons/action-button/ActionButton";
+import SecondaryButton from "../../components/buttons/secondary-button/SecondaryButton";
 
 const switchStyle = {
   width: "10rem",
@@ -185,16 +185,18 @@ function Dashboard() {
               .slice(0, loginShown)}
         {isOnActivities ? (
           transactionShown <= sortedTransactions.length ? (
-            <ActionButton onClick={() => setTransactionShown((cur) => cur + 3)}>
+            <SecondaryButton
+              onClick={() => setTransactionShown((cur) => cur + 3)}
+            >
               Show more activities
-            </ActionButton>
+            </SecondaryButton>
           ) : (
             ""
           )
         ) : loginShown <= sortedLogins.length ? (
-          <ActionButton onClick={() => setLoginShown((cur) => cur + 3)}>
+          <SecondaryButton onClick={() => setLoginShown((cur) => cur + 3)}>
             Show more activities
-          </ActionButton>
+          </SecondaryButton>
         ) : (
           ""
         )}
