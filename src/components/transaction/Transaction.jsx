@@ -433,7 +433,6 @@ function Transaction({ user, id, type, balances, setType }) {
                 borderRadius: "0.25rem",
                 paddingBlock: "0.75rem",
               }}
-              onClick={handleTransaction}
             >
               {type?.split("").at(0).toUpperCase() + type?.slice(1)}
             </ActionButton>
