@@ -24,6 +24,8 @@ function Signup() {
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("Not specified");
   const [birthdate, setBirthdate] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -57,7 +59,7 @@ function Signup() {
         gender: gender,
       },
 
-      location: { city: "Addis Ababa", country: "Ethiopia" },
+      location: { city: city, country: country },
 
       account: {
         username: username?.toLowerCase(),
@@ -91,6 +93,8 @@ function Signup() {
     firstName,
     lastName,
     gender,
+    city,
+    country,
     birthdate,
     username,
     email,
@@ -166,6 +170,14 @@ function Signup() {
               />
               <Input type="text" placeholder="Surname" getValue={setLastName} />
             </article>
+
+            <article
+              style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}
+            >
+              <Input type="text" placeholder="City" getValue={setCity} />
+              <Input type="text" placeholder="Country" getValue={setCountry} />
+            </article>
+
             <article
               style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}
             >
