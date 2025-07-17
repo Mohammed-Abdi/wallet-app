@@ -6,6 +6,7 @@ import ThemeToggle from "../../components/buttons/ThemeToggle";
 import ActionButton from "../../components/buttons/action-button/ActionButton";
 import Hero from "../../components/hero/Hero";
 import Footer from "../../components/Footer";
+import Disclaimer from "../../components/Disclaimer";
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
       </NavBar>
       <Hero />
       <Footer>
+        <Disclaimer />
         <p>&copy;2025 Mohammed Abdi. All rights reserved</p>
       </Footer>
     </main>

@@ -1,12 +1,11 @@
 const footerStyle = {
   display: "flex",
+  flexDirection: "column",
+  gap: "1.25rem",
   justifyContent: "center",
   alignItems: "center",
-  paddingBlock: "3rem",
-  position: "absolute",
+  paddingBlock: "1.25rem",
   width: "100%",
-  bottom: 0,
-  left: 0,
 };
 
 function Footer({ children }) {
