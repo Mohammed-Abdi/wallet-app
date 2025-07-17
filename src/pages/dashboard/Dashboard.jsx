@@ -191,14 +191,18 @@ function Dashboard() {
               Show more activities
             </SecondaryButton>
           ) : (
-            ""
+            <SecondaryButton onClick={() => setTransactionShown(3)}>
+              Show less activities
+            </SecondaryButton>
           )
         ) : loginShown <= sortedLogins.length ? (
           <SecondaryButton onClick={() => setLoginShown((cur) => cur + 3)}>
             Show more activities
           </SecondaryButton>
         ) : (
-          ""
+          <SecondaryButton onClick={() => setLoginShown(3)}>
+            Show less activities
+          </SecondaryButton>
         )}
       </div>
       <Transaction
