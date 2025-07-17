@@ -26,6 +26,14 @@ function Transaction({ user, id, type, balances, setType }) {
   const numericAmount = Number(Number(amount).toFixed(2));
   const amountInput = useRef();
 
+  const okBtn = useRef();
+
+  useEffect(() => {
+    if (isSuccessful) {
+      okBtn.current.focus();
+    }
+  }, [isSuccessful]);
+
   useEffect(() => {
     if (type && amountInput.current) {
       amountInput.current.focus();
@@ -237,6 +245,7 @@ function Transaction({ user, id, type, balances, setType }) {
           />
           <p>{successMessage}</p>
           <ActionButton
+            ref={okBtn}
             style={{
               width: "100%",
               backgroundColor: "var(--accent-clr)",
