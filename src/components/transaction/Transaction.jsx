@@ -274,7 +274,7 @@ function Transaction({ user, id, type, balances, setType }) {
           </Highlight>
 
           {/* for deposit and withdraw */}
-          <div style={{ display: "flex", gap: "0.5rem" }}>
+          <div style={{ display: "flex", gap: "0.5rem", position: "relative" }}>
             <input
               type="text"
               placeholder="Enter amount..."
@@ -286,7 +286,13 @@ function Transaction({ user, id, type, balances, setType }) {
               name="currency"
               id="currencyDropDown"
               style={{
-                backgroundColor: `var(--${theme}-border-clr)`,
+                position: "absolute",
+                right: "0.75rem",
+                top: "50%",
+                transform: "translateY(-50%)",
+                padding: "0.75rem",
+                width: "25%",
+                backgroundColor: `var(--${theme}-wrapper-clr)`,
                 color: `var(--${theme}-text-clr)`,
               }}
               value={currency}
@@ -311,7 +317,9 @@ function Transaction({ user, id, type, balances, setType }) {
 
           {/* for conversion */}
           {type?.toLowerCase() === "convert" && (
-            <div style={{ display: "flex", gap: "0.5rem" }}>
+            <div
+              style={{ display: "flex", gap: "0.5rem", position: "relative" }}
+            >
               <input
                 type="text"
                 placeholder="Enter amount..."
@@ -327,7 +335,13 @@ function Transaction({ user, id, type, balances, setType }) {
                 name="currency"
                 id="currency"
                 style={{
-                  backgroundColor: `var(--${theme}-border-clr)`,
+                  position: "absolute",
+                  right: "0.75rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  padding: "0.75rem",
+                  width: "25%",
+                  backgroundColor: `var(--${theme}-background)`,
                   color: `var(--${theme}-text-clr)`,
                 }}
                 value={toCurrency}
