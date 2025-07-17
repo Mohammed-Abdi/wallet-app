@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import ActionButton from "../buttons/action-button/ActionButton";
 import SecondaryButton from "../buttons/secondary-button/SecondaryButton";
 import styles from "./Transaction.module.css";
@@ -23,6 +23,13 @@ function Transaction({ user, id, type, balances, setType }) {
   const [successMessage, setSuccessMessage] = useState("");
   const [isSuccessful, setIsSuccessful] = useState(false);
   const numericAmount = Number(Number(amount).toFixed(2));
+  const amountInput = useRef();
+
+  useEffect(() => {
+    if (type && amountInput.current) {
+      amountInput.current.focus();
+    }
+  }, [type]);
 
   const filteredCurrencyArray = useMemo(() => {
     return currencyArray.filter((cur) => cur !== currency);
@@ -278,6 +285,7 @@ function Transaction({ user, id, type, balances, setType }) {
           {/* for deposit and withdraw */}
           <div style={{ display: "flex", gap: "0.5rem", position: "relative" }}>
             <input
+              ref={amountInput}
               type="text"
               placeholder="Enter amount..."
               style={inputStyle}
