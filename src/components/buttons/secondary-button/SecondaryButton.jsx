@@ -7,6 +7,7 @@ function SecondaryButton({ children, style, onClick }) {
 
   return (
     <button
+      type="button"
       className={`${styles.button} ${
         theme === "dark" ? styles.dark : theme === "light" ? styles.light : ""
       }`}
