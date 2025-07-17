@@ -113,6 +113,12 @@ function Transaction({ user, id, type, balances, setType }) {
   function handleTransaction(e) {
     e.preventDefault();
     const numericAmount = Number(Number(amount).toFixed(2));
+
+    if (!amount || isNaN(numericAmount) || numericAmount <= 0) {
+      setMessage("Enter a valid amount");
+      return;
+    }
+
     if (type?.toLowerCase() === "deposit") {
       accountDispatch({
         type: "deposit",
@@ -153,6 +159,10 @@ function Transaction({ user, id, type, balances, setType }) {
       }
     }
     if (type?.toLowerCase() === "send") {
+      if (!receiver) {
+        setMessage("Enter receiver's wallet address");
+        return;
+      }
       accountDispatch({
         type: "send",
         payload: { id, receiver, amount: numericAmount, currency, date: time },
