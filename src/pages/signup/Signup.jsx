@@ -197,7 +197,7 @@ function Signup() {
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               >
-                <option value="Not specified" disabled>
+                <option value="None" disabled>
                   Choose your gender
                 </option>
                 <option value="Male">Male</option>
