@@ -67,17 +67,14 @@ const guestAccount = {
   logins: [
     {
       status: "success",
-      location: { city: "Addis Ababa", country: "Ethiopia" },
       date: "2025-07-13T08:20:00",
     },
     {
       status: "failed",
-      location: { city: "Nairobi", country: "Kenya" },
       date: "2025-07-12T22:45:10",
     },
     {
       status: "blocked",
-      location: { city: "Addis Ababa", country: "Ethiopia" },
       date: "2025-07-12T20:18:45",
     },
   ],
