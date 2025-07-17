@@ -89,7 +89,7 @@ function Transaction({ user, id, type, balances, setType }) {
     } else {
       setSuccessMessage("");
     }
-  }, [type, amount, currency, id, toCurrency, setSuccessMessage]);
+  }, [type, receiverName, amount, currency, id, toCurrency, setSuccessMessage]);
 
   useEffect(() => {
     if (
