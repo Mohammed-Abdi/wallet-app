@@ -34,6 +34,8 @@ function Dashboard() {
   const [type, setType] = useState(null);
   const { theme } = useContext(ThemeContext);
   const { accounts } = useContext(AccountContext);
+  const [transactionShown, setTransactionShown] = useState(3);
+  const [loginShown, setLoginShown] = useState(3);
 
   const date = useLiveDate(60_000);
 
@@ -157,26 +159,45 @@ function Dashboard() {
           </button>
         </div>
         {isOnActivities
-          ? sortedTransactions.map((transaction) => (
-              <History
-                key={transaction.id}
-                type={transaction.type}
-                id={transaction.receiver}
-                date={transaction.date}
-                amount={transaction.amount}
-                currency={transaction.currency}
-                from={transaction.from}
-                to={transaction.to}
-              />
-            ))
-          : sortedLogins.map((login) => (
-              <History
-                key={login.date}
-                status={login.status}
-                date={login.date}
-                location={login.location}
-              />
-            ))}
+          ? sortedTransactions
+              .map((transaction) => (
+                <History
+                  key={transaction.id}
+                  type={transaction.type}
+                  id={transaction.receiver}
+                  date={transaction.date}
+                  amount={transaction.amount}
+                  currency={transaction.currency}
+                  from={transaction.from}
+                  to={transaction.to}
+                />
+              ))
+              .slice(0, transactionShown)
+          : sortedLogins
+              .map((login) => (
+                <History
+                  key={login.date}
+                  status={login.status}
+                  date={login.date}
+                  location={login.location}
+                />
+              ))
+              .slice(0, loginShown)}
+        {isOnActivities ? (
+          transactionShown <= sortedTransactions.length ? (
+            <ActionButton onClick={() => setTransactionShown((cur) => cur + 3)}>
+              Show more activities
+            </ActionButton>
+          ) : (
+            ""
+          )
+        ) : loginShown <= sortedLogins.length ? (
+          <ActionButton onClick={() => setLoginShown((cur) => cur + 3)}>
+            Show more activities
+          </ActionButton>
+        ) : (
+          ""
+        )}
       </div>
       <Transaction
         user={currentUser}
