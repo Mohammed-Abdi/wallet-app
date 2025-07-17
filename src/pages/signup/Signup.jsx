@@ -202,7 +202,7 @@ function Signup() {
                 </option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <option value="Prefer not to say">Prefer not to say</option>
+                <option value="None">Prefer not to say</option>
               </select>
               <Input
                 type="date"
