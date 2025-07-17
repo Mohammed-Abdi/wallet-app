@@ -101,6 +101,10 @@ function reducer(state, action) {
             return {
               ...account,
               status: { ...account.status, accountStatus: "active" },
+              logins: [
+                { status: "success", date: new Date().toISOString() },
+                ...account.logins,
+              ],
               timestamps: {
                 ...account.timestamps,
                 lastLogin: new Date().toISOString(),
