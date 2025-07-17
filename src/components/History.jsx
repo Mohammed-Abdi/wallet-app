@@ -130,11 +130,7 @@ function History({ id, date, type, amount, currency, from, to, status }) {
 
       <div style={columnStyles}>
         <div style={messageStyles}>{message}</div>
-        {location && (
-          <div style={{ ...dateStyles, color: "#4682A9", opacity: 1 }}>
-            {location.city + ", " + location.country}
-          </div>
-        )}
+
         <div style={dateStyles}>{formatDateTime(date)}</div>
       </div>
     </div>

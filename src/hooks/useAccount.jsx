@@ -63,48 +63,6 @@ const guestAccount = {
       currency: "BNB",
       date: "2025-07-13T08:45:00",
     },
-    {
-      id: "AqGnzWYF10pT7vBh4xMjL",
-      type: "convert",
-      from: {
-        amount: 0.0318,
-        currency: "ETH",
-      },
-      to: {
-        amount: 40.31,
-        currency: "USDT",
-      },
-      date: "2025-07-12T15:30:00",
-    },
-    {
-      id: "XkL93Nz0rUMgHd5VWcKqb",
-      type: "send",
-      receiver: "tx04-receiver",
-      amount: 0.01,
-      currency: "ETH",
-      date: "2025-07-12T09:00:00",
-    },
-    {
-      id: "8hQ0A1oFb72eMxKYjz3uV",
-      type: "deposit",
-      amount: 0.05,
-      currency: "ETH",
-      date: "2025-07-11T12:00:00",
-    },
-    {
-      id: "y2vCkLdTPXfR8Jo6hzM1Q",
-      type: "withdraw",
-      amount: 0.01946,
-      currency: "BTC",
-      date: "2025-07-11T09:00:00",
-    },
-    {
-      id: "V9fz9mj72HrWaXKblFZrM",
-      type: "deposit",
-      amount: 0.02,
-      currency: "BTC",
-      date: "2025-07-10T10:00:00",
-    },
   ],
   logins: [
     {
@@ -121,21 +79,6 @@ const guestAccount = {
       status: "blocked",
       location: { city: "Addis Ababa", country: "Ethiopia" },
       date: "2025-07-12T20:18:45",
-    },
-    {
-      status: "success",
-      location: { city: "Addis Ababa", country: "Ethiopia" },
-      date: "2025-07-11T06:15:30",
-    },
-    {
-      status: "failed",
-      location: { city: "Dubai", country: "UAE" },
-      date: "2025-07-10T19:02:00",
-    },
-    {
-      status: "success",
-      location: { city: "Addis Ababa", country: "Ethiopia" },
-      date: "2025-07-10T07:30:00",
     },
   ],
   timestamps: {
