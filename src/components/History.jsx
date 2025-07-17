@@ -38,17 +38,7 @@ const dateStyles = {
   opacity: 0.7,
 };
 
-function History({
-  id,
-  date,
-  type,
-  amount,
-  currency,
-  from,
-  to,
-  status,
-  location,
-}) {
+function History({ id, date, type, amount, currency, from, to, status }) {
   const [message, setMessage] = useState("");
   const { theme } = useContext(ThemeContext);
 

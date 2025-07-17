@@ -213,7 +213,6 @@ function Dashboard() {
                   key={login.date}
                   status={login.status}
                   date={login.date}
-                  location={login.location}
                 />
               ))
               .slice(0, loginShown)}
