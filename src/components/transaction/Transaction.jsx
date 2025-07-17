@@ -102,7 +102,8 @@ function Transaction({ user, id, type, balances, setType }) {
     }
   }, [currentBalance, amount, type, numericAmount]);
 
-  function handleTransaction() {
+  function handleTransaction(e) {
+    e.preventDefault();
     const numericAmount = Number(Number(amount).toFixed(2));
     if (type?.toLowerCase() === "deposit") {
       accountDispatch({
@@ -235,7 +236,8 @@ function Transaction({ user, id, type, balances, setType }) {
           </ActionButton>
         </div>
       ) : (
-        <div
+        <form
+          onSubmit={handleTransaction}
           className={styles.wrapper}
           style={{
             color: `var(--${theme}-text-clr)`,
@@ -432,7 +434,7 @@ function Transaction({ user, id, type, balances, setType }) {
                   ))}
               </div>
             )}
-        </div>
+        </form>
       )}
     </main>
   ) : (
