@@ -2,6 +2,16 @@ h1 {
   font-size: 1.5rem;
 }
 
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  width: 32px;
+  height: 32px;
+  transition: background-color 0.3s ease-in-out;
+}
+
 @media (min-width: 48rem) {
   h1 {
     font-size: 3rem;
@@ -9,5 +19,13 @@ h1 {
   .card:hover span {
     transform: rotateY(360deg);
     transition: transform 0.5s ease-in;
+  }
+
+  .icon.dark:hover {
+    background-color: var(--dark-button-hover-clr);
+  }
+
+  .icon.light:hover {
+    background-color: var(--light-button-hover-clr);
   }
 }

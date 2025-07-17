@@ -379,11 +379,12 @@ function Transaction({ user, id, type, balances, setType }) {
               />
               {!receiver && (
                 <div
+                  className={`icon ${theme}`}
                   style={{
                     position: "absolute",
                     top: "50%",
                     right: "0.5rem",
-                    transform: "translateY(-30%)",
+                    transform: "translateY(-50%)",
                     cursor: "pointer",
                   }}
                   onClick={async () => {
@@ -395,7 +396,9 @@ function Transaction({ user, id, type, balances, setType }) {
                     }
                   }}
                 >
-                  <PasteButton style={{ opacity: 0.7 }} />
+                  <div style={{ transform: "translate(20%, 20%)" }}>
+                    <PasteButton style={{ opacity: 0.7 }} />
+                  </div>
                 </div>
               )}
             </div>

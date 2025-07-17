@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import ThemeToggle from "../../components/buttons/ThemeToggle";
 import { ThemeContext } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ import Transaction from "../../components/transaction/Transaction";
 import { calcTotal } from "../../services/calcTotal";
 import SecondaryButton from "../../components/buttons/secondary-button/SecondaryButton";
 import CopyButton from "../../assets/CopyButton";
+import Copied from "../../assets/Copied";
 
 const switchStyle = {
   width: "10rem",
@@ -35,6 +36,13 @@ function Dashboard() {
   const { accounts } = useContext(AccountContext);
   const [transactionShown, setTransactionShown] = useState(3);
   const [loginShown, setLoginShown] = useState(3);
+  const [isCopied, setIsCopied] = useState(false);
+
+  useEffect(() => {
+    if (isCopied) {
+      setTimeout(() => setIsCopied(false), 5000);
+    }
+  }, [isCopied]);
 
   const currentUser = useMemo(() => {
     return accounts.find(
@@ -124,8 +132,19 @@ function Dashboard() {
           >
             {currentUser.id}
           </div>
-          <div style={{ cursor: "pointer" }}>
-            <CopyButton />
+          <div
+            className={`icon ${theme}`}
+            style={{ cursor: "pointer" }}
+            onClick={async () => {
+              try {
+                navigator.clipboard.writeText(currentUser.id);
+                setIsCopied(true);
+              } catch (error) {
+                console.error("failed to copy:", error.message);
+              }
+            }}
+          >
+            {isCopied ? <Copied /> : <CopyButton />}
           </div>
         </div>
       </div>
