@@ -372,7 +372,7 @@ function Transaction({ user, id, type, balances, setType }) {
             <div style={{ position: "relative" }}>
               <input
                 type="text"
-                placeholder="Enter receivers ID..."
+                placeholder="Enter receivers address..."
                 style={inputStyle}
                 value={receiver}
                 onChange={(e) => setReceiver(e.target.value)}
@@ -444,7 +444,7 @@ function Transaction({ user, id, type, balances, setType }) {
           {type?.toLowerCase() === "send" &&
             user.account.username === "guest_user" && (
               <div>
-                <p>Select a contact to paste their ID</p>
+                <p>Select a contact to paste their address</p>
                 {accounts
                   .filter(
                     (account) => account.status.accountStatus === "contacts"
