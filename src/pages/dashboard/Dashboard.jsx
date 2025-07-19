@@ -292,6 +292,7 @@ function Dashboard() {
         )}
       </div>
       <Transaction
+        key={type}
         user={currentUser}
         id={currentUser.id}
         type={type}
