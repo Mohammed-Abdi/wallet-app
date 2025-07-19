@@ -1,12 +1,9 @@
 .hero {
   display: flex;
-  margin-top: 1.25rem;
-}
-
-.left {
-  display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.25rem;
+  text-align: center;
 }
 
 .buttons {
@@ -18,31 +15,5 @@
 @media (max-width: 25rem) {
   .buttons {
     flex-direction: column;
-  }
-}
-
-@media (max-width: 48rem) {
-  .hero {
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.25rem;
-  }
-  .left {
-    margin-top: 3rem;
-    align-items: center;
-    text-align: center;
-  }
-  .right {
-    display: none;
-  }
-}
-
-@media (min-width: 48rem) {
-  .hero {
-    justify-content: space-between;
-    align-items: center;
-  }
-  .right {
-    margin-right: 5rem;
   }
 }
