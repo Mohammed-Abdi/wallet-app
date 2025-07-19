@@ -104,6 +104,19 @@ function Signup() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (
+      !firstName ||
+      !lastName ||
+      !gender ||
+      !city ||
+      !country ||
+      !birthdate ||
+      !username ||
+      !email ||
+      !newPassword ||
+      !confirmPassword
+    )
+      return;
     accountDispatch({ type: "addNewUser", payload: userInfo });
     accountDispatch({ type: "login", payload: username.toLowerCase() });
     setFirstName("");
@@ -159,7 +172,7 @@ function Signup() {
           </section>
         </div>
         <div className={styles.rightSide}>
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <article
               style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}
             >
@@ -276,10 +289,7 @@ function Signup() {
                 </div>
               )}
             </article>
-            <ActionButton
-              onClick={handleSubmit}
-              style={{ width: "100%", paddingBlock: "0.75rem" }}
-            >
+            <ActionButton style={{ width: "100%", paddingBlock: "0.75rem" }}>
               Sign Up
             </ActionButton>
           </form>
